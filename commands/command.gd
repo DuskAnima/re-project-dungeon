@@ -5,16 +5,19 @@ class_name Command
 signal finished
 
 var actor : Entity
+var _source : Variant
+var _target : Variant
+
 var is_executing : bool = false
 
-func _init(_actor : Entity) -> void:
-	actor = _actor
-	
-func execute() -> void:
-	finish()
+func _init(act : Entity,  src : Variant, targ : Variant) -> void:
+	actor = act
+	_source = src
+	_target = targ
 
-func setup(_actor) -> void:
-	actor = _actor
+## La ejecución debe ser implementada.
+@abstract
+func execute() -> void
 
 func finish() -> void:
 	is_executing = false
