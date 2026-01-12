@@ -17,10 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://autoloads/GameManager.gd"
-GridManager="*res://autoloads/GridManager.gd"
-TurnManager="*res://autoloads/TurnManager.gd"
-ActionQueue="*res://autoloads/ActionQueue.gd"
+GameManager="*res://utils/autoloads/GameManager.gd"
+GridManager="*res://utils/autoloads/GridManager.gd"
+TurnManager="*res://utils/autoloads/TurnManager.gd"
+ActionQueue="*res://utils/autoloads/ActionQueue.gd"
+EventBus="*res://utils/autoloads/EventBus.gd"
 
 [input]
 

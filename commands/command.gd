@@ -1,5 +1,5 @@
 @abstract
-extends  RefCounted
+extends RefCounted
 class_name Command
 
 signal finished

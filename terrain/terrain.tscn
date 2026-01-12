@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://jdklqavmseve"]
+
+[ext_resource type="Texture2D" uid="uid://2jp6flfawrie" path="res://terrain/floor.png" id="1_l7s0s"]
+[ext_resource type="Texture2D" uid="uid://4ybcyus4nexe" path="res://terrain/ice_crack.png" id="2_2ilfp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nigp7"]
+texture = ExtResource("1_l7s0s")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7nt5j"]
+texture = ExtResource("2_2ilfp")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mk5yb"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "is_solid"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "can_break"
+custom_data_layer_1/type = 1
+sources/1 = SubResource("TileSetAtlasSource_nigp7")
+sources/2 = SubResource("TileSetAtlasSource_7nt5j")
+
+[node name="Terrain" type="TileMapLayer"]
+tile_set = SubResource("TileSet_mk5yb")

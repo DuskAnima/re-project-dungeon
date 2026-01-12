@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://e37cu42p5qq8"]
+
+[ext_resource type="Script" uid="uid://cm7wt27n860nf" path="res://tests/stupu/stupu.gd" id="1_a4uk4"]
+[ext_resource type="Texture2D" uid="uid://bufp1xqtk45fw" path="res://icon.svg" id="2_nd7ec"]
+
+[node name="Stupu" type="Node2D"]
+script = ExtResource("1_a4uk4")
+speed = 0.55
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_nd7ec")

@@ -10,13 +10,16 @@ func set_actor(_act : Entity) -> void:
 	actor = _act
 
 func _unhandled_input(event: InputEvent) -> void:
+	movement_manager(event)
+
+func movement_manager(event) -> void:
 	if actor == null or not actor.is_controllable():
 		return
 
 	var direction := _get_direction(event)
 	if direction == Vector2i.ZERO:
 		return
-		
+
 	var from := actor.grid_pos
 	var to := from + direction
 
