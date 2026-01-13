@@ -10,9 +10,9 @@ func set_actor(_act : Entity) -> void:
 	actor = _act
 
 func movement_manager() -> void:
-	if actor == null:
-		return
-
+	if actor == null: return
+	if actor.can_act == false: return
+		
 	var dir : Vector2i = direction.pick_random()
 	if dir == Vector2i.ZERO:
 		return

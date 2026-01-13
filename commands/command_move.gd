@@ -2,7 +2,7 @@ extends Command
 class_name CommandMove
 
 ## Tiempo que tarda este comando en ejecutarse
-@export var turn_time : float = 1
+var action_time : float = 1
 ## Variable source nombrada "from" por legibilidad.
 var from : Vector2i:
 	get:

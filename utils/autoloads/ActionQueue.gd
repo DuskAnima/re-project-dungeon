@@ -1,8 +1,11 @@
 extends Node
 
+signal executed_action(time)
+
 var queue : Array = []
 var is_executing : bool = false
 var current : Command = null
+
 
 func add_command(cmd : Command) -> void:
 	queue.push_back(cmd)
@@ -19,7 +22,7 @@ func _execute_next() -> void:
 
 	if not current.finished.is_connected(_on_command_finished):
 		current.finished.connect(_on_command_finished)
-
+	command_data_sender()
 	current.execute()
 
 func _on_command_finished() -> void:
@@ -32,3 +35,7 @@ func _reset():
 	queue.clear()
 	is_executing = false
 	current = null
+
+func command_data_sender() -> void:
+	executed_action.emit(current.action_time)
+	

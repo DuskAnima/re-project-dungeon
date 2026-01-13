@@ -13,8 +13,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	movement_manager(event)
 
 func movement_manager(event) -> void:
-	if actor == null or not actor.is_controllable():
-		return
+	if actor == null: return
+	if actor.is_controllable == false: return
+	if actor.can_act == false: return
 
 	var direction := _get_direction(event)
 	if direction == Vector2i.ZERO:
