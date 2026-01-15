@@ -27,10 +27,5 @@ func send_cost() -> void:
 	return TimeManager.set_command_time_cost(time_cost)
 
 func finish() -> void:
-	finish_hook()
-	actor.is_busy = false
 	is_executing = false
 	finished.emit()
-
-func finish_hook() -> void:
-	pass

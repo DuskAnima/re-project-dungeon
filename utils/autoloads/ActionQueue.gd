@@ -6,9 +6,6 @@ var current : Command = null
 
 
 func add_command(cmd : Command) -> void:
-	if cmd.actor.is_busy:
-		print("can't do that, is bussy")
-		return
 	queue.push_back(cmd)
 	if not is_executing:
 		_execute_next()

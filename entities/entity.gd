@@ -2,7 +2,6 @@ extends Node2D
 class_name Entity
 
 # Flags
-var is_busy : bool = false
 var can_act : bool = false
 var is_controllable : bool = false
 var initiative_variation : bool = true

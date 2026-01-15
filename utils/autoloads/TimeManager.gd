@@ -16,11 +16,9 @@ func _ready() -> void:
 	start.connect(TurnManager._on_start)
 
 func set_command_time_cost(cost : float) -> void:
-	prints("cost", cost)
 	var command : Command = ActionQueue.current
 	if command.is_executing:
 		timer -= cost
-		print(timer)
 		time_check()
 	
 func _timer_iterator() -> void:
@@ -30,5 +28,4 @@ func _timer_iterator() -> void:
 func time_check() -> void:
 	if timer <= 0:
 		timeout.emit()
-		print("timeout")
 		_timer_iterator()

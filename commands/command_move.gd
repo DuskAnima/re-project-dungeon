@@ -36,7 +36,6 @@ func execute() -> void:
 		finish()
 		return
 
-	actor.is_busy = true
 	is_executing = true
 
 	GridManager.update_grid(actor, to)
@@ -50,6 +49,3 @@ func _set_cost() -> void:
 func _tween_movement(_act: Entity, _from : Vector2, _to : Vector2) -> void:
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)
-
-func finish_hook() -> void:
-	await tween.finished
