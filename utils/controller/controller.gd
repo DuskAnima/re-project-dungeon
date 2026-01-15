@@ -13,6 +13,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	movement_manager(event)
 
 func movement_manager(event) -> void:
+	######################## test stuff
+
 	if actor == null: return
 	if actor.is_controllable == false: return
 	if actor.can_act == false: return
@@ -26,6 +28,8 @@ func movement_manager(event) -> void:
 
 	var cmd := CommandMove.new(actor, from, to)
 	ActionQueue.add_command(cmd)
+
+	
 
 
 func _get_direction(movement : InputEvent) -> Vector2i:

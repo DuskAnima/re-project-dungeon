@@ -1,7 +1,7 @@
 extends Entity
 
 func _ready() -> void:
-	GameManager.set_current_ai_actor(self)
+	pass
 
 func _to_string() -> String:
 	return "Glorbo"

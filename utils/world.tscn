@@ -23,11 +23,10 @@ unique_name_in_owner = true
 [node name="Player" parent="Entities" instance=ExtResource("1_f3sb7")]
 position = Vector2(3, -29)
 
-[node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
-position = Vector2(22, -39)
-
 [node name="Glorbo" parent="Entities" instance=ExtResource("4_aqk2v")]
 position = Vector2(18, 15)
+
+[node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
 
 [node name="Utils" type="Node" parent="."]
 

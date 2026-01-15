@@ -7,6 +7,7 @@ signal finished
 var actor : Entity
 var _source : Variant
 var _target : Variant
+var time_cost : float
 
 var is_executing : bool = false
 
@@ -19,6 +20,17 @@ func _init(act : Entity,  src : Variant, targ : Variant) -> void:
 @abstract
 func execute() -> void
 
+@abstract
+func _set_cost() -> void
+
+func send_cost() -> void:
+	return TimeManager.set_command_time_cost(time_cost)
+
 func finish() -> void:
+	finish_hook()
+	actor.is_busy = false
 	is_executing = false
 	finished.emit()
+
+func finish_hook() -> void:
+	pass

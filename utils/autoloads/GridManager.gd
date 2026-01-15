@@ -2,8 +2,6 @@ extends Node
 
 const cell_size = 32
 
-signal entity_moved(actor, to)
-
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
 func grid_setup(_act: Entity) -> void:
@@ -17,10 +15,9 @@ func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity), posición 
 ## source (V2i) y posición target (V2i). Solo debe ser usada por CommandMove.
-func move_entity(_act: Entity, _from: Vector2i, _to: Vector2i) -> void:
+func update_grid(_act: Entity, _to: Vector2i) -> void:
 	_act.grid_pos = _to
-	_act.position = _grid_to_world(_act.grid_pos)
-	entity_moved.emit(_act, _to)
+
 
 ## Multiplica la posición de grid (V2i) por el cell_size para calcular posición global.
 func _grid_to_world(grid_pos : Vector2i) -> Vector2:

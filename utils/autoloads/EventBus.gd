@@ -1,9 +1,7 @@
 extends Node
 
 func _ready() -> void:
-	GridManager.entity_moved.connect(grid_catcher)
-	ActionQueue.executed_action.connect(command_time_catcher)
-
+	pass #GridManager.entity_moved.connect(grid_catcher)
 	
 func grid_catcher(_actor: Entity, _grid_pos: Vector2i) -> void:
 	pass
