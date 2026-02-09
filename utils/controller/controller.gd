@@ -1,10 +1,14 @@
 extends Node
+## Controller es un nodo que originalmente debe ser inyectado como nodo hijo en Entities controlables.
+## 
+## El primer Entity controlable es inyectado desde GameManager._game_set_up()
 class_name Controller
 
-var actor : Entity = null
+var actor : Entity
 
 func _ready() -> void:
-	GameManager.register_controller(self)
+	actor = get_parent()
+	owner = actor
 
 func set_actor(_act : Entity) -> void:
 	actor = _act
@@ -28,8 +32,6 @@ func movement_manager(event) -> void:
 
 	var cmd := CommandMove.new(actor, from, to)
 	ActionQueue.add_command(cmd)
-
-	
 
 
 func _get_direction(movement : InputEvent) -> Vector2i:

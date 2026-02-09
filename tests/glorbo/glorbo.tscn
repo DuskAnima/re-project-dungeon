@@ -16,3 +16,4 @@ stats = SubResource("Resource_oquja")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_78113")
+centered = false

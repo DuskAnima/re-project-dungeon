@@ -1,14 +1,15 @@
 [gd_scene load_steps=8 format=4 uid="uid://ctp2jvx7qfhi1"]
 
 [ext_resource type="PackedScene" uid="uid://n6aipd0jxgwt" path="res://entities/player/player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://qggkbfe0vfto" path="res://utils/world.gd" id="1_ll1b3"]
 [ext_resource type="PackedScene" uid="uid://jdklqavmseve" path="res://terrain/terrain.tscn" id="1_us6my"]
-[ext_resource type="PackedScene" uid="uid://c3s36k2ushysk" path="res://utils/controller/controller.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://dytk0mcntjn62" path="res://tests/glorbo/glorbo.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://e37cu42p5qq8" path="res://tests/stupu/stupu.tscn" id="5_jp4t6"]
 [ext_resource type="PackedScene" uid="uid://dygh6km2cgqfm" path="res://utils/controller/ai_controller.tscn" id="6_am7ch"]
 [ext_resource type="Script" uid="uid://cce6vkvqrl12j" path="res://utils/start_notifier.gd" id="7_ll1b3"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_ll1b3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -18,10 +19,9 @@ metadata/_edit_lock_ = true
 tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAA=")
 
 [node name="Entities" type="Node" parent="."]
-unique_name_in_owner = true
 
 [node name="Player" parent="Entities" instance=ExtResource("1_f3sb7")]
-position = Vector2(3, -29)
+position = Vector2(-49, -2)
 
 [node name="Glorbo" parent="Entities" instance=ExtResource("4_aqk2v")]
 position = Vector2(18, 15)
@@ -29,8 +29,6 @@ position = Vector2(18, 15)
 [node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
 
 [node name="Utils" type="Node" parent="."]
-
-[node name="Controller" parent="Utils" instance=ExtResource("3_tlwt5")]
 
 [node name="AiController" parent="Utils" instance=ExtResource("6_am7ch")]
 

@@ -4,7 +4,6 @@ class_name Entity
 # Flags
 var can_act : bool = false
 var is_controllable : bool = false
-var initiative_variation : bool = true
 
 # Grid Position
 var grid_pos : Vector2i 
@@ -21,9 +20,10 @@ func set_can_act(switch: bool) -> void:
 	can_act = switch
 
 ## Al entrar al arbol 
-func _enter_tree() -> void:
+func _ready() -> void:
 	GameManager.entity_setup(self)
 	_decenter_sprite()
+	ready_hook()
 
 ## Quita la propiedad "Sprite2D.center"
 func _decenter_sprite() -> void:
@@ -33,3 +33,6 @@ func _decenter_sprite() -> void:
 ## Identificación para debugging
 func _to_string() -> String:
 	return "entity"
+
+func ready_hook() -> void:
+	pass

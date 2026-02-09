@@ -6,8 +6,8 @@ const cell_size = 32
 ## _grid_snap(), _act.grid_pos
 func grid_setup(_act: Entity) -> void:
 	var pos : Vector2 = _act.position # Obtiene posición global
-	pos = _grid_snap(pos) # Hace snap en el grid
-	_act.grid_pos = _world_to_grid(pos) # Registra la posición de grid en las propiedades de la Entity
+	_grid_snap(_act, pos) # Hace snapping a Entity en el grid
+	update_grid(_act, _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
 
 ## FALTA IMPLEMENTACIÓN. Fuente de verdad para llevar a cabo el movimiento.
 func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
@@ -28,6 +28,6 @@ func _world_to_grid(pos : Vector2) -> Vector2i:
 	return round(pos / cell_size)
 
 ## Determina que el sprite será encajado dentro de su casilla de grid
-func _grid_snap(pos : Vector2) -> Vector2:
+func _grid_snap(_act: Entity, pos : Vector2) -> void:
 	var grid_pos = _world_to_grid(pos)
-	return _grid_to_world(grid_pos)
+	_act.position = _grid_to_world(grid_pos)

@@ -4,7 +4,6 @@ var queue : Array = []
 var is_executing : bool = false
 var current : Command = null
 
-
 func add_command(cmd : Command) -> void:
 	queue.push_back(cmd)
 	if not is_executing:

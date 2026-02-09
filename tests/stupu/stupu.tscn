@@ -16,3 +16,4 @@ stats = SubResource("Resource_3nv1d")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_nd7ec")
+centered = false
