@@ -19,6 +19,7 @@ func _init(_act : Entity,  _src : Variant, _targ : Variant) -> void
 @abstract
 func execute() -> void
 
+## Es necesario declarar el coste de tiempo con la variable "time_cost : float"
 @abstract
 func _set_time_cost() -> float
 

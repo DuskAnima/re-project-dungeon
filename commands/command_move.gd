@@ -32,15 +32,32 @@ func execute() -> void:
 		return
 
 	is_executing = true
-
+	
+	var cmd : Command = CommandFaceDirection.new(act, from, to)
+	ActionQueue.add_command(cmd)
 	GridManager.update_grid(act, to)
 	send_cost()
 	_tween_movement(act, global_from, global_to)
-	finish()
+	if tween.finished:
+		finish()
 
 func _set_time_cost() -> float:
 	return 1
 
+func face_direction() -> Vector2i:
+	var result : Vector2i = to - from
+	match result:
+		Vector2i.UP:
+			return result
+		Vector2i.DOWN:
+			return result
+		Vector2i.LEFT:
+			return result
+		Vector2i.RIGHT:
+			return result
+		_:
+			return act.direction
+			
 func _tween_movement(_act: Entity, _from : Vector2, _to : Vector2) -> void:
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)

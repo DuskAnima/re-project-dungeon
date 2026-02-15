@@ -5,9 +5,11 @@ extends Node
 var actors : Array[Entity]
 
 func entity_setup(_act: Entity) -> void:
+	print(_act)
 	actors.push_back(_act)
 	GridManager.grid_setup(_act)
 	TurnManager.turn_setup(_act)
+	print(actors)
 
 func _game_set_up() -> void:
 	register_controller()

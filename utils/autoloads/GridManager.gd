@@ -1,6 +1,9 @@
 extends Node
 
-const cell_size = 32
+## Tamaño de las celdas del grid.
+const cell_size : int = 32
+## Referencia a las diferentes entidades registradas para poder acceder a sus posiciones
+var actors : Array[Entity] = GameManager.actors
 
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
@@ -12,6 +15,9 @@ func grid_setup(_act: Entity) -> void:
 ## FALTA IMPLEMENTACIÓN. Fuente de verdad para llevar a cabo el movimiento.
 func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 	return true
+
+func cell_check() -> void:
+	pass
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity), posición 
 ## source (V2i) y posición target (V2i). Solo debe ser usada por CommandMove.

@@ -4,6 +4,7 @@ class_name Entity
 # Flags
 var can_act : bool = false
 var is_controllable : bool = false
+var direction : Vector2i
 
 # Grid Position
 var grid_pos : Vector2i 
