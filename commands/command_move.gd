@@ -24,20 +24,18 @@ func execute() -> void:
 
 	if act == null:
 		push_error("Command Move: Actor is Null")
-		finish()
 		return
 
 	if not GridManager.can_move(act, from, to):
-		finish()
+		push_error("Command Move: Actor is not allowed to go this way")
 		return
 
-	is_executing = true
+	start()
 
 	GridManager.update_grid(act, to)
-	send_cost()
 	_tween_movement(act, global_from, global_to)
-	if tween.finished:
-		finish()
+	
+	finish()
 
 func _set_time_cost() -> float:
 	return 1
