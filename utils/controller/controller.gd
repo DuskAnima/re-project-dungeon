@@ -20,7 +20,7 @@ func movement_manager(event) -> void:
 	######################## test stuff
 
 	if actor == null: return
-	if actor.is_controllable == false: return
+	if actor.properties.is_controllable == false: return
 	if actor.can_act == false: return
 
 	var direction := _get_direction(event)

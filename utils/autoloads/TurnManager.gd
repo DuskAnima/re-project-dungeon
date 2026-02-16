@@ -12,7 +12,7 @@ func turn_setup(_act: Entity) -> void:
 	var randomizer : float = randf_range(0.5, 1.5)
 	if _act == null:
 		return
-	var rng_speed : float = _act.stats.initiative * randomizer
+	var rng_speed : float = _act.properties.initiative * randomizer
 	turn_order.append([ _act, rng_speed ])
 	turn_order.sort_custom(_sort_descending)
 
@@ -31,7 +31,7 @@ func turn_iterator() -> void:
 
 func turn_process() -> void:
 	var unit : Entity = turn_order[current_index][0] # Toma la unidad de turno
-	if unit.is_controllable == false: # Si la unidad no es controlable
+	if unit.properties.is_controllable == false: # Si la unidad no es controlable
 		GameManager.set_current_ai_actor(unit) # Se inyecta la Entity al AiController
 	unit.set_can_act(true) # Establece que puede moverse
 

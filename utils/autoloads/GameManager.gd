@@ -23,7 +23,7 @@ var controller: Controller = Controller.new()
 ## El controller invoca esta función y pasa self.
 func register_controller() -> void:
 	for actor in actors:
-		if actor.is_controllable == false:
+		if actor.properties.is_controllable == false:
 			return
 		if actor.has_node("Controller"):
 			print("Ya tiene un control")

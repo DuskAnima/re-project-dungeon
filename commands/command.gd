@@ -3,6 +3,7 @@ extends RefCounted
 class_name Command
 
 signal finished
+signal started
 
 #var actor : Entity
 #var _source : Variant
@@ -11,16 +12,16 @@ var time_cost : float = _set_time_cost()
 
 var is_executing : bool = false
 
-## Función de inicialización que requiere Entity, Orgen y Objetivo.
 @abstract
+## Función de inicialización que requiere Entity, Orgen y Objetivo.
 func _init(_act : Entity,  _src : Variant, _targ : Variant) -> void
 
-## La ejecución debe ser implementada.
 @abstract
+## La ejecución debe ser implementada.
 func execute() -> void
 
-## Es necesario declarar el coste de tiempo con la variable "time_cost : float"
 @abstract
+## Es necesario declarar el coste de tiempo con la variable "time_cost : float"
 func _set_time_cost() -> float
 
 func send_cost() -> void:
@@ -29,3 +30,9 @@ func send_cost() -> void:
 func finish() -> void:
 	is_executing = false
 	finished.emit()
+
+func start() -> void:
+	started.connect(CommandBus.command_catcher, CONNECT_ONE_SHOT)
+	is_executing = true
+	started.emit(time_cost)
+	

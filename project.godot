@@ -21,7 +21,7 @@ GameManager="*res://utils/autoloads/GameManager.gd"
 GridManager="*res://utils/autoloads/GridManager.gd"
 TurnManager="*res://utils/autoloads/TurnManager.gd"
 ActionQueue="*res://utils/autoloads/ActionQueue.gd"
-EventBus="*res://utils/autoloads/EventBus.gd"
+CommandBus="*res://utils/autoloads/CommandBus.gd"
 TimeManager="*res://utils/autoloads/TimeManager.gd"
 
 [input]

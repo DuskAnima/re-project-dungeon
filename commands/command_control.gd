@@ -10,6 +10,7 @@ func _init(_act : Entity,  _src : Variant = null, _targ : Variant = null) -> voi
 	targ = _targ
 
 func execute() -> void:
+	
 	# Casos de uso:
 		# delegar a un personaje in-code
 			# Establecer en ready() para obtener al personaje inicial

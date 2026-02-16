@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://e37cu42p5qq8"]
 
 [ext_resource type="Script" uid="uid://cm7wt27n860nf" path="res://tests/stupu/stupu.gd" id="1_a4uk4"]
-[ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/stats.gd" id="2_353yl"]
+[ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="2_353yl"]
 [ext_resource type="Texture2D" uid="uid://bufp1xqtk45fw" path="res://icon.svg" id="2_nd7ec"]
 
-[sub_resource type="Resource" id="Resource_3nv1d"]
+[sub_resource type="Resource" id="Resource_353yl"]
 script = ExtResource("2_353yl")
-initiative = 0.5
+initiative = 1.0
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [node name="Stupu" type="Node2D"]
 script = ExtResource("1_a4uk4")
-stats = SubResource("Resource_3nv1d")
+properties = SubResource("Resource_353yl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

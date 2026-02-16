@@ -13,7 +13,7 @@ func _execute_next() -> void:
 	if queue.is_empty():
 		is_executing = false
 		return
-
+	
 	is_executing = true
 	current = queue.pop_front()
 

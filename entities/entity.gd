@@ -3,18 +3,16 @@ class_name Entity
 
 # Flags
 var can_act : bool = false
-var is_controllable : bool = false
-var direction : Vector2i
 
 # Grid Position
 var grid_pos : Vector2i 
 
-# Stat Resource
-@export var stats : Stats
+# Properties Resource
+@export var properties : Properties
 
 ## Establece la propiedad que permite que el jugador pueda controlar a una entidad
 func set_controllable(switch: bool) -> void:
-	is_controllable = switch
+	properties.is_controllable = switch
 	
 ## Establece la propiedad que permite que una entidad pueda tomar su turno para actuar.
 func set_can_act(switch: bool) -> void:
