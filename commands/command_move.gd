@@ -5,17 +5,18 @@ class_name CommandMove
 var act : Entity
 ## Variable de inicialización para origen del movimiento Vector2i
 var from : Vector2i
-## Variable de inicialización de dirección Vector2i
+## Variable de inicialización de dirección Vector2i.DIR
 var dir : Vector2i
 
 
 ## Command Move requiere recibir al actor de la acción, posición actual de grid y posición requerida de grid.
-func _init(_act : Entity,  _from : Variant, _dir : Variant) -> void:
+func _init(_act : Entity,  _from : Vector2i, _dir : Vector2i) -> void:
 	act = _act
 	from = _from
 	dir = _dir
 
 func execute() -> void:
+	print(dir)
 	# Grid new position
 	var to : Vector2i = from + dir
 	prints("act:", act, " from:", from, " to:", to)
@@ -34,7 +35,7 @@ func execute() -> void:
 
 	start()
 
-	GridManager.update_grid(act, dir)
+	GridManager.update_grid(act, to)
 	GridManager.grid_movement(act, global_from, global_to)
 	
 	finish()

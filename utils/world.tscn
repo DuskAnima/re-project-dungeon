@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://ctp2jvx7qfhi1"]
+[gd_scene load_steps=8 format=4 uid="uid://ctp2jvx7qfhi1"]
 
 [ext_resource type="PackedScene" uid="uid://n6aipd0jxgwt" path="res://entities/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://qggkbfe0vfto" path="res://utils/world.gd" id="1_ll1b3"]
 [ext_resource type="PackedScene" uid="uid://jdklqavmseve" path="res://terrain/terrain.tscn" id="1_us6my"]
+[ext_resource type="PackedScene" uid="uid://dytk0mcntjn62" path="res://tests/glorbo/glorbo.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://e37cu42p5qq8" path="res://tests/stupu/stupu.tscn" id="5_jp4t6"]
 [ext_resource type="PackedScene" uid="uid://dygh6km2cgqfm" path="res://utils/controller/ai_controller.tscn" id="6_am7ch"]
 [ext_resource type="Script" uid="uid://cce6vkvqrl12j" path="res://utils/start_notifier.gd" id="7_ll1b3"]
 
@@ -20,6 +22,11 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAA
 
 [node name="Player" parent="Entities" instance=ExtResource("1_f3sb7")]
 position = Vector2(-49, -2)
+
+[node name="Glorbo" parent="Entities" instance=ExtResource("4_aqk2v")]
+position = Vector2(18, 15)
+
+[node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
 
 [node name="Utils" type="Node" parent="."]
 
