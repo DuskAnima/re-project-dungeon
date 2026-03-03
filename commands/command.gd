@@ -9,15 +9,17 @@ var time_cost : float = _set_time_cost()
 var is_executing : bool = false
 
 @abstract
-## Función de inicialización que requiere Entity, Orgen y Objetivo.
-func _init(_act : Entity,  _src : Variant, _targ : Variant) -> void
+## Función de inicialización de comandos. Cada comando tiene diferentes requerimientos que deben ser implementados
+## y documentados individualmente.
+func _init() -> void
 
+## La ejecución debe ser implementada. Siempre debe llamarse start() al comienzo de la implementación y finish() al
+## final
 @abstract
-## La ejecución debe ser implementada.
 func execute() -> void
 
+## Es necesario declarar el coste de tiempo con un return de un float
 @abstract
-## Es necesario declarar el coste de tiempo con un return de un float"
 func _set_time_cost() -> float
 
 ## Conecta a CommandBus

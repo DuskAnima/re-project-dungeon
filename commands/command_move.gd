@@ -3,25 +3,27 @@ class_name CommandMove
 
 ## Variable de inicialización para actor
 var act : Entity
-## Variable de inicialización para origen del movimiento
+## Variable de inicialización para origen del movimiento Vector2i
 var from : Vector2i
-## Variable de inicialización para destino del movimiento
-var to : Vector2i
-## Tween que determina el trayecto del movimiento en grid
-var tween : Tween
-## Velocidad de desplazamiento entre tiles
-var tween_speed : float = 0.2
+## Variable de inicialización de dirección Vector2i
+var dir : Vector2i
+
 
 ## Command Move requiere recibir al actor de la acción, posición actual de grid y posición requerida de grid.
-func _init(_act : Entity,  _src : Variant, _targ : Variant) -> void:
+func _init(_act : Entity,  _from : Variant, _dir : Variant) -> void:
 	act = _act
-	from = _src
-	to = _targ
+	from = _from
+	dir = _dir
 
 func execute() -> void:
+	# Grid new position
+	var to : Vector2i = from + dir
+	prints("act:", act, " from:", from, " to:", to)
+	# Grid origin
 	var global_from : Vector2 = GridManager._grid_to_world(from)
+	# Grid destiny
 	var global_to : Vector2 = GridManager._grid_to_world(to)
-
+	prints("global from: ", global_from, " global_to:", global_to)
 	if act == null:
 		push_error("Command Move: Actor is Null")
 		return
@@ -32,14 +34,10 @@ func execute() -> void:
 
 	start()
 
-	GridManager.update_grid(act, to)
-	_tween_movement(act, global_from, global_to)
+	GridManager.update_grid(act, dir)
+	GridManager.grid_movement(act, global_from, global_to)
 	
 	finish()
 
 func _set_time_cost() -> float:
-	return 1
-			
-func _tween_movement(_act: Entity, _from : Vector2, _to : Vector2) -> void:
-	tween = _act.create_tween()
-	tween.tween_property(_act, "position", _to, tween_speed)
+	return 0

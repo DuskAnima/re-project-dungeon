@@ -1,5 +1,5 @@
 extends Command
-class_name CommandFaceDirection
+class_name CommandFace
 
 var act : Entity
 var from : Vector2i
@@ -14,22 +14,23 @@ func _init(_act : Entity,  _from : Vector2i, _to : Vector2i) -> void:
 
 func execute() -> void:
 	is_executing = true
-	# Accede a la propiedad que almacena el Vector2i de dirección 
-	var direction = act.properties.direction
+	# Accede a la referencia de la propiedad que almacena el Vector2 de dirección 
+	var face_direction := act.properties.face_direction
 	# Toma el Vector2i de la posición a la cual se desea mirar y la del origen de la entidad mirando para calcular la dirección 
-	var result : Vector2i = to - from
+	var result : Vector2 = to - from
 	# Asigna el resultado a la variable de dirección.
+	start()
 	match result:
 		Vector2i.UP:
-			direction = result
+			face_direction = result
 		Vector2i.DOWN:
-			direction = result
+			face_direction = result
 		Vector2i.LEFT:
-			direction = result
+			face_direction = result
 		Vector2i.RIGHT:
-			direction = result
+			face_direction = result
 		_:
-			direction = act.direction
+			face_direction = act.properties.face_direction
 	finish()
 
 func _set_time_cost() -> float:

@@ -19,7 +19,7 @@ func movement_manager() -> void:
 	var from := actor.grid_pos
 	var to := from + dir
 
-	var cmd := CommandMove.new(actor, from, to)
+	var cmd := CommandWalk.new(actor, from, to)
 	ActionQueue.add_command(cmd)
 
 
