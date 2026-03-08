@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_sglur"]
 script = ExtResource("2_sglur")
-initiative = 1.0
+initiative = 5.0
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [node name="Player" type="Node2D"]

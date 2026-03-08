@@ -28,6 +28,9 @@ position = Vector2(18, 15)
 
 [node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
 
+[node name="Stupu2" parent="Entities" instance=ExtResource("5_jp4t6")]
+position = Vector2(74, -33)
+
 [node name="Utils" type="Node" parent="."]
 
 [node name="AiController" parent="Utils" instance=ExtResource("6_am7ch")]

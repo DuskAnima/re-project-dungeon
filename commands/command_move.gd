@@ -16,19 +16,16 @@ func _init(_act : Entity,  _from : Vector2i, _dir : Vector2i) -> void:
 	dir = _dir
 
 func execute() -> void:
-	print(dir)
 	# Grid new position
 	var to : Vector2i = from + dir
-	prints("act:", act, " from:", from, " to:", to)
 	# Grid origin
 	var global_from : Vector2 = GridManager._grid_to_world(from)
 	# Grid destiny
 	var global_to : Vector2 = GridManager._grid_to_world(to)
-	prints("global from: ", global_from, " global_to:", global_to)
+	
 	if act == null:
 		push_error("Command Move: Actor is Null")
 		return
-
 	if not GridManager.can_move(act, from, to):
 		push_error("Command Move: Actor is not allowed to go this way")
 		return
