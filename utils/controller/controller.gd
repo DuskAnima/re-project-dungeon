@@ -21,13 +21,13 @@ func movement_manager(event) -> void:
 
 	if actor == null: return
 	if actor.properties.is_controllable == false: return
-	if actor.can_act == false: return
+	if actor.properties.can_act == false: return
 
 	var dir := _get_direction(event)
 	if dir == Vector2i.ZERO:
 		return
 
-	var from := actor.grid_pos
+	var from := actor.properties.grid_pos
 	var cmd := CommandWalk.new(actor, from, dir)
 	ActionQueue.add_command(cmd)
 

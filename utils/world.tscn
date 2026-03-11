@@ -1,39 +1,30 @@
-[gd_scene load_steps=8 format=4 uid="uid://ctp2jvx7qfhi1"]
+[gd_scene format=4 uid="uid://ctp2jvx7qfhi1"]
 
 [ext_resource type="PackedScene" uid="uid://n6aipd0jxgwt" path="res://entities/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://qggkbfe0vfto" path="res://utils/world.gd" id="1_ll1b3"]
 [ext_resource type="PackedScene" uid="uid://jdklqavmseve" path="res://terrain/terrain.tscn" id="1_us6my"]
-[ext_resource type="PackedScene" uid="uid://dytk0mcntjn62" path="res://tests/glorbo/glorbo.tscn" id="4_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://e37cu42p5qq8" path="res://tests/stupu/stupu.tscn" id="5_jp4t6"]
 [ext_resource type="PackedScene" uid="uid://dygh6km2cgqfm" path="res://utils/controller/ai_controller.tscn" id="6_am7ch"]
 [ext_resource type="Script" uid="uid://cce6vkvqrl12j" path="res://utils/start_notifier.gd" id="7_ll1b3"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=304851295]
 script = ExtResource("1_ll1b3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=740200642]
 zoom = Vector2(1.5, 1.5)
 metadata/_edit_lock_ = true
 
-[node name="Terrain" parent="." instance=ExtResource("1_us6my")]
+[node name="Terrain" parent="." unique_id=76177753 instance=ExtResource("1_us6my")]
+position = Vector2(-16, -16)
 tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAA=")
 
-[node name="Entities" type="Node" parent="."]
+[node name="Entities" type="Node" parent="." unique_id=490192879]
 
-[node name="Player" parent="Entities" instance=ExtResource("1_f3sb7")]
-position = Vector2(-49, -2)
+[node name="Player" parent="Entities" unique_id=1162997554 instance=ExtResource("1_f3sb7")]
+position = Vector2(-32, 0)
 
-[node name="Glorbo" parent="Entities" instance=ExtResource("4_aqk2v")]
-position = Vector2(18, 15)
+[node name="Utils" type="Node" parent="." unique_id=336515052]
 
-[node name="Stupu" parent="Entities" instance=ExtResource("5_jp4t6")]
+[node name="AiController" parent="Utils" unique_id=591202511 instance=ExtResource("6_am7ch")]
 
-[node name="Stupu2" parent="Entities" instance=ExtResource("5_jp4t6")]
-position = Vector2(74, -33)
-
-[node name="Utils" type="Node" parent="."]
-
-[node name="AiController" parent="Utils" instance=ExtResource("6_am7ch")]
-
-[node name="StartNotifier" type="Node" parent="Utils"]
+[node name="StartNotifier" type="Node" parent="Utils" unique_id=596735551]
 script = ExtResource("7_ll1b3")

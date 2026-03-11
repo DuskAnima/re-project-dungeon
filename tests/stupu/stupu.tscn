@@ -1,19 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://e37cu42p5qq8"]
+[gd_scene format=3 uid="uid://e37cu42p5qq8"]
 
 [ext_resource type="Script" uid="uid://cm7wt27n860nf" path="res://tests/stupu/stupu.gd" id="1_a4uk4"]
 [ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="2_353yl"]
-[ext_resource type="Texture2D" uid="uid://bufp1xqtk45fw" path="res://icon.svg" id="2_nd7ec"]
+[ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="3_3nv1d"]
+[ext_resource type="Texture2D" uid="uid://d2aerontaop7r" path="res://entities/player/player_sprites/back.png" id="3_353yl"]
 
 [sub_resource type="Resource" id="Resource_353yl"]
 script = ExtResource("2_353yl")
-initiative = 1.0
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
-[node name="Stupu" type="Node2D"]
+[sub_resource type="Resource" id="Resource_3nv1d"]
+script = ExtResource("3_3nv1d")
+initiative = 1.0
+metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nd7ec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_353yl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Stupu" type="Node2D" unique_id=860496046]
 script = ExtResource("1_a4uk4")
 properties = SubResource("Resource_353yl")
+stats = SubResource("Resource_3nv1d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_nd7ec")
-centered = false
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1498269150]
+sprite_frames = SubResource("SpriteFrames_nd7ec")

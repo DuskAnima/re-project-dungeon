@@ -23,10 +23,12 @@ func _init(_act : Entity,  _from : Vector2i, _dir : Vector2i) -> void:
 	
 func execute() -> void:
 	start()
-	var cmd_face := CommandFace.new(act, dir)
+	
 	var cmd_move := CommandMove.new(act, from, dir)
-	ActionQueue.add_command(cmd_face)
+	var cmd_face := CommandFace.new(act, dir)
 	ActionQueue.add_command(cmd_move)
+	ActionQueue.add_command(cmd_face)
+	
 	finish()
 
 func _set_time_cost() -> float:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://jdklqavmseve"]
+[gd_scene format=3 uid="uid://jdklqavmseve"]
 
 [ext_resource type="Texture2D" uid="uid://2jp6flfawrie" path="res://terrain/floor.png" id="1_l7s0s"]
 [ext_resource type="Texture2D" uid="uid://4ybcyus4nexe" path="res://terrain/ice_crack.png" id="2_2ilfp"]
+[ext_resource type="Script" uid="uid://v1r1yxbsdrws" path="res://terrain/terrain.gd" id="3_2ilfp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nigp7"]
 texture = ExtResource("1_l7s0s")
@@ -24,5 +25,6 @@ custom_data_layer_1/type = 1
 sources/1 = SubResource("TileSetAtlasSource_nigp7")
 sources/2 = SubResource("TileSetAtlasSource_7nt5j")
 
-[node name="Terrain" type="TileMapLayer"]
+[node name="Terrain" type="TileMapLayer" unique_id=1063133987]
 tile_set = SubResource("TileSet_mk5yb")
+script = ExtResource("3_2ilfp")

@@ -7,7 +7,7 @@ var actors : Array[Entity] = GameManager.actors
 ## Tween que determina el trayecto del movimiento en grid
 var tween : Tween
 ## Velocidad de desplazamiento entre tiles
-var tween_speed : float = 0.2
+var tween_speed : float = 0.5
 
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
@@ -26,11 +26,12 @@ func cell_check() -> void:
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
 ##  target (V2i). Solo debe ser usada por CommandMove.
 func update_grid(_act: Entity, _to: Vector2i) -> void:
-	_act.grid_pos = _to
+	_act.properties.grid_pos = _to
 
-func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> void:
+func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)
+	return tween
 
 ## Multiplica la posición de grid (V2i) por el cell_size para calcular posición global.
 func _grid_to_world(grid_pos : Vector2i) -> Vector2:

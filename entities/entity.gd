@@ -2,13 +2,14 @@ extends Node2D
 class_name Entity
 
 # Flags
-var can_act : bool = false
-
-# Grid Position
-var grid_pos : Vector2i 
-
-# Properties Resource
+## Resource que almacena referencias a las animaciones y las ejecuta
+var animations : Animations = Animations.new(self)
+## Diccionario de referencia para los diferentes nodos de animaciones
+@export var animated_sprites : Dictionary[String, AnimatedSprite2D]
+## General logic properties of entities (grid_pos, face_direction, is_controlable)
 @export var properties : Properties
+## General stats of entities (initiative)
+@export var stats : Stats
 
 ## Establece la propiedad que permite que el jugador pueda controlar a una entidad
 func set_controllable(switch: bool) -> void:
@@ -16,18 +17,12 @@ func set_controllable(switch: bool) -> void:
 	
 ## Establece la propiedad que permite que una entidad pueda tomar su turno para actuar.
 func set_can_act(switch: bool) -> void:
-	can_act = switch
+	properties.can_act = switch
 
 ## Al entrar al arbol 
 func _ready() -> void:
 	GameManager.entity_setup(self)
-	_decenter_sprite()
 	ready_hook()
-
-## Quita la propiedad "Sprite2D.center"
-func _decenter_sprite() -> void:
-	var sprite : Sprite2D = get_node("Sprite2D")
-	sprite.centered = false
 
 ## Identificación para debugging
 func _to_string() -> String:

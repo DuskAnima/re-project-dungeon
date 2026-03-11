@@ -1,19 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://dytk0mcntjn62"]
+[gd_scene format=3 uid="uid://dytk0mcntjn62"]
 
 [ext_resource type="Script" uid="uid://kqviout5wo7h" path="res://tests/glorbo/glorbo.gd" id="1_w6ask"]
-[ext_resource type="Texture2D" uid="uid://bufp1xqtk45fw" path="res://icon.svg" id="2_78113"]
 [ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="2_dlytc"]
+[ext_resource type="Texture2D" uid="uid://d2aerontaop7r" path="res://entities/player/player_sprites/back.png" id="3_dlytc"]
+[ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="3_oquja"]
 
 [sub_resource type="Resource" id="Resource_dlytc"]
 script = ExtResource("2_dlytc")
-initiative = 1.0
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
-[node name="Glorbo" type="Node2D"]
+[sub_resource type="Resource" id="Resource_dea6x"]
+script = ExtResource("3_oquja")
+initiative = 1.0
+metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78113"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dlytc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Glorbo" type="Node2D" unique_id=234887506]
 script = ExtResource("1_w6ask")
 properties = SubResource("Resource_dlytc")
+stats = SubResource("Resource_dea6x")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_78113")
-centered = false
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=644089473]
+sprite_frames = SubResource("SpriteFrames_78113")

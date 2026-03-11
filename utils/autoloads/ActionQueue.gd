@@ -1,25 +1,29 @@
 extends Node
 
 var queue : Array = []
-var is_executing : bool = false
+var in_process : bool = false
 var current : Command = null
 
+## agrega un nuevo comando a la cola
 func add_command(cmd : Command) -> void:
-	queue.push_back(cmd)
-	if not is_executing:
-		_execute_next()
+	queue.push_back(cmd) # Agrega un comando al final
+	prints("nuevo comando: ", cmd)
+	prints("lista de comandos", queue)
+	if not in_process : # Si no hay comando en proceso
+		_execute_next() # Ejecutar siguiente
 
 func _execute_next() -> void:
-	if queue.is_empty():
-		is_executing = false
-		return
+	if queue.is_empty(): # Si la lista está vacía
+		in_process = false # Flagear que no hay ningun comando en proceso
+		return # Terminar
 	
-	is_executing = true
-	current = queue.pop_front()
+	in_process = true # Flagear que hay un comando en proceso
+	current = queue.pop_front() # Sacar el comando de la lista y aislarlo para usarlo
 
-	if not current.finished.is_connected(_on_command_finished):
+	if not current.finished.is_connected(_on_command_finished): # Conectar señal de finalización
 		current.finished.connect(_on_command_finished)
-	current.execute()
+	current.execute() 
+	prints("ejecutando: ", current)
 
 func _on_command_finished() -> void:
 	if current and current.finished.is_connected(_on_command_finished):
@@ -29,5 +33,5 @@ func _on_command_finished() -> void:
 
 func _reset():
 	queue.clear()
-	is_executing = false
+	in_process = false
 	current = null

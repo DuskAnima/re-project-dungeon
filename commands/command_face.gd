@@ -10,8 +10,6 @@ func _init(_act : Entity, _dir : Vector2i) -> void:
 	dir = _dir
 
 func execute() -> void:
-	print("ejecutando")
-	is_executing = true
 	# Accede a la referencia de la propiedad que almacena el Vector2 de dirección 
 	var face_direction := act.properties.face_direction
 	# Toma el Vector2i de la posición a la cual se desea mirar y la del origen de la entidad mirando para calcular la dirección 
@@ -20,16 +18,16 @@ func execute() -> void:
 	match dir:
 		Vector2i.UP:
 			face_direction = dir
-			print("arriba")
+			act.animations.play_movement("up")
 		Vector2i.DOWN:
 			face_direction = dir
-			print("abajo")
+			act.animations.play_movement("down")
 		Vector2i.LEFT:
 			face_direction = dir
-			print("izquierda")
+			act.animations.play_movement("left")
 		Vector2i.RIGHT:
 			face_direction = dir
-			print("derecha")
+			act.animations.play_movement("right")
 		_:
 			face_direction = face_direction
 	finish()

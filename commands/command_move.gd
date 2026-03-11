@@ -18,11 +18,7 @@ func _init(_act : Entity,  _from : Vector2i, _dir : Vector2i) -> void:
 func execute() -> void:
 	# Grid new position
 	var to : Vector2i = from + dir
-	# Grid origin
-	var global_from : Vector2 = GridManager._grid_to_world(from)
-	# Grid destiny
-	var global_to : Vector2 = GridManager._grid_to_world(to)
-	
+
 	if act == null:
 		push_error("Command Move: Actor is Null")
 		return
@@ -31,11 +27,33 @@ func execute() -> void:
 		return
 
 	start()
+	
+	match dir:
+		Vector2i.UP:
+			act.animations.play_movement("move_up")
+		Vector2i.DOWN:
+			act.animations.play_movement("move_down")
+		Vector2i.LEFT:
+			act.animations.play_movement("move_left")
+		Vector2i.RIGHT:
+			act.animations.play_movement("move_right")
+		_:
+			return
 
 	GridManager.update_grid(act, to)
-	GridManager.grid_movement(act, global_from, global_to)
-	
+
+	# Grid origin
+	var global_from : Vector2 = GridManager._grid_to_world(from)
+	# Grid destiny
+	var global_to : Vector2 = GridManager._grid_to_world(to)
+	# Movement tween
+	var tween : Tween = GridManager.grid_movement(act, global_from, global_to)
+	tween.finished.connect(on_movement_finished)
+
+func on_movement_finished() -> void:
+	prints("movement finished for ", self, " id:", get_instance_id())
 	finish()
 
 func _set_time_cost() -> float:
 	return 0
+	

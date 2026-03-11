@@ -11,12 +11,12 @@ func set_actor(_act : Entity) -> void:
 
 func movement_manager() -> void:
 	if actor == null: return
-	if actor.can_act == false: return
+	if actor.properties.can_act == false: return
 		
 	var dir : Vector2i = direction.pick_random()
 	if dir == Vector2i.ZERO:
 		return
-	var from := actor.grid_pos
+	var from := actor.properties.grid_pos
 
 	var cmd := CommandWalk.new(actor, from, dir)
 	ActionQueue.add_command(cmd)

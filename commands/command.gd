@@ -7,6 +7,8 @@ signal finished
 
 var time_cost : float = _set_time_cost()
 var is_executing : bool = false
+# Identificador único para depuración
+var _debug_id: int = randi_range(0, 1000)
 
 @abstract
 ## Función de inicialización de comandos. Cada comando tiene diferentes requerimientos que deben ser implementados
@@ -32,4 +34,6 @@ func start() -> void:
 func finish() -> void:
 	is_executing = false
 	finished.emit()
-	
+
+func _to_string() -> String:
+	return "%s(id=%d)" % [get_script().get_global_name(), _debug_id]

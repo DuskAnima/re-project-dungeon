@@ -12,7 +12,7 @@ func turn_setup(_act: Entity) -> void:
 	var randomizer : float = randf_range(0.5, 1.5)
 	if _act == null:
 		return
-	var rng_speed : float = _act.properties.initiative * randomizer
+	var rng_speed : float = _act.stats.initiative * randomizer
 	turn_order.append([ _act, rng_speed ])
 	turn_order.sort_custom(_sort_descending)
 

@@ -30,16 +30,6 @@ func register_controller() -> void:
 			return
 		actor.add_child(controller)
 
-"	controller = ctrl
-	if current_actor:
-		controller.set_actor(current_actor)"
-
-## Función que registra un nodo Entity como personaje controlable.
-## Por defecto registra a Player.
-"func set_current_actor(_act: Entity) -> void:
-	current_actor = _act
-	if controller:
-		controller.set_actor(_act)"
 
 # --------- NPC CONTROLLER SETTING --------- 
 var current_ai: Entity = null
