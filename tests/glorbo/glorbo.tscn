@@ -25,10 +25,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Glorbo" type="Node2D" unique_id=234887506]
+[node name="Glorbo" type="Node2D" unique_id=234887506 node_paths=PackedStringArray("animated_sprites")]
 script = ExtResource("1_w6ask")
+animated_sprites = {
+"movement": NodePath("MovementSprites")
+}
 properties = SubResource("Resource_dlytc")
 stats = SubResource("Resource_dea6x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=644089473]
+[node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=644089473]
 sprite_frames = SubResource("SpriteFrames_78113")

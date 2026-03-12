@@ -51,7 +51,6 @@ func execute() -> void:
 	tween.finished.connect(on_movement_finished)
 
 func on_movement_finished() -> void:
-	prints("movement finished for ", self, " id:", get_instance_id())
 	finish()
 
 func _set_time_cost() -> float:

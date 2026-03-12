@@ -26,7 +26,7 @@ func register_controller() -> void:
 		if actor.properties.is_controllable == false:
 			return
 		if actor.has_node("Controller"):
-			print("Ya tiene un control")
+			push_error("Ya tiene un control")
 			return
 		actor.add_child(controller)
 

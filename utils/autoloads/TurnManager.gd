@@ -23,6 +23,7 @@ func _sort_descending(a, b) -> bool:
 
 func turn_iterator() -> void:
 	var unit : Entity = turn_order[current_index][0] # Toma la entidad de turno
+	print("UNIDAD: ", unit)
 	unit.set_can_act(false) # Establece que ya no puede moverse
 	current_index += 1 # Mueve el puntero un elemento extra
 	if current_index == turn_order.size():
