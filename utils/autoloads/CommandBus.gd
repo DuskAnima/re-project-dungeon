@@ -3,6 +3,11 @@ extends Node
 func _ready() -> void:
 	pass #GridManager.entity_moved.connect(grid_catcher)
 
-func command_catcher(time: Variant) -> void:
-	TimeManager.set_command_time_cost(time)
-	
+func on_command_start(_time: Variant) -> void:
+	if _time:
+		TimeManager.set_command_time_cost(_time)
+
+
+"func on_command_finished() -> void:
+	TimeManager.timer_iterator_enabler()
+"

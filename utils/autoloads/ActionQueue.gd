@@ -9,7 +9,6 @@ var stack = get_stack()
 func add_command(cmd : Command) -> void:
 #	prints("AÑADIENDO comando:", cmd, "id:", cmd.get_instance_id(), "desde:", stack)
 	queue.push_back(cmd) # Agrega un comando al final
-	prints("lista de comandos", queue)
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
 
@@ -22,27 +21,26 @@ func _execute_next() -> void:
 	
 	in_process = true # Flagear que hay un comando en proceso
 	prints("Pre asignación de comando", current)
+	if current != null:
+		push_error("Existe una recursión en la ejecusión del turno, instancia de Command debería ser NULL antes de ejecutar el siguente Command, pero es ", current)
 	current = queue.pop_front() # Sacar el comando de la lista y aislarlo para usarlo
-	prints("Post asignación de comando", current)
-
 	if not current.finished.is_connected(_on_command_finished): # Conectar señal de finalización
 		current.finished.connect(_on_command_finished)
-	prints("pre command.execute() : ", current)
 	current.execute() 
+	await current.finished
 	prints("post command.execute() : ", current, "<- post _on_command_finished, tiene que ser null. FINALIZACIÓN")
-
+	_execute_next()
 
 func _on_command_finished() -> void:
-	var finished = []
+	var finished = [] # Debug stuff only
 	if current and current.finished.is_connected(_on_command_finished):
 		current.finished.disconnect(_on_command_finished)
 		prints("on_command_finished_ pre execute_next()", current, "Eliminando comando, verificación de next in Queue")
 		finished.append(current)
 		current = null
-		
 	_execute_next()
-	print("_on_command_finished_ post execute_next()", current, " <- Comando eliminado, debería ser null en el útlimo")
-	prints("Comandos ejecutados: ", finished)
+
+	
 func _reset():
 	queue.clear()
 	in_process = false

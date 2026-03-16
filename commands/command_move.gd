@@ -7,7 +7,7 @@ var act : Entity
 var from : Vector2i
 ## Variable de inicialización de dirección Vector2i.DIR
 var dir : Vector2i
-
+var tween : Tween
 
 ## Command Move requiere recibir al actor de la acción, posición actual de grid y posición requerida de grid.
 func _init(_act : Entity,  _from : Vector2i, _dir : Vector2i) -> void:
@@ -47,10 +47,9 @@ func execute() -> void:
 	# Grid destiny
 	var global_to : Vector2 = GridManager._grid_to_world(to)
 	# Movement tween
-	var tween : Tween = GridManager.grid_movement(act, global_from, global_to)
-	tween.finished.connect(on_movement_finished)
+	tween = GridManager.grid_movement(act, global_from, global_to)
+	await tween.finished
 
-func on_movement_finished() -> void:
 	finish()
 
 func _set_time_cost() -> float:

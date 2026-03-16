@@ -26,12 +26,14 @@ func _set_time_cost() -> float
 
 ## Conecta a CommandBus
 func start() -> void:
-	started.connect(CommandBus.command_catcher, CONNECT_ONE_SHOT)
+	started.connect(CommandBus.on_command_start, CONNECT_ONE_SHOT)
 	is_executing = true
 	started.emit(time_cost)
 
 ## Envía información pertinente a ActionQueue
 func finish() -> void:
+#	finished.connect(CommandBus.on_command_finished, CONNECT_ONE_SHOT)
+	print("EMITIENDO AVISO DE QUE EL COMANDO TERMINÓ")
 	is_executing = false
 	finished.emit()
 
