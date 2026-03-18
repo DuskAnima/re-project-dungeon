@@ -48,8 +48,12 @@ func execute() -> void:
 	var global_to : Vector2 = GridManager._grid_to_world(to)
 	# Movement tween
 	tween = GridManager.grid_movement(act, global_from, global_to)
-	await tween.finished
+	_on_tween_finished()
 
+
+func _on_tween_finished() -> void:
+	await tween.finished
+	print("on tween finished")
 	finish()
 
 func _set_time_cost() -> float:

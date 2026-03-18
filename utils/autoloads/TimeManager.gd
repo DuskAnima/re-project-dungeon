@@ -17,12 +17,8 @@ func _ready() -> void:
 	start.connect(TurnManager._on_start)
 
 func set_command_time_cost(cost : float) -> void:
-	if command.is_executing:
-		prints("TIEMPO:", timer, "COSTE:", cost)
-
-		await command.finished
-		timer -= cost
-		time_check()
+	timer -= cost
+	time_check()
 
 func _timer_iterator() -> void:
 	if timer <= 0:

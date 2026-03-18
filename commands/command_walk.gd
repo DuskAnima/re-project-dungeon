@@ -26,8 +26,8 @@ func execute() -> void:
 	
 	var cmd_move := CommandMove.new(act, from, dir)
 	var cmd_face := CommandFace.new(act, dir)
-	#ActionQueue.add_command(cmd_face)
 	ActionQueue.add_command(cmd_move)
+	ActionQueue.add_command(cmd_face)
 	
 	finish()
 
