@@ -20,7 +20,6 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAA
 [node name="Entities" type="Node" parent="." unique_id=490192879]
 
 [node name="Player" parent="Entities" unique_id=1162997554 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("1_f3sb7")]
-position = Vector2(-32, 0)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }

@@ -25,19 +25,17 @@ func execute() -> void
 @abstract
 func _set_time_cost() -> float
 
-## Conecta a CommandBus
+## Conecta a CommandBus y envía el comando para procesarse en el momento en el que comienza su ejecusión
 func start() -> void:
-	prints(name, ": COMENZÓ")
-	is_executing = true
-	started.connect(CommandBus.on_command_start, CONNECT_ONE_SHOT)
-	started.emit(time_cost)
+	is_executing = true # Flag de ejecusión
+	started.connect(CommandBus.on_command_start, CONNECT_ONE_SHOT) # Conecta el comando y lo envía
+	started.emit(self)
 
 ## Envía información pertinente a ActionQueue
 func finish() -> void:
 #	finished.connect(CommandBus.on_command_finished, CONNECT_ONE_SHOT)
 	is_executing = false
 	finished.emit()
-	prints(name, ": finished signal <<<<EMITIDO>>>>")
 
 func _to_string() -> String:
 	return "%s(id=%d)" % [get_script().get_global_name(), _debug_id]
