@@ -27,8 +27,7 @@ func movement_manager(event) -> void:
 	if dir == Vector2i.ZERO:
 		return
 
-	var from := actor.properties.grid_pos
-	var cmd := CommandWalk.new(actor, from, dir)
+	var cmd := CommandWalk.new(actor, dir)
 	ActionQueue.add_command(cmd)
 
 

@@ -1,12 +1,5 @@
 extends Node
 
-# ToDO: 
-# - Bug de repetición de operación, CommandMove:
-# El comando move, al depender de la intancia empaquetada del actor, genera que se opere grid_update()
-# sobre información no actualizada: El flujo sería Command 1 -> grid update instantaneo -> Command init múltiple -> 
-# Comand init 1 termina -> Command init 2 -> grid update sobre la operación anterior -> Command init 3.4,5 etc 
-# grid update opera sobre todas las veces que se logró instanciar el Command antes que el Command init 1 terminase.
-
 ## Tamaño de las celdas del grid.
 const cell_size : int = 32
 ## Referencia a las diferentes entidades registradas para poder acceder a sus posiciones
@@ -14,8 +7,8 @@ var actors : Array[Entity] = GameManager.actors
 ## Tween que determina el trayecto del movimiento en grid
 var tween : Tween
 ## Velocidad de desplazamiento entre tiles
-var tween_speed : float = 2
-var counter : int = 0
+var tween_speed : float = 0.4
+var counter : int = 0 # Debug only, delete later
 
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
