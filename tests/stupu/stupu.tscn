@@ -25,10 +25,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Stupu" type="Node2D" unique_id=860496046]
+[node name="Stupu" type="Node2D" unique_id=860496046 node_paths=PackedStringArray("animated_sprites")]
 script = ExtResource("1_a4uk4")
+animated_sprites = {
+"movement": NodePath("MovementSprites")
+}
 properties = SubResource("Resource_353yl")
 stats = SubResource("Resource_3nv1d")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1498269150]
+[node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=1498269150]
 sprite_frames = SubResource("SpriteFrames_nd7ec")

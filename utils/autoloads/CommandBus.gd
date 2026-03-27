@@ -8,8 +8,8 @@ func _ready() -> void:
 func on_command_start(_cmd: Command) -> void:
 	cmd = _cmd
 
-func send_time_cost() -> void:
-	TimeManager.consume_time(cmd.time_cost)
+func send_time_cost(time_cost : float) -> void:
+	TimeManager.consume_time(time_cost)
 
 "func on_command_finished() -> void:
 	TimeManager.timer_iterator_enabler()

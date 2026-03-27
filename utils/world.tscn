@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://n6aipd0jxgwt" path="res://entities/player/player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://qggkbfe0vfto" path="res://utils/world.gd" id="1_ll1b3"]
 [ext_resource type="PackedScene" uid="uid://jdklqavmseve" path="res://terrain/terrain.tscn" id="1_us6my"]
+[ext_resource type="PackedScene" uid="uid://dytk0mcntjn62" path="res://tests/glorbo/glorbo.tscn" id="4_am7ch"]
+[ext_resource type="PackedScene" uid="uid://e37cu42p5qq8" path="res://tests/stupu/stupu.tscn" id="5_ll1b3"]
 [ext_resource type="PackedScene" uid="uid://dygh6km2cgqfm" path="res://utils/controller/ai_controller.tscn" id="6_am7ch"]
 [ext_resource type="Script" uid="uid://cce6vkvqrl12j" path="res://utils/start_notifier.gd" id="7_ll1b3"]
 
@@ -23,6 +25,13 @@ tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAA
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
+
+[node name="Glorbo" parent="Entities" unique_id=234887506 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("4_am7ch")]
+animated_sprites = {
+"movement": NodePath("MovementSprites")
+}
+
+[node name="Stupu" parent="Entities" unique_id=860496046 instance=ExtResource("5_ll1b3")]
 
 [node name="Utils" type="Node" parent="." unique_id=336515052]
 

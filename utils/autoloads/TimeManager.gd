@@ -1,9 +1,9 @@
 extends Node
 
-signal start
 signal timeout
 
-var timer : float = 4
+const base_time : float = 2
+var timer : float
 
 # Central que itera globalmente el tiempo de cada turno
 	# Captura el tiempo que usa cada Command
@@ -12,8 +12,8 @@ var timer : float = 4
 		# Reinicia el tiempo
 
 func _ready() -> void:
+	timer = base_time
 	timeout.connect(TurnManager._on_timeout)
-	start.connect(TurnManager._on_start)
 
 func consume_time(cost : float) -> void:
 	timer -= cost
@@ -21,7 +21,7 @@ func consume_time(cost : float) -> void:
 
 func _timer_iterator() -> void:
 	if timer <= 0:
-		timer = 2
+		timer = base_time
 
 func time_check() -> void:
 	if timer <= 0:

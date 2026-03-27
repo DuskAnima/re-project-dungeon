@@ -42,6 +42,3 @@ func turn_process() -> void:
 ## Señal recibida de TimeManager avisando que el tiempo del turno se acabó
 func _on_timeout() -> void:
 	turn_iterator()
-
-func _on_start() -> void:
-	turn_process()

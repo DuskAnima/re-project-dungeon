@@ -27,7 +27,7 @@ func execute() -> void:
 		return
 
 	start()
-	
+
 	match dir:
 		Vector2i.UP:
 			act.animations.play_movement("move_up")

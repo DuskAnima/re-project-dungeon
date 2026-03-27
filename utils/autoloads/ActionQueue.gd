@@ -7,6 +7,7 @@ var current : Command = null
 ## agrega un nuevo comando a la cola
 func add_command(cmd : Command) -> void:
 	queue.push_back(cmd) # Agrega un comando al final
+	CommandBus.send_time_cost(cmd.time_cost)
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
 
