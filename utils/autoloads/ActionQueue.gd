@@ -1,11 +1,24 @@
 extends Node
 
+signal queue_empty
+
 var queue : Array = []
 var in_process : bool = false
 var current : Command = null
 
-## agrega un nuevo comando a la cola
+## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por los controles.
 func add_command(cmd : Command) -> void:
+	if not cmd.act.properties.can_act: # Si personaje NO puede actuar
+		return
+	prints("AQ:", cmd, "by", cmd.act)
+	queue.push_back(cmd) # Agrega un comando al final
+	CommandBus.send_time_cost(cmd.time_cost)
+	if not in_process : # Si no hay comando en proceso
+		_execute_next() # Ejecutar siguiente
+
+## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por otros comandos.
+func add_wrapped_command(cmd : Command) -> void:
+	prints("AQ:", cmd, "unwrapped")
 	queue.push_back(cmd) # Agrega un comando al final
 	CommandBus.send_time_cost(cmd.time_cost)
 	if not in_process : # Si no hay comando en proceso
@@ -14,6 +27,8 @@ func add_command(cmd : Command) -> void:
 func _execute_next() -> void:
 	if queue.is_empty(): # Si la lista está vacía
 		in_process = false # Flagear que no hay ningun comando en proceso
+		queue_empty.emit()
+		
 		return # Terminar
 	if current != null:
 		push_error("Existe una recursión en la ejecusión del turno, variable 'current' debería ser NULL antes de ejecutar el siguente Command, pero es ", current)

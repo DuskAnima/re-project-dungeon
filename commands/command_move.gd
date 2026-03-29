@@ -1,8 +1,6 @@
 extends Command
 class_name CommandMove
 
-## Variable de inicialización para actor
-var act : Entity
 ## Variable de inicialización para origen del movimiento Vector2i
 var from : Vector2i #
 # Variable de inicialización de dirección Vector2i.DIR

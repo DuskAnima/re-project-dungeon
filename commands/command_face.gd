@@ -1,7 +1,6 @@
 extends Command
 class_name CommandFace
 
-var act : Entity
 var dir : Vector2i
 
 ## Coste 0, debe ser instanciada por otro comando. _act = Entidad a posiciónar. _dir = Dirección a mirar. 

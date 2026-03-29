@@ -21,7 +21,8 @@ func movement_manager(event) -> void:
 
 	if actor == null: return
 	if actor.properties.is_controllable == false: return
-	if actor.properties.can_act == false: return
+	if actor.properties.can_act == false: 
+		return
 
 	var dir := _get_direction(event)
 	if dir == Vector2i.ZERO:

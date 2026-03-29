@@ -12,7 +12,6 @@ func set_actor(_act : Entity) -> void:
 func movement_manager() -> void:
 	if actor == null: return
 	if actor.properties.can_act == false: 
-		print("CAN'T ACT")
 		return
 		
 	var dir : Vector2i = direction.pick_random()

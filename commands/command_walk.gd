@@ -1,8 +1,6 @@
 extends Command
 class_name CommandWalk
 
-## Variable de inicialización para actor
-var act : Entity
 ## Variable de inicialización para destino del movimiento
 var dir : Vector2i
 ## Tween que determina el trayecto del movimiento en grid
@@ -23,8 +21,8 @@ func execute() -> void:
 	
 	var cmd_move := CommandMove.new(act, dir)
 	var cmd_face := CommandFace.new(act, dir)
-	ActionQueue.add_command(cmd_move)
-	ActionQueue.add_command(cmd_face)
+	ActionQueue.add_wrapped_command(cmd_move)
+	ActionQueue.add_wrapped_command(cmd_face)
 	
 	finish()
 

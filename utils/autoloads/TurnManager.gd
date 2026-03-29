@@ -22,19 +22,23 @@ func turn_setup(_act: Entity) -> void:
 func _sort_descending(a, b) -> bool:
 	return a[1] > b[1]
 
-## Termina el turno de y da acceso a que la siguiente entidad pueda actuar.
+## ADVERTENCIA: Función con dependencia fuerte con ActionQueue. [br]
+## Termina el turno de la entidad y da acceso a que la siguiente entidad pueda actuar.
 func turn_iterator() -> void:
 	current_actor = turn_order[current_index][0] # Toma la entidad de turno desde su indice/accede a su instancia
-	print("UNIDAD: ", current_actor)
 	current_actor.set_can_act(false) # Establece que ya no puede moverse
+	await ActionQueue.queue_empty # Espera a la señal de ActionQueue 
 	current_index += 1 # Mueve el puntero un elemento extra
 	if current_index == turn_order.size(): # Si se llega al final de la lista, esta comienza desde el principio
 		current_index = 0
 	turn_process() # Ejecuta el siguiente turno.
 
+## ADVERTENCIA: Función con dependencia fuerte con GameManager, seguramente habrá que refactorizar
+## GameManager.set_current_ai_actor(). [br]
 ## Da acceso a que la unidad correspondiente pueda tomar su turno.
 func turn_process() -> void:
 	current_actor = turn_order[current_index][0] # Toma la unidad de turno
+	print("TurnM - UNIDAD: ", current_actor)
 	if current_actor.properties.is_controllable == false: # Si la unidad no es controlable
 		GameManager.set_current_ai_actor(current_actor) # Se inyecta la Entity al AiController
 	current_actor.set_can_act(true) # Establece que puede moverse

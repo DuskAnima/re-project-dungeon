@@ -1,6 +1,5 @@
 extends Command
 
-var act : Entity
 var src : Variant
 var targ : Variant
 

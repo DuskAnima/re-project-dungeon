@@ -10,7 +10,3 @@ func on_command_start(_cmd: Command) -> void:
 
 func send_time_cost(time_cost : float) -> void:
 	TimeManager.consume_time(time_cost)
-
-"func on_command_finished() -> void:
-	TimeManager.timer_iterator_enabler()
-"

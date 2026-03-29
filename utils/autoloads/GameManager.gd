@@ -1,11 +1,11 @@
 extends Node
 
 # --------- SETUP --------- 
-## Array que almacena a todos los actores. Las interacciones con los actores deben ser mediadas desde aquí
+## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
 var actors : Array[Entity]
 
 func entity_setup(_act: Entity) -> void:
-	print(_act)
+	prints("GM - entity setup:", _act)
 	actors.push_back(_act)
 	GridManager.grid_setup(_act)
 	TurnManager.turn_setup(_act)
@@ -26,7 +26,7 @@ func register_controller() -> void:
 		if actor.properties.is_controllable == false:
 			return
 		if actor.has_node("Controller"):
-			push_error("Ya tiene un control")
+			push_error(actor, "ya tiene un control")
 			return
 		actor.add_child(controller)
 
