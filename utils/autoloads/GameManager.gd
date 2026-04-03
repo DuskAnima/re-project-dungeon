@@ -3,13 +3,14 @@ extends Node
 # --------- SETUP --------- 
 ## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
 var actors : Array[Entity]
+var current_actor : Entity
 
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
 	actors.push_back(_act)
 	GridManager.grid_setup(_act)
 	TurnManager.turn_setup(_act)
-	print(actors)
+	print(actors, "le toca a ")
 
 func _game_set_up() -> void:
 	register_controller()

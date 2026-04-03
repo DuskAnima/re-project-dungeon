@@ -13,7 +13,9 @@ texture_region_size = Vector2i(32, 32)
 texture = ExtResource("2_2ilfp")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/custom_data_1 = true
 1:0/0 = 0
+1:0/0/custom_data_1 = true
 2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_mk5yb"]

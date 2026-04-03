@@ -28,6 +28,7 @@ func _set_time_cost() -> float
 
 ## Conecta a CommandBus y envía el comando para procesarse en el momento en el que comienza su ejecusión
 func start() -> void:
+	CommandBus.send_time_cost(time_cost)
 	is_executing = true # Flag de ejecusión
 	started.connect(CommandBus.on_command_start, CONNECT_ONE_SHOT) # Conecta el comando y lo envía
 	started.emit(self)

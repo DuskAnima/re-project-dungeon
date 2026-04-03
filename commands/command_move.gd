@@ -5,6 +5,7 @@ class_name CommandMove
 var from : Vector2i #
 # Variable de inicialización de dirección Vector2i.DIR
 var dir : Vector2i
+# Variable que almacena el tween de movimiento
 var tween : Tween
 
 ## Command Move requiere recibir al actor de la acción, posición actual de grid y posición requerida de grid.

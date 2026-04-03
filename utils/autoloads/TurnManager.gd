@@ -38,11 +38,14 @@ func turn_iterator() -> void:
 ## Da acceso a que la unidad correspondiente pueda tomar su turno.
 func turn_process() -> void:
 	current_actor = turn_order[current_index][0] # Toma la unidad de turno
-	print("TurnM - UNIDAD: ", current_actor)
+	GameManager.current_actor = current_actor
+	print("TurnM - UNIDAD: ", current_actor, " GM !!!!!!!!", GameManager.current_actor)
 	if current_actor.properties.is_controllable == false: # Si la unidad no es controlable
 		GameManager.set_current_ai_actor(current_actor) # Se inyecta la Entity al AiController
 	current_actor.set_can_act(true) # Establece que puede moverse
+	TimeManager.timer_reset()
 
 ## Señal recibida de TimeManager avisando que el tiempo del turno se acabó
 func _on_timeout() -> void:
+	print("timeout")
 	turn_iterator()

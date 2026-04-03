@@ -10,9 +10,11 @@ var current : Command = null
 func add_command(cmd : Command) -> void:
 	if not cmd.act.properties.can_act: # Si personaje NO puede actuar
 		return
+	if cmd.act.properties.time == 0:
+		print("AQ: no time")
+		return
 	prints("AQ:", cmd, "by", cmd.act)
 	queue.push_back(cmd) # Agrega un comando al final
-	CommandBus.send_time_cost(cmd.time_cost)
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
 
