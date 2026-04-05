@@ -18,7 +18,7 @@ func set_controllable(switch: bool) -> void: properties.is_controllable = switch
 func set_can_act(switch: bool) -> void: properties.can_act = switch
 
 func get_time() -> float: return properties.time
-func set_time(time: float) -> void: properties.time -= time
+func set_time(time: float) -> void: properties.time = time
 	
 
 ## Al entrar al arbol 

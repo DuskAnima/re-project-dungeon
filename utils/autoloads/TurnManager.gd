@@ -3,6 +3,7 @@ extends Node
 # ToDO:
 # - Permitir que se consuma el action Queue
 # - Denegar inputs fuera de tiempo
+signal turn_ended
 
 var turn_order : Array[Array] = [] # Entity / float. Lista ordenada de mayor a menor.
 var current_actor : Entity
@@ -25,27 +26,15 @@ func _sort_descending(a, b) -> bool:
 ## ADVERTENCIA: Función con dependencia fuerte con ActionQueue. [br]
 ## Termina el turno de la entidad y da acceso a que la siguiente entidad pueda actuar.
 func turn_iterator() -> void:
-	current_actor = turn_order[current_index][0] # Toma la entidad de turno desde su indice/accede a su instancia
 	current_actor.set_can_act(false) # Establece que ya no puede moverse
-	await ActionQueue.queue_empty # Espera a la señal de ActionQueue 
 	current_index += 1 # Mueve el puntero un elemento extra
 	if current_index == turn_order.size(): # Si se llega al final de la lista, esta comienza desde el principio
 		current_index = 0
-	turn_process() # Ejecuta el siguiente turno.
 
-## ADVERTENCIA: Función con dependencia fuerte con GameManager, seguramente habrá que refactorizar
-## GameManager.set_current_ai_actor(). [br]
-## Da acceso a que la unidad correspondiente pueda tomar su turno.
-func turn_process() -> void:
+## Da acceso a que la unidad correspondiente pueda tomar su turno al establecer can_act = true. [br]
+## Retorna la entidad de turno.
+func turn_process() -> Entity:
 	current_actor = turn_order[current_index][0] # Toma la unidad de turno
-	GameManager.current_actor = current_actor
-	print("TurnM - UNIDAD: ", current_actor, " GM !!!!!!!!", GameManager.current_actor)
-	if current_actor.properties.is_controllable == false: # Si la unidad no es controlable
-		GameManager.set_current_ai_actor(current_actor) # Se inyecta la Entity al AiController
+	print("TurnM - UNIDAD: ", current_actor)
 	current_actor.set_can_act(true) # Establece que puede moverse
-	TimeManager.timer_reset()
-
-## Señal recibida de TimeManager avisando que el tiempo del turno se acabó
-func _on_timeout() -> void:
-	print("timeout")
-	turn_iterator()
+	return current_actor

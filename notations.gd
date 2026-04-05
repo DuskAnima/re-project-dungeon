@@ -2,6 +2,7 @@ extends Command
 class_name CommandFace
 
 var dir : Vector2i
+
 ## Coste 0, debe ser instanciada por otro comando. _act = Entidad a posiciónar. _dir = Dirección a mirar. 
 func _init(_act : Entity, _dir : Vector2i) -> void:
 	act = _act

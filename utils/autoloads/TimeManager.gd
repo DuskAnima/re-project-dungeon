@@ -10,22 +10,14 @@ var act : Entity
 	# Da aviso a TurnManager de cuando el tiempo se acabó y habilite a la siguiente entidad
 		# Reinicia el tiempo
 
-func _ready() -> void:
-	timeout.connect(TurnManager._on_timeout)
+func time_setup(_act: Entity) -> void:
+	timer_reset(_act)
 
 func consume_time(cost : float) -> void:
-	GameManager.current_actor.set_time(cost)
+	var time_left :float = GameManager.current_actor.get_time()
+	GameManager.current_actor.set_time(time_left - cost)
 	if GameManager.current_actor.get_time() <= 0:
-		print("Se acabó el tiempo")
 		timeout.emit()
 
-func timer_reset() -> void:
-	print("TIME MANAGER", GameManager.current_actor.get_time())
-	print(base_time)
-	GameManager.current_actor.set_time(2)
-	print("TIME MANAGER", GameManager.current_actor.get_time())
-	print(base_time)
-
-
-	
-	
+func timer_reset(_act : Entity) -> void:
+	_act.set_time(base_time)

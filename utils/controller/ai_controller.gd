@@ -1,17 +1,16 @@
 extends Node
 class_name AiController
 
-var actor : Entity = null
+var actor : Entity
 
 func _ready() -> void:
-	GameManager.register_ai_controller(self)
-
-func set_actor(_act : Entity) -> void:
-	actor = _act
+	actor = get_parent()
+	owner = actor
 
 func movement_manager() -> void:
 	if actor == null: return
-	if actor.properties.can_act == false: 
+	if actor.properties.can_act == false:
+		print("AI Controller Cant act")
 		return
 		
 	var dir : Vector2i = direction.pick_random()
