@@ -22,13 +22,13 @@ func add_command(cmd : Command) -> void:
 func add_wrapped_command(cmd : Command) -> void:
 	prints("AQ:", cmd, "unwrapped")
 	queue.push_back(cmd) # Agrega un comando al final
-	CommandBus.send_time_cost(cmd.time_cost)
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
 
 func _execute_next() -> void:
 	if queue.is_empty(): # Si la lista está vacía
 		in_process = false # Flagear que no hay ningun comando en proceso
+		print("AQ: QUEUE EMPTY")
 		queue_empty.emit()
 		
 		return # Terminar

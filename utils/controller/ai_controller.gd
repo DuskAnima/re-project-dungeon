@@ -10,9 +10,8 @@ func _ready() -> void:
 func movement_manager() -> void:
 	if actor == null: return
 	if actor.properties.can_act == false:
-		print("AI Controller Cant act")
 		return
-		
+
 	var dir : Vector2i = direction.pick_random()
 	if dir == Vector2i.ZERO:
 		return
