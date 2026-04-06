@@ -3,7 +3,7 @@ extends Node
 # ToDO:
 # - Permitir que se consuma el action Queue
 # - Denegar inputs fuera de tiempo
-signal turn_ended
+#signal turn_ended
 
 var turn_order : Array[Array] = [] # Entity / float. Lista ordenada de mayor a menor.
 var current_actor : Entity

@@ -14,7 +14,7 @@ func time_setup(_act: Entity) -> void:
 	timer_reset(_act)
 
 func consume_time(cost : float) -> void:
-	var time_left :float = GameManager.current_actor.get_time()
+	var time_left : float = GameManager.current_actor.get_time()
 	GameManager.current_actor.set_time(time_left - cost)
 	if GameManager.current_actor.get_time() <= 0:
 		timeout.emit()

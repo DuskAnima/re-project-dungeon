@@ -12,21 +12,22 @@ func entity_setup(_act: Entity) -> void:
 	TurnManager.turn_setup(_act)
 	TimeManager.time_setup(_act)
 	
-func game_loop() -> void:
+func _game_loop() -> void:
 	print("game loop started")
 	current_actor = TurnManager.turn_process()
 	prints("TurnProcess init, current actor", current_actor, "can act? =", current_actor.properties.can_act)
 	await TimeManager.timeout
 	print("TimeOut signal")
+	TimeManager.timer_reset(current_actor)
 	TurnManager.turn_iterator()
 	print("Turn_iterator")
 	await ActionQueue.queue_empty
-	game_loop()
+	_game_loop()
 	
 
 func _on_ready_setup() -> void:
 	register_controller()
-	game_loop()
+	_game_loop()
 
 # --------- CONTROLLER SETTING --------- 
 ## Variable Controller que guarda el registro del nodo que conecta el control del usuario con una entidad.

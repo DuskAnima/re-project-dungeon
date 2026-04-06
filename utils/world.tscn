@@ -8,10 +8,22 @@
 [ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="5_xv25a"]
 [ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="6_dvl40"]
 
-[sub_resource type="Resource" id="Resource_dvl40"]
+[sub_resource type="Resource" id="Resource_ll1b3"]
 resource_local_to_scene = true
 script = ExtResource("6_dvl40")
 initiative = 5.0
+metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
+
+[sub_resource type="Resource" id="Resource_xv25a"]
+resource_local_to_scene = true
+script = ExtResource("5_xv25a")
+time = null
+metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
+
+[sub_resource type="Resource" id="Resource_dvl40"]
+resource_local_to_scene = true
+script = ExtResource("6_dvl40")
+initiative = 1.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
 [sub_resource type="Resource" id="Resource_3rw00"]
@@ -26,18 +38,6 @@ script = ExtResource("6_dvl40")
 initiative = 1.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
-[sub_resource type="Resource" id="Resource_asps3"]
-resource_local_to_scene = true
-script = ExtResource("5_xv25a")
-time = null
-metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
-
-[sub_resource type="Resource" id="Resource_jnjsm"]
-resource_local_to_scene = true
-script = ExtResource("6_dvl40")
-initiative = 1.0
-metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
-
 [node name="World" type="Node2D" unique_id=304851295]
 script = ExtResource("1_ll1b3")
 
@@ -47,7 +47,7 @@ metadata/_edit_lock_ = true
 
 [node name="Terrain" parent="." unique_id=76177753 instance=ExtResource("1_us6my")]
 position = Vector2(-16, -16)
-tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAAAAAIAAgAAAAAAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAACAAEAAgAAAAAAAAACAAAAAgAAAAAAAAACAP//AgAAAAAAAAACAP7/AgAAAAAAAAABAP7/AgAAAAAAAAAAAP7/AgAAAAAAAAD///7/AgAAAAAAAAD+//7/AgAAAAAAAAD9/wIAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD9////AQAAAAAAAAD9//7/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD/////AQAAAAAAAAAAAP//AQAAAAAAAAABAP//AQAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD//wIAAgAAAAAAAAAAAAIAAgAAAAAAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAACAAEAAgAAAAAAAAACAAAAAgAAAAAAAAACAP//AgAAAAAAAAACAP7/AgAAAAAAAAABAP7/AgAAAAAAAAAAAP7/AgAAAAAAAAD///7/AgAAAAAAAAD+//7/AgAAAAAAAAD9/wIAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD9////AQAAAAAAAAD9//7/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8//z/AQAAAAAAAAD9//z/AQAAAAAAAAD+//z/AQAAAAAAAAD///z/AQAAAAAAAAAAAPz/AQAAAAAAAAABAPz/AQAAAAAAAAACAPz/AQAAAAAAAAADAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAQAAQAAAAAAAAADAAQAAQAAAAAAAAACAAQAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAQAAQAAAAAAAAD//wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD8/wMAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD8/wAAAQAAAAAAAAD8////AQAAAAAAAAD8//7/AQAAAAAAAAD8//3/AQAAAAAAAAD7//v/AgAAAAAAAAD7//z/AgAAAAAAAAD7//3/AgAAAAAAAAD7//7/AgAAAAAAAAD7////AgAAAAAAAAD7/wAAAgAAAAAAAAD7/wEAAgAAAAAAAAD7/wIAAgAAAAAAAAD7/wMAAgAAAAAAAAD7/wQAAgAAAAAAAAD7/wUAAgAAAAAAAAD8/wUAAgAAAAAAAAD9/wUAAgAAAAAAAAD+/wUAAgAAAAAAAAD//wUAAgAAAAAAAAAAAAUAAgAAAAAAAAABAAUAAgAAAAAAAAACAAUAAgAAAAAAAAADAAUAAgAAAAAAAAAEAAUAAgAAAAAAAAAFAAUAAgAAAAAAAAAFAPv/AgAAAAAAAAAFAPz/AgAAAAAAAAAFAP3/AgAAAAAAAAAFAP7/AgAAAAAAAAAFAP//AgAAAAAAAAAFAAAAAgAAAAAAAAAFAAEAAgAAAAAAAAAFAAIAAgAAAAAAAAAFAAMAAgAAAAAAAAAFAAQAAgAAAAAAAAD8//v/AgAAAAAAAAD9//v/AgAAAAAAAAD+//v/AgAAAAAAAAD///v/AgAAAAAAAAAAAPv/AgAAAAAAAAABAPv/AgAAAAAAAAACAPv/AgAAAAAAAAADAPv/AgAAAAAAAAAEAPv/AgAAAAAAAAA=")
 
 [node name="Entities" type="Node" parent="." unique_id=490192879]
 
@@ -56,19 +56,19 @@ position = Vector2(32, 16)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-stats = SubResource("Resource_dvl40")
+stats = SubResource("Resource_ll1b3")
 
 [node name="Glorbo" parent="Entities" unique_id=234887506 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("4_am7ch")]
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_3rw00")
-stats = SubResource("Resource_lyijg")
+properties = SubResource("Resource_xv25a")
+stats = SubResource("Resource_dvl40")
 
 [node name="Stupu" parent="Entities" unique_id=860496046 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("5_ll1b3")]
 position = Vector2(-32, 32)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_asps3")
-stats = SubResource("Resource_jnjsm")
+properties = SubResource("Resource_3rw00")
+stats = SubResource("Resource_lyijg")
