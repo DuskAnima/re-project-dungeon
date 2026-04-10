@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func movement_manager() -> void:
 	if ActionQueue.in_process == true:
-#		print("No puedes agregar comandos")
 		return
 	if actor == null: return
 	if actor.properties.can_act == false:

@@ -8,16 +8,12 @@ var current : Command = null
 
 ## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por los controles.
 func add_command(cmd : Command) -> void:
-#	prints("AQ:", cmd, "by", cmd.act)
 	queue.push_back(cmd) # Agrega un comando al final
-	print("AQ Time Cost > add command: ", cmd.time_cost)
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
 
 ## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por otros comandos.
 func add_wrapped_command(cmd : Command) -> void:
-#	prints("AQ:", cmd, "unwrapped")
-	CommandBus.command_catcher(cmd)
 	queue.push_back(cmd) # Agrega un comando al final
 	if not in_process : # Si no hay comando en proceso
 		_execute_next() # Ejecutar siguiente
@@ -25,7 +21,6 @@ func add_wrapped_command(cmd : Command) -> void:
 func _execute_next() -> void:
 	if queue.is_empty(): # Si la lista está vacía
 		in_process = false # Flagear que no hay ningun comando en proceso
-#		print("AQ: QUEUE EMPTY")
 		queue_empty.emit()
 		
 		return # Terminar

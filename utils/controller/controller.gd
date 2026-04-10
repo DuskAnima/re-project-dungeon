@@ -14,7 +14,6 @@ func set_actor(_act : Entity) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if ActionQueue.in_process == true:
-#		print("No puedes agregar comandos")
 		return
 	movement_manager(event)
 

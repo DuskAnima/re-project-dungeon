@@ -35,6 +35,5 @@ func turn_iterator() -> void:
 ## Retorna la entidad de turno.
 func turn_process() -> Entity:
 	current_actor = turn_order[current_index][0] # Toma la unidad de turno
-#	print("TurnM - UNIDAD: ", current_actor)
 	current_actor.set_can_act(true) # Establece que puede moverse
 	return current_actor
