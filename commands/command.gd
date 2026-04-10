@@ -25,9 +25,9 @@ func execute() -> void
 @abstract
 func _set_time_cost() -> float
 
-## Conecta a CommandBus y envía el comando para procesarse en el momento en el que comienza su ejecusión
+## Conecta a CommandBus y envía el comando para procesarse en el momento en el que comienza su ejecución
 func start() -> void:
-	is_executing = true # Flag de ejecusión
+	is_executing = true # Flag de ejecución
 
 ## Envía información pertinente a ActionQueue
 func finish() -> void:

@@ -13,6 +13,9 @@ func set_actor(_act : Entity) -> void:
 	actor = _act
 
 func _unhandled_input(event: InputEvent) -> void:
+	if ActionQueue.in_process == true:
+#		print("No puedes agregar comandos")
+		return
 	movement_manager(event)
 
 func movement_manager(event) -> void:
@@ -24,10 +27,11 @@ func movement_manager(event) -> void:
 		return
 
 	var dir := _get_direction(event)
+	var from : Vector2i = actor.properties.grid_pos
 	if dir == Vector2i.ZERO:
 		return
 
-	var cmd := CommandWalk.new(actor, dir)
+	var cmd := CommandWalk.new(actor, from, dir)
 	ActionQueue.add_command(cmd)
 
 

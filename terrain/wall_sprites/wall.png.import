@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4ybcyus4nexe"
-path="res://.godot/imported/ice_crack.png-af3a4c8cfaf7189243a18c85fafb5514.ctex"
+uid="uid://crn03wdq0l83t"
+path="res://.godot/imported/wall.png-43bef8209b2d34fcc1d8d9a558587e8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://terrain/ice_crack.png"
-dest_files=["res://.godot/imported/ice_crack.png-af3a4c8cfaf7189243a18c85fafb5514.ctex"]
+source_file="res://terrain/wall_sprites/wall.png"
+dest_files=["res://.godot/imported/wall.png-43bef8209b2d34fcc1d8d9a558587e8c.ctex"]
 
 [params]
 

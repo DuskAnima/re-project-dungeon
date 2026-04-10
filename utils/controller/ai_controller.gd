@@ -8,15 +8,19 @@ func _ready() -> void:
 	owner = actor
 
 func movement_manager() -> void:
+	if ActionQueue.in_process == true:
+#		print("No puedes agregar comandos")
+		return
 	if actor == null: return
 	if actor.properties.can_act == false:
 		return
 
 	var dir : Vector2i = direction.pick_random()
+	var from : Vector2i = actor.properties.grid_pos
 	if dir == Vector2i.ZERO:
 		return
 
-	var cmd := CommandWalk.new(actor, dir)
+	var cmd := CommandWalk.new(actor, from, dir)
 	ActionQueue.add_command(cmd)
 
 

@@ -1,6 +1,10 @@
 extends Node
 
 # --------- SETUP --------- 
+## Boolean que termina el estado del juego
+var game_running : bool
+
+var current_command : Command
 ## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
 var actors : Array[Entity]
 var current_actor : Entity
@@ -13,20 +17,24 @@ func entity_setup(_act: Entity) -> void:
 	TimeManager.time_setup(_act)
 	
 func _game_loop() -> void:
-	print("game loop started")
-	current_actor = TurnManager.turn_process()
-	prints("TurnProcess init, current actor", current_actor, "can act? =", current_actor.properties.can_act)
-	await TimeManager.timeout
-	print("TimeOut signal")
-	TimeManager.timer_reset(current_actor)
-	TurnManager.turn_iterator()
-	print("Turn_iterator")
-	await ActionQueue.queue_empty
-	_game_loop()
-	
+	var counter : int = 0
+	while game_running:
+		counter += 1
+		prints("game loop started: iteration number ", counter)
+		if ActionQueue.in_process == true:
+			print("No deberías poder agregar mas comandos")
+		current_actor = TurnManager.turn_process()
+		prints("TurnProcess init, current actor", current_actor, "can act? =", current_actor.properties.can_act)
+		await TimeManager.timeout
+		print("TimeOut signal")
+		TimeManager.timer_reset(current_actor)
+		TurnManager.turn_iterator()
+		print("Turn_iterator")
+
 
 func _on_ready_setup() -> void:
 	register_controller()
+	game_running = true
 	_game_loop()
 
 # --------- CONTROLLER SETTING --------- 

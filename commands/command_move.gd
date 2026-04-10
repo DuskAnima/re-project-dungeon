@@ -23,7 +23,6 @@ func execute() -> void:
 		return
 	if not GridManager.can_move(act, from, to):
 		push_error("Command Move: Actor is not allowed to go this way")
-		return
 
 	start()
 

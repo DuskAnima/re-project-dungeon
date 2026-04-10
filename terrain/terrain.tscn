@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://jdklqavmseve"]
 
-[ext_resource type="Texture2D" uid="uid://2jp6flfawrie" path="res://terrain/floor.png" id="1_l7s0s"]
-[ext_resource type="Texture2D" uid="uid://4ybcyus4nexe" path="res://terrain/ice_crack.png" id="2_2ilfp"]
+[ext_resource type="Texture2D" uid="uid://2jp6flfawrie" path="res://terrain/floor_sprites/floor.png" id="1_l7s0s"]
+[ext_resource type="Texture2D" uid="uid://4ybcyus4nexe" path="res://terrain/floor_sprites/ice_crack.png" id="2_2ilfp"]
 [ext_resource type="Script" uid="uid://v1r1yxbsdrws" path="res://terrain/terrain.gd" id="3_2ilfp"]
+[ext_resource type="Texture2D" uid="uid://crn03wdq0l83t" path="res://terrain/wall_sprites/wall.png" id="3_7nt5j"]
+[ext_resource type="Texture2D" uid="uid://rpie07ipt5pc" path="res://terrain/wall_sprites/breakable_wall.png" id="4_mk5yb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nigp7"]
 texture = ExtResource("1_l7s0s")
@@ -18,6 +20,42 @@ texture_region_size = Vector2i(32, 32)
 1:0/0/custom_data_1 = true
 2:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpiom"]
+texture = ExtResource("4_mk5yb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+0:1/0/custom_data_1 = true
+1:1/0 = 0
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+0:2/0/custom_data_1 = true
+1:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mk5yb"]
+texture = ExtResource("3_7nt5j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+1:2/0 = 0
+1:2/0/custom_data_0 = true
+0:3/0 = 0
+0:3/0/custom_data_0 = true
+1:3/0 = 0
+1:3/0/custom_data_0 = true
+
 [sub_resource type="TileSet" id="TileSet_mk5yb"]
 tile_size = Vector2i(32, 32)
 custom_data_layer_0/name = "is_solid"
@@ -26,6 +64,8 @@ custom_data_layer_1/name = "can_break"
 custom_data_layer_1/type = 1
 sources/1 = SubResource("TileSetAtlasSource_nigp7")
 sources/2 = SubResource("TileSetAtlasSource_7nt5j")
+sources/5 = SubResource("TileSetAtlasSource_fpiom")
+sources/6 = SubResource("TileSetAtlasSource_mk5yb")
 
 [node name="Terrain" type="TileMapLayer" unique_id=1063133987]
 tile_set = SubResource("TileSet_mk5yb")
