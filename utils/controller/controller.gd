@@ -13,9 +13,8 @@ func set_actor(_act : Entity) -> void:
 	actor = _act
 
 func _unhandled_input(event: InputEvent) -> void:
-	if ActionQueue.in_process == true:
-		return
 	movement_manager(event)
+
 
 func movement_manager(event) -> void:
 	######################## test stuff

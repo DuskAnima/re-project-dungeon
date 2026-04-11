@@ -3,7 +3,7 @@ extends Node
 ## Tamaño de las celdas del grid.
 const cell_size : int = 32
 ## Referencia a las diferentes entidades registradas para poder acceder a sus posiciones
-var actors : Array[Entity] = GameManager.actors
+var grid_occupation : Dictionary[Vector2i, Array]
 ## Referencia a el terreno de juego
 var terrain : Terrain
 ## Tween que determina el trayecto del movimiento en grid
@@ -11,13 +11,12 @@ var tween : Tween
 ## Velocidad de desplazamiento entre tiles
 var tween_speed : float = 0.4
 
-
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
 func grid_setup(_act: Entity) -> void:
 	var pos : Vector2 = _act.position # Obtiene posición global
 	_grid_snap(_act, pos) # Hace snapping a Entity en el grid
-	update_grid(_act, _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
+	update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
 
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
@@ -30,7 +29,11 @@ func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
 ##  target (V2i). Solo debe ser usada por CommandMove.
-func update_grid(_act: Entity, _to: Vector2i) -> void:
+func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
+	if _from != _to:
+		grid_occupation.erase(_from)
+	grid_occupation.get_or_add(_to, [])
+	grid_occupation[_to].append(_act)
 	_act.properties.grid_pos = _to
 
 func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:

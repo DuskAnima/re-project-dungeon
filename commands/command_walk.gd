@@ -10,11 +10,11 @@ var tween : Tween
 ## Velocidad de desplazamiento entre tiles
 var tween_speed : float = 0.2
 
-## Coste 1. Command Move requiere recibir al actor de la acción, posición actual de grid y la constante de dirección Vector2i.
-## Primero ejecuta CommandFace, el cual toma al actor y la dirección para asignar la orientación lógica de la entidad
-## (face_direction). Luego ejecuta CommandMovo, el cual toma al actor, la posición lógica (grid_pos) la dirección
+## Coste 1. Command Move requiere recibir al actor de la acción, posición actual de grid y la constante de dirección.
+## Vector2i Primero ejecuta CommandFace, el cual toma al actor y la dirección para asignar la orientación lógica de la 
+## entidad (face_direction). Luego ejecuta CommandMovo, el cual toma al actor, la posición lógica (grid_pos) la dirección
 ## para determinar qué entidad se mueve y en qué dirección.
-func _init(_act : Entity, _form, _dir : Vector2i) -> void:
+func _init(_act : Entity, _form : Vector2i, _dir : Vector2i) -> void:
 	act = _act
 	from = _form
 	dir = _dir
@@ -29,10 +29,11 @@ func execute() -> void:
 	if not GridManager.can_move(act, from, to):
 		ActionQueue.add_wrapped_command(cmd_face)
 		time_cost = 0
+
 		finish()
 		return
 	
-	var cmd_move := CommandMove.new(act, dir)
+	var cmd_move := CommandMove.new(act, from, dir)
 	ActionQueue.add_wrapped_command(cmd_move)
 	ActionQueue.add_wrapped_command(cmd_face)
 	

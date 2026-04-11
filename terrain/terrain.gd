@@ -11,12 +11,20 @@ var tile_data : TileData
 func _ready() -> void:
 	GridManager.terrain_setup(self)
 
-func is_path_blocked(grid_position : Vector2i) -> bool:
-	tile_data = get_cell_tile_data(grid_position)
+## Función que retorna si un camino está bloqueado. Retorna "true" si el camino está bloqueado.
+func is_path_blocked(_grid_position : Vector2i) -> bool:
+	return _is_tile_solid(_grid_position) or _is_tile_occupied(_grid_position)
+
+## Función que revisa los tiles ocupados por entidades, retorna "true" si el tile está ocupado
+func _is_tile_occupied(_grid_position : Vector2i) -> bool:
+	if GridManager.grid_occupation.has(_grid_position):
+		return true
+	return false
+	
+## Función que revisa los tiles con custom_data "is_solid", retorna "true" si el tile es sólido.
+func _is_tile_solid(_grid_position : Vector2i) -> bool:
+	tile_data = get_cell_tile_data(_grid_position)
 	if tile_data == null:
-		push_error("No existe tile en la posición ", grid_position, "instancia es Null")
+		push_error("No existe tile en la posición ", _grid_position, "instancia es Null")
 		return true
 	return tile_data.get_custom_data("is_solid")
-	
-	
-	#print(get_cell_tile_data(GameManager.actors[0].properties.grid_pos))

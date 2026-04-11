@@ -2,7 +2,7 @@ extends Node
 
 # --------- SETUP --------- 
 ## Boolean que termina el estado del juego
-var game_running : bool
+var game_running : bool = false
 
 var current_command : Command
 ## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí

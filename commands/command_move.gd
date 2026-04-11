@@ -9,12 +9,12 @@ var dir : Vector2i
 var tween : Tween
 
 ## Command Move requiere recibir al actor de la acción, posición actual de grid y posición requerida de grid.
-func _init(_act : Entity, _dir : Vector2i) -> void:
+func _init(_act: Entity, _from: Vector2i, _dir: Vector2i) -> void:
 	act = _act
+	from = _from
 	dir = _dir
 
 func execute() -> void:
-	from = act.properties.grid_pos
 	# Grid new position
 	var to : Vector2i = from + dir
 
@@ -35,10 +35,8 @@ func execute() -> void:
 			act.animations.play_movement("move_left")
 		Vector2i.RIGHT:
 			act.animations.play_movement("move_right")
-		_:
-			return
 
-	GridManager.update_grid(act, to)
+	GridManager.update_grid(act, from, to)
 
 	# Grid origin
 	var global_from : Vector2 = GridManager._grid_to_world(from)
