@@ -1,11 +1,5 @@
-extends Node
+extends Controller
 class_name AiController
-
-var actor : Entity
-
-func _ready() -> void:
-	actor = get_parent()
-	owner = actor
 
 func movement_manager() -> void:
 	if ActionQueue.in_process == true:

@@ -2,7 +2,7 @@ extends Node
 
 signal timeout
 
-const base_time : float = 2
+const base_time : float = 1
 var act : Entity
 # Central que itera globalmente el tiempo de cada turno
 	# Captura el tiempo que usa cada Command

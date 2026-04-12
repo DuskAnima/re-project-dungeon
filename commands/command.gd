@@ -13,17 +13,17 @@ var name : String = get_script().get_global_name()
 
 ## Función de inicialización de comandos. Cada comando tiene diferentes requerimientos que deben ser implementados
 ## y documentados individualmente.
-func _init(_act : Entity) -> void:
-	act = _act
+@abstract
+func _init(_act : Entity) -> void
 
-## La ejecución debe ser implementada. Siempre debe llamarse start() al comienzo de la implementación y finish() al
-## final
 @abstract
 func execute() -> void
+## La ejecución debe ser implementada. Siempre debe llamarse start() al comienzo de la implementación y finish() al
+## final
 
-## Es necesario declarar el coste de tiempo con un return de un float
 @abstract
 func _set_time_cost() -> float
+## Es necesario declarar el coste de tiempo con un return de un float.
 
 ## Conecta a CommandBus y envía el comando para procesarse en el momento en el que comienza su ejecución
 func start() -> void:

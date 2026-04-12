@@ -2,7 +2,18 @@
 
 [ext_resource type="Script" uid="uid://xlls12qxkbyr" path="res://entities/objects/items/bomb/bomb.gd" id="1_8lu2u"]
 [ext_resource type="Texture2D" uid="uid://ci3bw7n5qc0dh" path="res://entities/objects/items/bomb/bomb_sprites/bomb.png" id="2_6owu1"]
+[ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="2_gyrm6"]
 [ext_resource type="Texture2D" uid="uid://rw304plb7uah" path="res://entities/objects/items/bomb/bomb_sprites/explotion.png" id="3_akqmt"]
+[ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="3_uig4m"]
+
+[sub_resource type="Resource" id="Resource_gyrm6"]
+script = ExtResource("2_gyrm6")
+entity_kind = "object"
+metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
+
+[sub_resource type="Resource" id="Resource_uig4m"]
+script = ExtResource("3_uig4m")
+metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gyrm6"]
 atlas = ExtResource("2_6owu1")
@@ -223,8 +234,11 @@ script = ExtResource("1_8lu2u")
 animated_sprites = {
 "explotion": NodePath("ExplotionSprites")
 }
+properties = SubResource("Resource_gyrm6")
+stats = SubResource("Resource_uig4m")
 metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 
 [node name="ExplotionSprites" type="AnimatedSprite2D" parent="." unique_id=1518888651]
 sprite_frames = SubResource("SpriteFrames_tn6gv")
-animation = &"explotion"
+animation = &"ignition"
+autoplay = "idle"

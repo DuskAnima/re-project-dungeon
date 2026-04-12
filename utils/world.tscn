@@ -7,32 +7,39 @@
 [ext_resource type="PackedScene" uid="uid://e37cu42p5qq8" path="res://tests/stupu/stupu.tscn" id="5_ll1b3"]
 [ext_resource type="Script" uid="uid://dkrrpgp4v8ijp" path="res://entities/resources/properties.gd" id="5_xv25a"]
 [ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="6_dvl40"]
-
-[sub_resource type="Resource" id="Resource_ll1b3"]
-resource_local_to_scene = true
-script = ExtResource("6_dvl40")
-initiative = 5.0
-metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
+[ext_resource type="PackedScene" uid="uid://bso8g0gkgeipa" path="res://entities/objects/items/bomb/bomb.tscn" id="8_xv25a"]
 
 [sub_resource type="Resource" id="Resource_xv25a"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
-time = null
+entity_kind = "player"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_dvl40"]
 resource_local_to_scene = true
 script = ExtResource("6_dvl40")
-initiative = 1.0
+initiative = 5.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
 [sub_resource type="Resource" id="Resource_3rw00"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
-time = null
+entity_kind = "ai"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_lyijg"]
+resource_local_to_scene = true
+script = ExtResource("6_dvl40")
+initiative = 1.0
+metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
+
+[sub_resource type="Resource" id="Resource_asps3"]
+resource_local_to_scene = true
+script = ExtResource("5_xv25a")
+entity_kind = "ai"
+metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
+
+[sub_resource type="Resource" id="Resource_jnjsm"]
 resource_local_to_scene = true
 script = ExtResource("6_dvl40")
 initiative = 1.0
@@ -56,19 +63,26 @@ position = Vector2(32, 16)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-stats = SubResource("Resource_ll1b3")
+properties = SubResource("Resource_xv25a")
+stats = SubResource("Resource_dvl40")
 
 [node name="Glorbo" parent="Entities" unique_id=234887506 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("4_am7ch")]
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_xv25a")
-stats = SubResource("Resource_dvl40")
+properties = SubResource("Resource_3rw00")
+stats = SubResource("Resource_lyijg")
 
 [node name="Stupu" parent="Entities" unique_id=860496046 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("5_ll1b3")]
 position = Vector2(-32, 32)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_3rw00")
-stats = SubResource("Resource_lyijg")
+properties = SubResource("Resource_asps3")
+stats = SubResource("Resource_jnjsm")
+
+[node name="Bomb" parent="Entities" unique_id=297779133 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("8_xv25a")]
+position = Vector2(-40, -31)
+animated_sprites = {
+"explotion": NodePath("ExplotionSprites")
+}

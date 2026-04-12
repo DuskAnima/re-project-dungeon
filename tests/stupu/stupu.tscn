@@ -15,6 +15,7 @@
 [sub_resource type="Resource" id="Resource_353yl"]
 resource_local_to_scene = true
 script = ExtResource("2_353yl")
+entity_kind = "ai"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_3nv1d"]
@@ -305,11 +306,12 @@ animations = [{
 [node name="Stupu" type="Node2D" unique_id=860496046 node_paths=PackedStringArray("animated_sprites")]
 script = ExtResource("1_a4uk4")
 animated_sprites = {
-"movement": NodePath("")
+"movement": null
 }
 properties = SubResource("Resource_353yl")
 stats = SubResource("Resource_3nv1d")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=816172309]
 sprite_frames = SubResource("SpriteFrames_e3c2l")
-animation = &"move_up"
+animation = &"down"
+autoplay = "down"

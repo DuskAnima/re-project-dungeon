@@ -21,7 +21,6 @@ func get_time() -> float: return properties.time
 func set_time(time: float) -> void: properties.time = time
 	
 
-## Al entrar al arbol 
 func _ready() -> void:
 	GameManager.entity_setup(self)
 	ready_hook()

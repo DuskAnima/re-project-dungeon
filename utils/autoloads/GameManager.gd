@@ -35,18 +35,20 @@ func _on_ready_setup() -> void:
 # --------- CONTROLLER SETTING --------- 
 ## Variable Controller que guarda el registro del nodo que conecta el control del usuario con una entidad.
 var controller : Controller
-var ai_controller : AiController 
 
 ## Se agrega una instancia de control en las entidades
 func register_controller() -> void:
 	for actor in actors: # Itera por todas las Entity
-		if actor.properties.is_controllable == false: # si no es controlable
+		if actor.properties.entity_kind == "ai": # si no es controlable
 			register_ai_controller(actor)
 			continue
-		if actor.has_node("Controller"):
+		if actor.properties.entity_kind == "object":
+			register_object_controller(actor)
+			continue
+		if actor.has_node("PlayerController"):
 			push_error(actor, "ya tiene un control")
 			continue
-		controller = Controller.new() # Si no es un NPC, se crea un controller 
+		controller = PlayerController.new() # Si no es un NPC, se crea un controller 
 		actor.add_child(controller) # Y se asigna 
 
 # --------- NPC CONTROLLER SETTING --------- 
@@ -54,5 +56,11 @@ func register_controller() -> void:
 func register_ai_controller(actor: Entity) -> void:
 	if actor.has_node("AiController"):
 		push_error(actor, "ya tiene un control")
-	ai_controller = AiController.new() # Crea un nuevo AiController
-	actor.add_child(ai_controller) # Y lo asigna como hijo de la entidad
+	controller = AiController.new() # Crea un nuevo AiController
+	actor.add_child(controller) # Y lo asigna como hijo de la entidad
+
+func register_object_controller(actor : Entity) -> void:
+	if actor.has_node("ObjectController"):
+		push_error(actor, "ya tiene un control")
+	controller = ObjectController.new() # Crea un nuevo AiController
+	actor.add_child(controller) # Y lo asigna como hijo de la entidad
