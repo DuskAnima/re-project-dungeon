@@ -13,7 +13,7 @@ var animations : Animations = Animations.new(self)
 
 ## Establece la propiedad que permite que el jugador pueda controlar a una entidad
 func set_controllable(switch: bool) -> void: properties.is_controllable = switch
-	
+
 ## Establece la propiedad que permite que una entidad pueda tomar su turno para actuar.
 func set_can_act(switch: bool) -> void: properties.can_act = switch
 

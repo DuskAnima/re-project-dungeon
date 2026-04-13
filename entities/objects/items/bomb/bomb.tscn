@@ -7,11 +7,13 @@
 [ext_resource type="Script" uid="uid://c3m0uv7c6m2jy" path="res://entities/resources/stats.gd" id="3_uig4m"]
 
 [sub_resource type="Resource" id="Resource_gyrm6"]
+resource_local_to_scene = true
 script = ExtResource("2_gyrm6")
 entity_kind = "object"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_uig4m"]
+resource_local_to_scene = true
 script = ExtResource("3_uig4m")
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
@@ -175,7 +177,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f6yhr")
 }],
-"loop": true,
+"loop": false,
 "name": &"explotion",
 "speed": 5.0
 }, {
@@ -183,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rp41h")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -224,7 +226,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yqwkk")
 }],
-"loop": true,
+"loop": false,
 "name": &"ignition",
 "speed": 5.0
 }]
@@ -240,5 +242,5 @@ metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 
 [node name="ExplotionSprites" type="AnimatedSprite2D" parent="." unique_id=1518888651]
 sprite_frames = SubResource("SpriteFrames_tn6gv")
-animation = &"ignition"
+animation = &"explotion"
 autoplay = "idle"

@@ -32,6 +32,9 @@ func _on_ready_setup() -> void:
 	game_running = true
 	_game_loop()
 
+func kill_entity(_act: Entity) -> void:
+	pass
+
 # --------- CONTROLLER SETTING --------- 
 ## Variable Controller que guarda el registro del nodo que conecta el control del usuario con una entidad.
 var controller : Controller
