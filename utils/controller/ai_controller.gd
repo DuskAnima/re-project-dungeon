@@ -1,6 +1,11 @@
 extends Controller
 class_name AiController
 
+
+# TODO: Arreglar estos sistemas de IA, de momento me sirve apoyarme en process, pero es un sistema muy deficiente.
+func _process(_delta: float) -> void:
+	movement_manager()
+
 func movement_manager() -> void:
 	if ActionQueue.in_process == true:
 		return
@@ -24,6 +29,3 @@ var direction = [
 	Vector2i.RIGHT,
 	Vector2i.ZERO
 ]
-
-func _process(_delta: float) -> void:
-	movement_manager()

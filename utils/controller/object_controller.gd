@@ -5,7 +5,8 @@ enum  {DETONATION, EXPLOSION}
 
 var status : int 
 
-func _process(delta: float) -> void:
+# TODO: Arreglar estos sistemas de IA, de momento me sirve apoyarme en process, pero es un sistema muy deficiente.
+func _process(_delta: float) -> void:
 	_bomb_controller()
 
 func _bomb_controller() -> void:

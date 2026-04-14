@@ -2,6 +2,8 @@ extends Node
 
 ## Tamaño de las celdas del grid.
 const cell_size : int = 32
+## Valor constante equivalente a Vector2i.MIN que sirve como convención de eliminación de entidad del grid.
+const ENTITY_DELETE_FLAG : Vector2i = Vector2i.MIN
 ## Referencia a las diferentes entidades registradas para poder acceder a sus posiciones
 var grid_occupation : Dictionary[Vector2i, Array]
 ## Referencia a el terreno de juego
@@ -30,6 +32,8 @@ func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
 ##  target (V2i). Solo debe ser usada por CommandMove.
 func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
+	if _to == ENTITY_DELETE_FLAG:
+		grid_occupation.erase(_from)
 	if _from != _to:
 		grid_occupation.erase(_from)
 	grid_occupation.get_or_add(_to, [])
