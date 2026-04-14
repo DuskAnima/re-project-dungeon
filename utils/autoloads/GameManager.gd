@@ -1,12 +1,15 @@
 extends Node
 
+# --------- GLOBAL REFERENCES --------- 
+## Variable de referencia al nodo Entities, el cual almacena todas las entidades.
+var entities_node : Node 
+
 # --------- SETUP --------- 
 ## Boolean que termina el estado del juego
 var game_running : bool = false
-
-var current_command : Command
 ## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
 var actors : Array[Entity]
+## Variable que revela al actor que está de turno
 var current_actor : Entity
 
 func entity_setup(_act: Entity) -> void:

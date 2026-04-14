@@ -4,14 +4,10 @@ class_name AiController
 
 # TODO: Arreglar estos sistemas de IA, de momento me sirve apoyarme en process, pero es un sistema muy deficiente.
 func _process(_delta: float) -> void:
-	movement_manager()
+	if _npc_action_check():
+		movement_manager()
 
 func movement_manager() -> void:
-	if ActionQueue.in_process == true:
-		return
-	if actor == null: return
-	if actor.properties.can_act == false:
-		return
 
 	var dir : Vector2i = direction.pick_random()
 	var from : Vector2i = actor.properties.grid_pos

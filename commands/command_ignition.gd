@@ -5,8 +5,8 @@ func _init(_act : Entity) -> void:
 	act = _act
 
 func execute() -> void:
-	start()
 	var animation : AnimatedSprite2D = act.animations.play_explotion()
+	start()
 	animation.play("ignition")
 	await animation.animation_finished
 	finish()

@@ -2,16 +2,12 @@ extends Controller
 class_name PlayerController
 
 func _unhandled_input(event: InputEvent) -> void:
-	movement_manager(event)
+	if _player_action_check():
+		movement_manager(event)
+		_action(event)
+		
 
 func movement_manager(event) -> void:
-	######################## test stuff
-
-	if actor == null: return
-	if actor.properties.is_controllable == false: return
-	if actor.properties.can_act == false: 
-		return
-
 	var dir := _get_direction(event)
 	var from : Vector2i = actor.properties.grid_pos
 	if dir == Vector2i.ZERO:
@@ -26,3 +22,8 @@ func _get_direction(movement : InputEvent) -> Vector2i:
 	elif movement.is_action_pressed("left"): return Vector2i.LEFT
 	elif  movement.is_action_pressed("right"): return Vector2i.RIGHT
 	else: return Vector2i.ZERO
+	
+func _action(action : InputEvent) -> void:
+	if action.is_action_pressed("action"):
+		var cmd : Command = CommandBomb.new(owner)
+		ActionQueue.add_command(cmd)

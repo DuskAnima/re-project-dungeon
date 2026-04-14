@@ -179,7 +179,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"explotion",
-"speed": 14.0
+"speed": 28.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -228,7 +228,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ignition",
-"speed": 11.0
+"speed": 22.0
 }]
 
 [node name="Bomb" type="Node2D" unique_id=297779133 node_paths=PackedStringArray("animated_sprites")]
@@ -242,5 +242,5 @@ metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 
 [node name="ExplotionSprites" type="AnimatedSprite2D" parent="." unique_id=1518888651]
 sprite_frames = SubResource("SpriteFrames_tn6gv")
-animation = &"explotion"
+animation = &"ignition"
 autoplay = "idle"
