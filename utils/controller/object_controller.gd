@@ -15,12 +15,12 @@ func _bomb_controller() -> void:
 	if actor.properties.can_act == false:
 		return
 
-	var cmd : Command = CommandIgnition.new(actor)
-	
-	ActionQueue.add_command(cmd)
+	var cmd_ignition : Command = CommandIgnition.new(actor)
+	var cmd_explotion : Command = CommandExplotion.new(actor)
+
 	match status:
 		DETONATION:
-			ActionQueue.add_command(cmd)
+			ActionQueue.add_command(cmd_ignition)
 			status += 1
 		EXPLOSION:
-			pass
+			ActionQueue.add_command(cmd_explotion)

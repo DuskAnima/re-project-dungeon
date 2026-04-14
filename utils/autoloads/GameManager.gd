@@ -22,6 +22,8 @@ func _game_loop() -> void:
 		counter += 1
 		prints("game loop started: iteration number ", counter)
 		current_actor = TurnManager.turn_process()
+		if current_actor == null:
+			continue
 		await TimeManager.timeout
 		TimeManager.timer_reset(current_actor)
 		TurnManager.turn_iterator()
@@ -33,7 +35,19 @@ func _on_ready_setup() -> void:
 	_game_loop()
 
 func kill_entity(_act: Entity) -> void:
-	pass
+	var index_to_remove : int = -1
+	for i in range(actors.size()): # Busca el índice de la entidad que se busca eliminar
+		if actors[i] == _act:
+			index_to_remove = i
+			break
+	if index_to_remove == -1: # SI la entidad no está en la lista, termina función.
+		return
+	actors.remove_at(index_to_remove)
+	# Ajuste al índice actual de ser necesario
+	if current_actor == _act:
+		current_actor = null
+	TurnManager.remove_entity_from_pool(_act)
+	_act.queue_free()
 
 # --------- CONTROLLER SETTING --------- 
 ## Variable Controller que guarda el registro del nodo que conecta el control del usuario con una entidad.

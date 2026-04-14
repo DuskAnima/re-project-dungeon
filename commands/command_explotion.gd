@@ -1,5 +1,5 @@
 extends Command
-class_name CommandIgnition
+class_name CommandExplotion
 
 func _init(_act : Entity) -> void:
 	act = _act
@@ -7,8 +7,10 @@ func _init(_act : Entity) -> void:
 func execute() -> void:
 	start()
 	var animation : AnimatedSprite2D = act.animations.play_explotion()
-	animation.play("ignition")
+	animation.play("explotion")
 	await animation.animation_finished
+	var cmd : Command = CommandDead.new(act)
+	ActionQueue.add_wrapped_command(cmd)
 	finish()
 
 func _set_time_cost() -> float:

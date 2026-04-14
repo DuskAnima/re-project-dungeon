@@ -179,7 +179,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"explotion",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -228,7 +228,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ignition",
-"speed": 5.0
+"speed": 11.0
 }]
 
 [node name="Bomb" type="Node2D" unique_id=297779133 node_paths=PackedStringArray("animated_sprites")]
