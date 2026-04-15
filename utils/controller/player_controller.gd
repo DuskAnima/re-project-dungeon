@@ -25,5 +25,5 @@ func _get_direction(movement : InputEvent) -> Vector2i:
 	
 func _action(action : InputEvent) -> void:
 	if action.is_action_pressed("action"):
-		var cmd : Command = CommandBomb.new(owner)
+		var cmd : Command = CommandSetBomb.new(owner)
 		ActionQueue.add_command(cmd)

@@ -22,7 +22,6 @@ func set_time(time: float) -> void: properties.time = time
 	
 
 func _ready() -> void:
-	GameManager.entity_setup(self)
 	ready_hook()
 
 ## Identificación para debugging

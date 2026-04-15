@@ -15,9 +15,9 @@ var current_actor : Entity
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
 	actors.push_back(_act)
-	GridManager.grid_setup(_act)
-	TurnManager.turn_setup(_act)
 	TimeManager.time_setup(_act)
+	TurnManager.turn_setup(_act)
+	GridManager.grid_setup(_act)
 	
 func _game_loop() -> void:
 	var counter : int = 0
@@ -31,8 +31,9 @@ func _game_loop() -> void:
 		TimeManager.timer_reset(current_actor)
 		TurnManager.turn_iterator()
 
-
 func _on_ready_setup() -> void:
+	for entity in entities_node.get_children():
+		entity_setup(entity)
 	register_controller()
 	game_running = true
 	_game_loop()
