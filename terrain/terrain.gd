@@ -28,3 +28,4 @@ func _is_tile_solid(_grid_position : Vector2i) -> bool:
 		push_error("No existe tile en la posición ", _grid_position, "instancia es Null")
 		return true
 	return tile_data.get_custom_data("is_solid")
+	

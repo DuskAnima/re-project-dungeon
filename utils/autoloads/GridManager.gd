@@ -16,9 +16,14 @@ var tween_speed : float = 0.4
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
 func grid_setup(_act: Entity) -> void:
-	var pos : Vector2 = _act.position # Obtiene posición global
-	_grid_snap(_act, pos) # Hace snapping a Entity en el grid
-	update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
+	if not GameManager.game_running:
+		var pos : Vector2 = _act.position # Obtiene posición global
+		_grid_snap(_act, pos) # Hace snapping a Entity en el grid
+		# Solo cuando update_grid es llamado desde grid setup from y to son llamados de esta forma.
+		update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
+	else:
+		update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos)
+		_act.position = _grid_to_world(_act.properties.grid_pos)
 
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
@@ -30,15 +35,15 @@ func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 	return true
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
-##  target (V2i). Solo debe ser usada por CommandMove.
+##  target (V2i). Solo debe ser usada por CommandMove y setup_entity()
 func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
-	if _to == ENTITY_DELETE_FLAG:
-		grid_occupation.erase(_from)
-	if _from != _to:
-		grid_occupation.erase(_from)
-	grid_occupation.get_or_add(_to, [])
-	grid_occupation[_to].append(_act)
-	_act.properties.grid_pos = _to
+	if _to == ENTITY_DELETE_FLAG: # SI posee flag de eliminación
+		grid_occupation.erase(_from) # Saca a la entidad del grid
+	if _from != _to: # Si el origen es diferente del destino
+		grid_occupation.erase(_from) # Elimina el origen
+	_act.properties.grid_pos = _to # A la entidad se le actualiza su posición lógica
+	grid_occupation.get_or_add(_to, []) # Luego agrega u obtiene la posición. Si la agrega le da por defecto un array vacío
+	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
 
 func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	tween = _act.create_tween()

@@ -14,12 +14,13 @@ var current_actor : Entity
 
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
-	actors.push_back(_act)
+	GridManager.grid_setup(_act)
 	TimeManager.time_setup(_act)
 	TurnManager.turn_setup(_act)
-	GridManager.grid_setup(_act)
+	actors.push_back(_act)
 	
 func _game_loop() -> void:
+	game_running = true
 	var counter : int = 0
 	while game_running:
 		counter += 1
@@ -30,12 +31,12 @@ func _game_loop() -> void:
 		await TimeManager.timeout
 		TimeManager.timer_reset(current_actor)
 		TurnManager.turn_iterator()
+	game_running = false
 
 func _on_ready_setup() -> void:
 	for entity in entities_node.get_children():
 		entity_setup(entity)
 	register_controller()
-	game_running = true
 	_game_loop()
 
 func kill_entity(_act: Entity) -> void:

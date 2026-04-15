@@ -9,13 +9,10 @@ func _init(_act : Entity, _pos : Vector2i) -> void:
 
 func execute() -> void:
 	start()
-	act = act.get_script().new()
 	GameManager.entities_node.add_child(act)
-	GameManager.entity_setup(act)
 	act.properties.grid_pos = grid_pos
-	print(act)
-	print(grid_pos)
-	print(act.properties.grid_pos)
+	GameManager.entity_setup(act)
+	GameManager.register_controller()
 	finish()
 
 func _set_time_cost() -> float:
