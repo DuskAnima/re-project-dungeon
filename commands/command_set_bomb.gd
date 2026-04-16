@@ -10,7 +10,7 @@ func execute() -> void:
 	var bomb : Bomb = bomb_scene.instantiate()
 	var bomb_position : Vector2i = act.properties.grid_pos + act.properties.face_direction
 	start()
-	var bomb_spawn : Command = CommandSpawn.new(bomb, bomb_position) 
+	var bomb_spawn : Command = CommandSpawn.new(bomb, bomb_position, act)
 	ActionQueue.add_wrapped_command(bomb_spawn)
 	finish()
 

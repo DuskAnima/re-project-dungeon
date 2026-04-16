@@ -1,7 +1,7 @@
 extends Controller
 class_name ObjectController
 
-enum  {DETONATION, EXPLOSION} 
+enum  {IDLE, DETONATION, EXPLOSION} 
 
 var status : int 
 
@@ -13,8 +13,10 @@ func _process(_delta: float) -> void:
 func _bomb_controller() -> void:
 	var cmd_ignition : Command = CommandIgnition.new(actor)
 	var cmd_explotion : Command = CommandExplotion.new(actor)
-
+	print(status)
 	match status:
+		IDLE:
+			status +=1
 		DETONATION:
 			ActionQueue.add_command(cmd_ignition)
 			status += 1

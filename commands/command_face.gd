@@ -11,15 +11,16 @@ func execute() -> void:
 
 	start()
 	act.properties.face_direction = dir
+	var animation : AnimatedSprite2D = act.animations.play_movement()
 	match dir:
 		Vector2i.UP:
-			act.animations.play_movement("up")
+			animation.play("UP")
 		Vector2i.DOWN:
-			act.animations.play_movement("down")
+			animation.play("DOWN")
 		Vector2i.LEFT:
-			act.animations.play_movement("left")
+			animation.play("LEFT")
 		Vector2i.RIGHT:
-			act.animations.play_movement("right")
+			animation.play("RIGHT")
 
 	finish()
 

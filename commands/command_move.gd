@@ -23,18 +23,20 @@ func execute() -> void:
 		return
 	if not GridManager.can_move(act, from, to):
 		push_error("Command Move: Actor is not allowed to go this way")
-
+	
+	var animation : AnimatedSprite2D = act.animations.play_movement()
+	
 	start()
 
 	match dir:
 		Vector2i.UP:
-			act.animations.play_movement("move_up")
+			animation.play("MOVE_UP")
 		Vector2i.DOWN:
-			act.animations.play_movement("move_down")
+			animation.play("MOVE_DOWN")
 		Vector2i.LEFT:
-			act.animations.play_movement("move_left")
+			animation.play("MOVE_LEFT")
 		Vector2i.RIGHT:
-			act.animations.play_movement("move_right")
+			animation.play("MOVE_RIGHT")
 
 	GridManager.update_grid(act, from, to)
 

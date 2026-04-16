@@ -7,7 +7,6 @@ var in_process : bool = false
 var current : Command = null
 var buffer_command: Command = null  # Buffer para un solo comando de input
 
-
 ## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por los controles.
 func add_command(cmd : Command) -> void:
 	if in_process:

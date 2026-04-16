@@ -6,15 +6,34 @@ var current_actor : Entity
 var current_index : int = 0
 
 ## Configura el funcionamiento básico de los turnos agregando entidades a la lista y asignando un turno.
-func turn_setup(_act: Entity) -> void:
-	var randomizer : float = randf_range(0.5, 1.5) # Genera un float random entre 0.5 y 1.5
+func turn_setup(_act: Entity, _initiative : float = 0) -> void:
 	if _act == null: 
 		push_error("AVISO: TurnManager.turn_setup() está recibiendo null en vez de una instancia de Entity")
-		return
-	# Obtiene stat de iniciativa del actor y se multiplica por el randomizer para dar variación al orden
-	var rng_speed : float = _act.stats.initiative * randomizer 
-	turn_order.append([ _act, rng_speed ]) # Agrega al actor y su velocidad de iniciativa rng a la lista
+	if not GameManager.game_running: # Comportamiento por defecto si el juego está en estado de SetUp
+		_initiative = rng_turn_setter(_act)
+	turn_order.append([ _act, _initiative ]) # Agrega al actor y su velocidad de iniciativa rng a la lista
 	turn_order.sort_custom(_sort_descending) # Se ordena la lista en función a la velocidad de manera descendiente
+
+func rng_turn_setter(_act) -> float:
+	var randomizer : float = randf_range(0.5, 1.5) # Genera un float random entre 0.5 y 1.5
+	# Obtiene stat de iniciativa del actor y se multiplica por el randomizer para dar variación al orden
+	return _act.stats.initiative * randomizer 
+
+func get_entity_index(_act) -> int:
+	const ERROR_INDEX : int = -1
+	for i in range(turn_order.size()): # Busca el índice de la entidad que se busca eliminar
+		if turn_order[i][ACTOR] == _act:
+			return i
+	push_error("Error al encontrar el index")
+	return ERROR_INDEX
+
+func get_entity_initiative(_act) -> float:
+	return turn_order.get(get_entity_index(_act))[INITIATIVE]
+
+func set_entity_initiative(_act: Entity, _initiative: float) -> void:
+	turn_order.get(get_entity_index(_act))[INITIATIVE] = _initiative
+	turn_order.sort_custom(_sort_descending)
+
 
 func remove_entity_from_pool(_act: Entity) -> void:
 	var index_to_remove : int = -1
@@ -22,7 +41,6 @@ func remove_entity_from_pool(_act: Entity) -> void:
 		if turn_order[i][ACTOR] == _act:
 			index_to_remove = i
 			break
-
 	if index_to_remove == -1: # SI la entidad no está en la lista, termina función.
 		return
 	turn_order.remove_at(index_to_remove)
@@ -40,7 +58,6 @@ func remove_entity_from_pool(_act: Entity) -> void:
 func _sort_descending(a, b) -> bool:
 	return a[1] > b[1]
 
-## ADVERTENCIA: Función con dependencia fuerte con ActionQueue. [br]
 ## Termina el turno de la entidad y da acceso a que la siguiente entidad pueda actuar.
 func turn_iterator() -> void:
 	if current_actor != null:
@@ -48,7 +65,6 @@ func turn_iterator() -> void:
 	current_index += 1 # Mueve el puntero un elemento extra
 	if current_index == turn_order.size(): # Si se llega al final de la lista, esta comienza desde el principio
 		current_index = 0
-
 
 ## Da acceso a que la unidad correspondiente pueda tomar su turno al establecer can_act = true. [br]
 ## Retorna la entidad de turno.

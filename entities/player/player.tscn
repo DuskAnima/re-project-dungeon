@@ -157,16 +157,16 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_bls4j")
 }],
-"loop": true,
-"name": &"down",
+"loop": false,
+"name": &"DOWN",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_wvtmh")
 }],
-"loop": true,
-"name": &"left",
+"loop": false,
+"name": &"LEFT",
 "speed": 5.0
 }, {
 "frames": [{
@@ -194,8 +194,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t1t22")
 }],
-"loop": true,
-"name": &"move_down",
+"loop": false,
+"name": &"MOVE_DOWN",
 "speed": 14.0
 }, {
 "frames": [{
@@ -223,8 +223,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vewsg")
 }],
-"loop": true,
-"name": &"move_left",
+"loop": false,
+"name": &"MOVE_LEFT",
 "speed": 14.0
 }, {
 "frames": [{
@@ -252,8 +252,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_geky7")
 }],
-"loop": true,
-"name": &"move_right",
+"loop": false,
+"name": &"MOVE_RIGHT",
 "speed": 14.0
 }, {
 "frames": [{
@@ -281,24 +281,24 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c112w")
 }],
-"loop": true,
-"name": &"move_up",
+"loop": false,
+"name": &"MOVE_UP",
 "speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_7thud")
 }],
-"loop": true,
-"name": &"right",
+"loop": false,
+"name": &"RIGHT",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("6_a1qjk")
 }],
-"loop": true,
-"name": &"up",
+"loop": false,
+"name": &"UP",
 "speed": 5.0
 }]
 
@@ -312,5 +312,5 @@ stats = SubResource("Resource_a1qjk")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=1892191052]
 sprite_frames = SubResource("SpriteFrames_sglur")
-animation = &"move_up"
-frame_progress = 0.9506676
+animation = &"MOVE_RIGHT"
+autoplay = "DOWN"

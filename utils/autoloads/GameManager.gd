@@ -14,9 +14,9 @@ var current_actor : Entity
 
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
+	TurnManager.turn_setup(_act)
 	GridManager.grid_setup(_act)
 	TimeManager.time_setup(_act)
-	TurnManager.turn_setup(_act)
 	actors.push_back(_act)
 	
 func _game_loop() -> void:
@@ -24,8 +24,8 @@ func _game_loop() -> void:
 	var counter : int = 0
 	while game_running:
 		counter += 1
-		prints("game loop started: iteration number ", counter)
 		current_actor = TurnManager.turn_process()
+		prints("game loop started: iteration number ", counter, ".", current_actor, "turn")
 		if current_actor == null:
 			continue
 		await TimeManager.timeout
