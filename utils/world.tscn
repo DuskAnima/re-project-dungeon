@@ -12,7 +12,7 @@
 [sub_resource type="Resource" id="Resource_xv25a"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
-entity_kind = "player"
+entity_kind = "Player"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_dvl40"]
@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 [sub_resource type="Resource" id="Resource_3rw00"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
-entity_kind = "ai"
+entity_kind = "Ai"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_lyijg"]
@@ -35,23 +35,11 @@ metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
 [sub_resource type="Resource" id="Resource_asps3"]
 resource_local_to_scene = true
-script = ExtResource("5_xv25a")
-entity_kind = "ai"
-metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
-
-[sub_resource type="Resource" id="Resource_jnjsm"]
-resource_local_to_scene = true
 script = ExtResource("6_dvl40")
 initiative = 1.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
-[sub_resource type="Resource" id="Resource_g5y3v"]
-resource_local_to_scene = true
-script = ExtResource("5_xv25a")
-entity_kind = "object"
-metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
-
-[sub_resource type="Resource" id="Resource_06djf"]
+[sub_resource type="Resource" id="Resource_jnjsm"]
 resource_local_to_scene = true
 script = ExtResource("6_dvl40")
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
@@ -90,13 +78,11 @@ position = Vector2(-32, 32)
 animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_asps3")
-stats = SubResource("Resource_jnjsm")
+stats = SubResource("Resource_asps3")
 
 [node name="Bomb" parent="Entities" unique_id=297779133 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("8_xv25a")]
 position = Vector2(-40, -31)
 animated_sprites = {
 "explotion": NodePath("ExplotionSprites")
 }
-properties = SubResource("Resource_g5y3v")
-stats = SubResource("Resource_06djf")
+stats = SubResource("Resource_jnjsm")

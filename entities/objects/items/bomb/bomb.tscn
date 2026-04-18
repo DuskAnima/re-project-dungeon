@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_gyrm6"]
 resource_local_to_scene = true
 script = ExtResource("2_gyrm6")
-entity_kind = "object"
+entity_kind = "Object"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_uig4m"]
@@ -179,7 +179,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"explotion",
-"speed": 28.0
+"speed": 42.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -228,7 +228,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ignition",
-"speed": 22.0
+"speed": 33.0
 }]
 
 [node name="Bomb" type="Node2D" unique_id=297779133 node_paths=PackedStringArray("animated_sprites")]
@@ -242,5 +242,5 @@ metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 
 [node name="ExplotionSprites" type="AnimatedSprite2D" parent="." unique_id=1518888651]
 sprite_frames = SubResource("SpriteFrames_tn6gv")
-animation = &"ignition"
+animation = &"explotion"
 autoplay = "idle"

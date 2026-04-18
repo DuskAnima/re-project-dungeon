@@ -11,7 +11,7 @@ var terrain : Terrain
 ## Tween que determina el trayecto del movimiento en grid
 var tween : Tween
 ## Velocidad de desplazamiento entre tiles
-var tween_speed : float = 0.4
+var tween_speed : float = 0.3
 
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos

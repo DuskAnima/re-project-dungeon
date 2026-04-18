@@ -1,3 +1,4 @@
+@abstract
 extends Node
 ## Controller es un nodo que originalmente debe ser inyectado como nodo hijo en Entities controlables.
 ## El primer Entity controlable es inyectado desde GameManager._game_set_up()

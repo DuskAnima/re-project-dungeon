@@ -25,7 +25,7 @@ func _game_loop() -> void:
 	while game_running:
 		counter += 1
 		current_actor = TurnManager.turn_process()
-		prints("game loop started: iteration number ", counter, ".", current_actor, "turn")
+		prints("Game loop started: iteration number ", counter, ".", current_actor, "turn")
 		if current_actor == null:
 			continue
 		await TimeManager.timeout
@@ -36,7 +36,7 @@ func _game_loop() -> void:
 func _on_ready_setup() -> void:
 	for entity in entities_node.get_children():
 		entity_setup(entity)
-	register_controller()
+		register_controller(entity)
 	_game_loop()
 
 func kill_entity(_act: Entity) -> void:
@@ -56,41 +56,31 @@ func kill_entity(_act: Entity) -> void:
 	_act.queue_free()
 
 # --------- CONTROLLER SETTING --------- 
-## Variable Controller que guarda el registro del nodo que conecta el control del usuario con una entidad.
-var controller : Controller
+## Función que agrega una instancia de control a la entidad entregada como argumento. 
+func register_controller(_act : Entity) -> void:
+	var entity_kind : String = _act.properties.entity_kind
+	match entity_kind:
+		"Player":
+			_register_controller(_act, PlayerController)
+		"Ai":
+			_register_controller(_act, AiController)
+		"Object":
+			_register_controller(_act, ObjectController)
 
-## Se agrega una instancia de control en las entidades
-func register_controller() -> void:
-	for actor in actors: # Itera por todas las Entity
-		if actor.properties.entity_kind == "ai": # si no es controlable
-			register_ai_controller(actor)
-			continue
-		elif actor.properties.entity_kind == "object":
-			register_object_controller(actor)
-			continue
-		elif actor.properties.entity_kind == "player":
-			register_player_controller(actor)
-			continue
+# --------- CONTROLLERS --------- 
 
-# --------- NPC CONTROLLER SETTING --------- 
-
-func register_player_controller(actor: Entity) -> void:
-	if actor.has_node("PlayerController"):
-		push_error(actor, "ya tiene un control")
+## Función privada que gestiona la instanciación de Controllers a las respectivas Entities.
+func _register_controller(_act: Entity, _controller_class: Variant) -> void:
+	var node_name : String = _controller_class.get_global_name()
+	var entity_kind : String = _act.properties.entity_kind
+	if not node_name.contains(_act.properties.entity_kind):
 		return
-	controller = PlayerController.new() # Crea un nuevo AiController
-	actor.add_child(controller) # Y lo asigna como hijo de la entidad
-
-func register_ai_controller(actor: Entity) -> void:
-	if actor.has_node("AiController"):
-		push_error(actor, "ya tiene un control")
+	if _act.has_node(node_name):
+		push_error(_act, " ya posee un control tipo ", node_name)
 		return
-	controller = AiController.new() # Crea un nuevo AiController
-	actor.add_child(controller) # Y lo asigna como hijo de la entidad
+	var new_controller : Controller = _controller_class.new() 
+	_act.add_child(new_controller)
+
+
 	
-func register_object_controller(actor : Entity) -> void:
-	if actor.has_node("ObjectController"):
-		push_error(actor, "ya tiene un control")
-		return
-	controller = ObjectController.new() # Crea un nuevo AiController
-	actor.add_child(controller) # Y lo asigna como hijo de la entidad
+	

@@ -15,7 +15,7 @@
 [sub_resource type="Resource" id="Resource_sglur"]
 resource_local_to_scene = true
 script = ExtResource("2_sglur")
-entity_kind = "player"
+entity_kind = "Player"
 metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 
 [sub_resource type="Resource" id="Resource_a1qjk"]

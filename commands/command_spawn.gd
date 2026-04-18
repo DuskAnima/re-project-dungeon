@@ -15,7 +15,7 @@ func execute() -> void:
 	act.properties.grid_pos = grid_pos
 	GameManager.entities_node.add_child(act)
 	GameManager.entity_setup(act)
-	GameManager.register_controller()
+	GameManager.register_controller(act)
 	finish()
 
 func _set_time_cost() -> float:
