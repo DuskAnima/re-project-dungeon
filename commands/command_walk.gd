@@ -26,7 +26,7 @@ func execute() -> void:
 	
 	start()
 	
-	if not GridManager.can_move(act, from, to):
+	if not GridManager.is_tile_free(act, from, to):
 		ActionQueue.add_wrapped_command(cmd_face)
 		time_cost = 0
 

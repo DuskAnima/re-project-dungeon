@@ -11,6 +11,7 @@ var buffer_command: Command = null  # Buffer para un solo comando de input
 func add_command(cmd : Command) -> void:
 	if in_process:
 		buffer_command = cmd # Buffer: reemplaza el comando pendiente (solo el último)
+		print("AQ: BUFFER: ", buffer_command)
 	else: # Si no hay comando en proceso
 		queue.push_back(cmd) # Agrega un comando al final
 		_execute_next() # Ejecutar siguiente

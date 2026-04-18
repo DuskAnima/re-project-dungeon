@@ -65,25 +65,32 @@ func register_controller() -> void:
 		if actor.properties.entity_kind == "ai": # si no es controlable
 			register_ai_controller(actor)
 			continue
-		if actor.properties.entity_kind == "object":
+		elif actor.properties.entity_kind == "object":
 			register_object_controller(actor)
 			continue
-		if actor.has_node("PlayerController"):
-			push_error(actor, "ya tiene un control")
+		elif actor.properties.entity_kind == "player":
+			register_player_controller(actor)
 			continue
-		controller = PlayerController.new() # Si no es un NPC, se crea un controller 
-		actor.add_child(controller) # Y se asigna 
 
 # --------- NPC CONTROLLER SETTING --------- 
+
+func register_player_controller(actor: Entity) -> void:
+	if actor.has_node("PlayerController"):
+		push_error(actor, "ya tiene un control")
+		return
+	controller = PlayerController.new() # Crea un nuevo AiController
+	actor.add_child(controller) # Y lo asigna como hijo de la entidad
 
 func register_ai_controller(actor: Entity) -> void:
 	if actor.has_node("AiController"):
 		push_error(actor, "ya tiene un control")
+		return
 	controller = AiController.new() # Crea un nuevo AiController
 	actor.add_child(controller) # Y lo asigna como hijo de la entidad
-
+	
 func register_object_controller(actor : Entity) -> void:
 	if actor.has_node("ObjectController"):
 		push_error(actor, "ya tiene un control")
+		return
 	controller = ObjectController.new() # Crea un nuevo AiController
 	actor.add_child(controller) # Y lo asigna como hijo de la entidad

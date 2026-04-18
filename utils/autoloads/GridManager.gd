@@ -28,8 +28,8 @@ func grid_setup(_act: Entity) -> void:
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
 
-## FALTA IMPLEMENTACIÓN. Fuente de verdad para llevar a cabo el movimiento.
-func can_move(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
+## Fuente de verdad para llevar a cabo el movimiento.
+func is_tile_free(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 	if terrain.is_path_blocked(_to):
 		return false
 	return true

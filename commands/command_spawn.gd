@@ -11,8 +11,9 @@ func _init(_act : Entity, _pos : Vector2i, _owner: Entity) -> void:
 
 func execute() -> void:
 	start()
-	GameManager.entities_node.add_child(act)
+#	if GridManager.
 	act.properties.grid_pos = grid_pos
+	GameManager.entities_node.add_child(act)
 	GameManager.entity_setup(act)
 	GameManager.register_controller()
 	finish()

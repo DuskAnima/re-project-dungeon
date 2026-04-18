@@ -6,6 +6,7 @@ class_name Controller
 var actor : Entity
 
 func _ready() -> void:
+	name = get_script().get_global_name()
 	actor = get_parent() # Obtiene al actor que instancia el control.
 	owner = actor # Lo establece como dueño del nodo.
 

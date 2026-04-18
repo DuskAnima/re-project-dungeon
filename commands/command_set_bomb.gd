@@ -15,5 +15,5 @@ func execute() -> void:
 	finish()
 
 func _set_time_cost() -> float:
-	return 0.5
+	return 0.1
 ## Es necesario declarar el coste de tiempo con un return de un float.

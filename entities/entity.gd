@@ -4,12 +4,15 @@ class_name Entity
 # Flags
 ## Resource que almacena referencias a las animaciones y las ejecuta
 var animations : Animations = Animations.new(self)
+## Place holder para asignar un controller
+var controller : Controller
 ## Diccionario de referencia para los diferentes nodos de animaciones
 @export var animated_sprites : Dictionary[String, AnimatedSprite2D]
 ## General logic properties of entities (grid_pos, face_direction, is_controlable)
 @export var properties : Properties
 ## General stats of entities (initiative)
 @export var stats : Stats
+
 
 ## Establece la propiedad que permite que el jugador pueda controlar a una entidad
 func set_controllable(switch: bool) -> void: properties.is_controllable = switch
