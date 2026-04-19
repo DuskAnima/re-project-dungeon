@@ -6,7 +6,7 @@ const cell_size : int = 32
 const ENTITY_DELETE_FLAG : Vector2i = Vector2i.MIN
 ## Referencia a las diferentes entidades registradas para poder acceder a sus posiciones
 var grid_occupation : Dictionary[Vector2i, Array]
-## Referencia a el terreno de juego
+## Referencia al terreno de juego para poder operar sobre él.
 var terrain : Terrain
 ## Tween que determina el trayecto del movimiento en grid
 var tween : Tween
@@ -28,7 +28,7 @@ func grid_setup(_act: Entity) -> void:
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
 
-## Fuente de verdad para llevar a cabo el movimiento.
+## Fuente de verdad para llevar a cabo movimientos.
 func is_tile_free(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 	if terrain.is_path_blocked(_to):
 		return false
@@ -45,7 +45,7 @@ func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	_act.properties.grid_pos = _to # A la entidad se le actualiza su posición lógica
 	grid_occupation.get_or_add(_to, []) # Luego agrega u obtiene la posición. Si la agrega le da por defecto un array vacío
 	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
-	terrain.tile_fetcher(_to)
+	terrain.process_tile(_to) # Detona la lógica del tile habitado
 
 ## Función que retorna el tween de movimiento standard.
 func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:

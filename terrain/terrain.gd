@@ -6,10 +6,19 @@ class_name Terrain
 ## se almacena en la posición global independiente de su posicionamiento visual. Es decir, podría transformar 
 ## la instancia de TileMapLayer x -2000 (por ejemplo) y el objeto tile seguiría posicionado en su coordenada
 ## logica desde el punto 0.0 y no del espacio visual que use. Esto no se altera ni siquiera alterando la clase.
-var tile_data : TileData
+
+enum { TILE_ID, TILE_ATLAS_COORD, TERRAIN_TILE_DATA }
+
+var tile_id : int
+var tile_atlas_coords : Vector2i
+var terrain_tile_data : TileData
 
 func _ready() -> void:
 	GridManager.terrain_setup(self)
+
+func process_tile(_grid_position: Vector2i) -> void:
+	_tile_fetcher(_grid_position)
+	break_tile(_grid_position)
 
 ## Función que retorna si un camino está bloqueado. Retorna "true" si el camino está bloqueado.
 func is_path_blocked(_grid_position : Vector2i) -> bool:
@@ -23,17 +32,22 @@ func _is_tile_occupied(_grid_position : Vector2i) -> bool:
 
 ## Función que revisa los tiles con custom_data "is_solid", retorna "true" si el tile es sólido.
 func _is_tile_solid(_grid_position : Vector2i) -> bool:
-	tile_data = get_cell_tile_data(_grid_position)
+	var tile_data : TileData = get_cell_tile_data(_grid_position)
 	if tile_data == null:
 		push_error("No existe tile en la posición ", _grid_position, "instancia es Null")
 		return true
 	return tile_data.get_custom_data("is_solid")
 
-func tile_fetcher(_grid_position: Vector2i) -> void:
-	var tile_id : int = get_cell_source_id(_grid_position)
-	var terrain_tile_data : TileData = get_cell_tile_data(_grid_position)
-	var tile_atlas_coords : Vector2i = get_cell_atlas_coords(_grid_position)
+func _tile_fetcher(_grid_position: Vector2i) -> void:
+	# Identifica el ID de la textura utilizada
+	tile_id = get_cell_source_id(_grid_position) 
+	# Identifica el tile interno de la textura setteada in game.
+	tile_atlas_coords = get_cell_atlas_coords(_grid_position) 
+	# Identifica la infromación del tile especifico
+	terrain_tile_data = get_cell_tile_data(_grid_position) 
+
+func break_tile(_grid_position: Vector2i) -> void:
 	var tile_information : bool = terrain_tile_data.get_custom_data("can_break")
 	if tile_information:
-		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0)
-		set_cell(_grid_position, tile_id, tile_breaker)
+		var tile_transform : Vector2i = tile_atlas_coords + Vector2i(1,0)
+		set_cell(_grid_position, tile_id, tile_transform)
