@@ -80,7 +80,3 @@ func _register_controller(_act: Entity, _controller_class: Variant) -> void:
 		return
 	var new_controller : Controller = _controller_class.new() 
 	_act.add_child(new_controller)
-
-
-	
-	

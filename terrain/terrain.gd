@@ -20,7 +20,7 @@ func _is_tile_occupied(_grid_position : Vector2i) -> bool:
 	if GridManager.grid_occupation.has(_grid_position):
 		return true
 	return false
-	
+
 ## Función que revisa los tiles con custom_data "is_solid", retorna "true" si el tile es sólido.
 func _is_tile_solid(_grid_position : Vector2i) -> bool:
 	tile_data = get_cell_tile_data(_grid_position)
@@ -28,4 +28,12 @@ func _is_tile_solid(_grid_position : Vector2i) -> bool:
 		push_error("No existe tile en la posición ", _grid_position, "instancia es Null")
 		return true
 	return tile_data.get_custom_data("is_solid")
-	
+
+func tile_fetcher(_grid_position: Vector2i) -> void:
+	var tile_id : int = get_cell_source_id(_grid_position)
+	var terrain_tile_data : TileData = get_cell_tile_data(_grid_position)
+	var tile_atlas_coords : Vector2i = get_cell_atlas_coords(_grid_position)
+	var tile_information : bool = terrain_tile_data.get_custom_data("can_break")
+	if tile_information:
+		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0)
+		set_cell(_grid_position, tile_id, tile_breaker)

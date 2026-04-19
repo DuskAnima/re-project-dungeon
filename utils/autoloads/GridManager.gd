@@ -39,12 +39,15 @@ func is_tile_free(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	if _to == ENTITY_DELETE_FLAG: # SI posee flag de eliminación
 		grid_occupation.erase(_from) # Saca a la entidad del grid
+		return
 	if _from != _to: # Si el origen es diferente del destino
 		grid_occupation.erase(_from) # Elimina el origen
 	_act.properties.grid_pos = _to # A la entidad se le actualiza su posición lógica
 	grid_occupation.get_or_add(_to, []) # Luego agrega u obtiene la posición. Si la agrega le da por defecto un array vacío
 	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
+	terrain.tile_fetcher(_to)
 
+## Función que retorna el tween de movimiento standard.
 func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)
