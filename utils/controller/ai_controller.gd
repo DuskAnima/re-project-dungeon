@@ -10,11 +10,10 @@ func _process(_delta: float) -> void:
 func movement_manager() -> void:
 
 	var dir : Vector2i = direction.pick_random()
-	var from : Vector2i = actor.properties.grid_pos
 	if dir == Vector2i.ZERO:
 		return
 
-	var cmd := CommandWalk.new(actor, from, dir)
+	var cmd := CommandWalk.new(actor, dir)
 	ActionQueue.add_command(cmd)
 
 

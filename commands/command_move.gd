@@ -24,19 +24,8 @@ func execute() -> void:
 	if not GridManager.is_tile_free(act, from, to):
 		push_error("Command Move: Actor is not allowed to go this way")
 
-	var animation : AnimatedSprite2D = act.animations.play_movement()
-
 	start()
 
-	match dir:
-		Vector2i.UP:
-			animation.play("MOVE_UP")
-		Vector2i.DOWN:
-			animation.play("MOVE_DOWN")
-		Vector2i.LEFT:
-			animation.play("MOVE_LEFT")
-		Vector2i.RIGHT:
-			animation.play("MOVE_RIGHT")
 
 	# Grid origin
 	var global_from : Vector2 = GridManager._grid_to_world(from)

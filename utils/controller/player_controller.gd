@@ -8,11 +8,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 func movement_manager(_event) -> void:
 	var dir := _get_direction(_event)
-	var from : Vector2i = actor.properties.grid_pos
 	if dir == Vector2i.ZERO:
 		return
 
-	var cmd := CommandWalk.new(actor, from, dir)
+	var cmd := CommandWalk.new(actor, dir)
 	ActionQueue.add_command(cmd)
 
 func _get_direction(movement) -> Vector2i:
@@ -24,6 +23,10 @@ func _get_direction(movement) -> Vector2i:
 	else: return Vector2i.ZERO
 	
 func _action() -> void:
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("command1"):
 		var cmd : Command = CommandSetBomb.new(owner)
+		ActionQueue.add_command(cmd)
+	
+	elif Input.is_action_just_pressed("command2"):
+		var cmd : Command = CommandPush.new(owner)
 		ActionQueue.add_command(cmd)

@@ -22,8 +22,9 @@ func grid_setup(_act: Entity) -> void:
 		# Solo cuando update_grid es llamado desde grid setup from y to son llamados de esta forma.
 		update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
 	else:
-		update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos)
-		_act.position = _grid_to_world(_act.properties.grid_pos)
+		# Esta sección es para settear Entities en runtime.
+		update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos) # Establece propiedaes lógicas
+		_act.position = _grid_to_world(_act.properties.grid_pos) # Las actualiza en valores globales
 
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
@@ -52,6 +53,12 @@ func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)
 	return tween
+
+func get_entity_from_grid(grid_position : Vector2i) -> Entity:
+	for tile in grid_occupation:
+		if tile == grid_position:
+			return grid_occupation[grid_position][0]
+	return
 
 ## Multiplica la posición de grid (V2i) por el cell_size para calcular posición global.
 func _grid_to_world(grid_pos : Vector2i) -> Vector2:
