@@ -23,9 +23,9 @@ func execute() -> void:
 		return
 	if not GridManager.is_tile_free(act, from, to):
 		push_error("Command Move: Actor is not allowed to go this way")
-	
+
 	var animation : AnimatedSprite2D = act.animations.play_movement()
-	
+
 	start()
 
 	match dir:

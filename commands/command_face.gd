@@ -14,13 +14,13 @@ func execute() -> void:
 	var animation : AnimatedSprite2D = act.animations.play_movement()
 	match dir:
 		Vector2i.UP:
-			animation.play("UP")
+			animation.play("FACE_UP")
 		Vector2i.DOWN:
-			animation.play("DOWN")
+			animation.play("FACE_DOWN")
 		Vector2i.LEFT:
-			animation.play("LEFT")
+			animation.play("FACE_LEFT")
 		Vector2i.RIGHT:
-			animation.play("RIGHT")
+			animation.play("FACE_RIGHT")
 
 	finish()
 

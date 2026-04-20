@@ -159,7 +159,7 @@ animations = [{
 "texture": ExtResource("4_0cgl1")
 }],
 "loop": false,
-"name": &"DOWN",
+"name": &"FACE_DOWN",
 "speed": 5.0
 }, {
 "frames": [{
@@ -167,7 +167,23 @@ animations = [{
 "texture": ExtResource("5_p0t3q")
 }],
 "loop": false,
-"name": &"LEFT",
+"name": &"FACE_LEFT",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_kqm5u")
+}],
+"loop": false,
+"name": &"FACE_RIGHT",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dlytc")
+}],
+"loop": false,
+"name": &"FACE_UP",
 "speed": 5.0
 }, {
 "frames": [{
@@ -285,22 +301,6 @@ animations = [{
 "loop": false,
 "name": &"MOVE_UP",
 "speed": 14.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_kqm5u")
-}],
-"loop": false,
-"name": &"RIGHT",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_dlytc")
-}],
-"loop": false,
-"name": &"UP",
-"speed": 5.0
 }]
 
 [node name="Glorbo" type="Node2D" unique_id=234887506 node_paths=PackedStringArray("animated_sprites")]
@@ -313,5 +313,5 @@ stats = SubResource("Resource_dea6x")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=1754204327]
 sprite_frames = SubResource("SpriteFrames_0cgl1")
-animation = &"MOVE_RIGHT"
-autoplay = "DOWN"
+animation = &"FACE_DOWN"
+autoplay = "FACE_DOWN"

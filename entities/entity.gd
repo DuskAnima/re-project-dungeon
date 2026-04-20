@@ -2,7 +2,6 @@
 extends Node2D
 class_name Entity
 
-# Flags
 ## Resource que almacena referencias a las animaciones y las ejecuta
 var animations : Animations = Animations.new(self)
 ## Place holder para asignar un controller
