@@ -18,11 +18,7 @@ func execute() -> void:
 	# Grid new position
 	var to : Vector2i = from + dir
 
-	if act == null:
-		push_error("Command Move: Actor is Null")
-		return
-	if not GridManager.is_tile_free(act, from, to):
-		push_error("Command Move: Actor is not allowed to go this way")
+
 
 	start()
 

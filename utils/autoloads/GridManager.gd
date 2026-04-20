@@ -54,6 +54,9 @@ func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	tween.tween_property(_act, "position", _to, tween_speed)
 	return tween
 
+func set_area_effect(_area : Rect2i) -> void:
+	print("el tamaño de la explosión fue", _area, "Con el centro en: ", _area.get_center(), "en la posición: ", _area.position)
+
 func get_entity_from_grid(grid_position : Vector2i) -> Entity:
 	for tile in grid_occupation:
 		if tile == grid_position:

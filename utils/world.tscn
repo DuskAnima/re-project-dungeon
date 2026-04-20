@@ -32,18 +32,6 @@ script = ExtResource("6_dvl40")
 initiative = 1.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
-[sub_resource type="Resource" id="Resource_lyijg"]
-resource_local_to_scene = true
-script = ExtResource("5_xv25a")
-entity_kind = "Ai"
-metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
-
-[sub_resource type="Resource" id="Resource_asps3"]
-resource_local_to_scene = true
-script = ExtResource("6_dvl40")
-initiative = 1.0
-metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
-
 [sub_resource type="Resource" id="Resource_jnjsm"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
@@ -78,14 +66,6 @@ animated_sprites = {
 }
 properties = SubResource("Resource_dvl40")
 stats = SubResource("Resource_3rw00")
-
-[node name="Stupu2" parent="Entities" unique_id=178445431 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("5_ll1b3")]
-position = Vector2(-37, -40)
-animated_sprites = {
-"movement": NodePath("MovementSprites")
-}
-properties = SubResource("Resource_lyijg")
-stats = SubResource("Resource_asps3")
 
 [node name="Player" parent="Entities" unique_id=172764692 node_paths=PackedStringArray("animated_sprites") instance=ExtResource("1_f3sb7")]
 position = Vector2(36, -45)

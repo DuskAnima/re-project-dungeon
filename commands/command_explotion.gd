@@ -9,10 +9,13 @@ func execute() -> void:
 	start()
 	ActionQueue.add_wrapped_command(cmd)
 	var animation : AnimatedSprite2D = act.animations.play_explotion()
-	animation.play("explotion")
+	animation.play("EXPLOTION")
+	var area_effect : CollisionShape2D = act.get_node("ExplotionArea/ExplotionShape")
+	print("area effect Rect: ",area_effect.shape.get_rect().grow(float(GridManager.cell_size)/2))
+	#GridManager.set_area_effect(area_effect)
 	await animation.animation_finished
+	
 	finish()
 
 func _set_time_cost() -> float:
 	return 1
-## Es necesario declarar el coste de tiempo con un return de un float.
