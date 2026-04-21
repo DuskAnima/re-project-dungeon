@@ -18,7 +18,9 @@ texture_region_size = Vector2i(32, 32)
 0:0/0/custom_data_1 = true
 1:0/0 = 0
 1:0/0/custom_data_1 = true
+1:0/0/custom_data_2 = true
 2:0/0 = 0
+2:0/0/custom_data_2 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fpiom"]
 texture = ExtResource("4_mk5yb")
@@ -62,8 +64,8 @@ custom_data_layer_0/name = "is_solid"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "can_break"
 custom_data_layer_1/type = 1
-custom_data_layer_2/name = "is_hole"
-custom_data_layer_2/type = 0
+custom_data_layer_2/name = "can_fall"
+custom_data_layer_2/type = 1
 sources/1 = SubResource("TileSetAtlasSource_nigp7")
 sources/2 = SubResource("TileSetAtlasSource_7nt5j")
 sources/5 = SubResource("TileSetAtlasSource_fpiom")

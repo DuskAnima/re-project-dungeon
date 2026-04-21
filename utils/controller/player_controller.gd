@@ -25,7 +25,8 @@ func _get_direction(movement) -> Vector2i:
 func _action() -> void:
 	if Input.is_action_just_pressed("command1"):
 		var cmd : Command = CommandSetBomb.new(owner)
-		ActionQueue.add_command(cmd)
+		var target : Command = CommandTarget.new(owner, cmd, "command1")
+		ActionQueue.add_command(target)
 	
 	elif Input.is_action_just_pressed("command2"):
 		var cmd : Command = CommandPush.new(owner)

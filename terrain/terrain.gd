@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func process_tile(_grid_position: Vector2i) -> void:
 	_tile_fetcher(_grid_position)
+	fall(_grid_position)
 	break_tile(_grid_position)
 
 ## Función que retorna si un camino está bloqueado. Retorna "true" si el camino está bloqueado.
@@ -38,6 +39,7 @@ func _is_tile_solid(_grid_position : Vector2i) -> bool:
 		return true
 	return tile_data.get_custom_data("is_solid")
 
+## Captura la infromación del grid_position dado
 func _tile_fetcher(_grid_position: Vector2i) -> void:
 	# Identifica el ID de la textura utilizada
 	tile_id = get_cell_source_id(_grid_position) 
@@ -45,6 +47,12 @@ func _tile_fetcher(_grid_position: Vector2i) -> void:
 	tile_atlas_coords = get_cell_atlas_coords(_grid_position) 
 	# Identifica la infromación del tile especifico
 	terrain_tile_data = get_cell_tile_data(_grid_position) 
+
+func fall(_grid_position: Vector2i) -> void:
+	var tile_information : bool = terrain_tile_data.get_custom_data("can_fall")
+	if tile_information:
+		var actor : Entity = GridManager.get_entity_from_grid(_grid_position)
+		ActionQueue.add_wrapped_command(CommandDead.new(actor))
 
 func break_tile(_grid_position: Vector2i) -> void:
 	var tile_information : bool = terrain_tile_data.get_custom_data("can_break")

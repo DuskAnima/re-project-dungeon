@@ -57,7 +57,9 @@ func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	return tween
 
 func get_surrounding_tiles_square(_grid_position : Vector2i) -> Array[Vector2i]:
-	var square : Array[Vector2i] = [Vector2i(1,1),Vector2i(0,1),Vector2i(-1,1),Vector2i(1,0),Vector2i(0,0),Vector2i(-1,0),Vector2i(1,-1),Vector2i(0,-1),Vector2i(-1,-1)]
+	var square : Array[Vector2i] = [Vector2i(1,1),Vector2i(0,1),Vector2i(-1,1),
+									Vector2i(1,0),Vector2i(0,0),Vector2i(-1,0),
+									Vector2i(1,-1),Vector2i(0,-1),Vector2i(-1,-1)]
 	var area : Array[Vector2i]
 	for i in square:
 		i = i+_grid_position

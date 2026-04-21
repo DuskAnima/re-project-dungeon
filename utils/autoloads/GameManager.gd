@@ -53,6 +53,7 @@ func kill_entity(_act: Entity) -> void:
 		current_actor = null
 	TurnManager.remove_entity_from_pool(_act)
 	GridManager.update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
+	TimeManager.timeout.emit()
 	_act.queue_free()
 
 # --------- CONTROLLER SETTING --------- 

@@ -11,6 +11,8 @@ var act : Entity
 		# Reinicia el tiempo
 
 func time_setup(_act: Entity) -> void:
+	if _act == null:
+		return
 	timer_reset(_act)
 
 func consume_time(cost : float) -> void:
@@ -22,4 +24,6 @@ func consume_time(cost : float) -> void:
 		timeout.emit()
 
 func timer_reset(_act : Entity) -> void:
+	if _act == null:
+		return
 	_act.set_time(base_time)

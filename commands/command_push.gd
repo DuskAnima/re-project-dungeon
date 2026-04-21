@@ -6,6 +6,7 @@ func _init(_act : Entity) -> void:
 
 func execute() -> void:
 	var push_at : Vector2i = act.properties.grid_pos + act.properties.face_direction
+	area_of_effect = [push_at]
 	var other_act : Entity = GridManager.get_entity_from_grid(push_at)
 	var move_cmd : Command = CommandMove.new(other_act, push_at, act.properties.face_direction)
 

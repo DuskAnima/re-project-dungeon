@@ -4,18 +4,20 @@ class_name Command
 
 signal finished
 
-# Referencia general a la entidad que está instanciando el Command.
+## Referencia general a la entidad que está instanciando el Command.
 var act : Entity
-# Referencia general a Strings de dirección en caso de necesitar ejecutar animaciones dependientes de la actual act.properties.face_position de la entidad
+## Referencia general a Strings de dirección en caso de necesitar ejecutar animaciones dependientes de la actual act.properties.face_position de la entidad
 var DIR : Dictionary[Vector2i, String] = { Vector2i.UP : "UP", Vector2i.DOWN : "DOWN", Vector2i.LEFT : "LEFT", Vector2i.RIGHT : "RIGHT"}  
-# Referencia al valor de tiempo de un Command. Debe ser establecida sobreescrimiendo _set_time_cost() y redefinida en ejecusión
+## Referencia al valor de tiempo de un Command. Debe ser establecida sobreescrimiendo _set_time_cost() y redefinida en ejecusión
 var time_cost : float = _set_time_cost()
-# Flag de ejecusión. Pasa a true tras start().
+## Flag de ejecusión. Pasa a true tras start().
 var is_executing : bool = false
-# Identificador único para depuración.
+## Identificador único para depuración.
 var _debug_id: int = randi_range(0, 1000)
-# Identificador del nombre de un Command para depuración.
+## Identificador del nombre de un Command para depuración.
 var name : String = get_script().get_global_name()
+## Referencia a el area de efecto de un comando
+var area_of_effect : Array
 
 ## Función de inicialización de comandos. Cada comando tiene diferentes requerimientos que deben ser implementados
 ## y documentados individualmente.

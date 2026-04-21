@@ -25,6 +25,7 @@ func set_time(time: float) -> void: properties.time = time
 	
 
 func _ready() -> void:
+	z_index = 3
 	ready_hook()
 
 ## Identificación para debugging

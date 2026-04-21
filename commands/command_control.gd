@@ -1,15 +1,9 @@
 extends Command
 
-var src : Variant
-var targ : Variant
-
-func _init(_act : Entity,  _src : Variant = null, _targ : Variant = null) -> void:
+func _init(_act : Entity) -> void:
 	act = _act
-	src = _src
-	targ = _targ
 
 func execute() -> void:
-	
 	# Casos de uso:
 		# delegar a un personaje in-code
 			# Establecer en ready() para obtener al personaje inicial

@@ -32,7 +32,7 @@ script = ExtResource("6_dvl40")
 initiative = 1.0
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
-[sub_resource type="Resource" id="Resource_jnjsm"]
+[sub_resource type="Resource" id="Resource_lyijg"]
 resource_local_to_scene = true
 script = ExtResource("5_xv25a")
 entity_kind = "Player"
@@ -73,4 +73,4 @@ animated_sprites = {
 "action": NodePath("ActionSprites"),
 "movement": NodePath("MovementSprites")
 }
-properties = SubResource("Resource_jnjsm")
+properties = SubResource("Resource_lyijg")
