@@ -21,8 +21,8 @@ func execute() -> void:
 	
 	var face_cmd : Command = CommandFace.new(act, act.properties.face_direction)
 	
-	await cast_animation.animation_finished
 	ActionQueue.add_wrapped_command(face_cmd)
+	await cast_animation.animation_finished
 	
 	finish()
 

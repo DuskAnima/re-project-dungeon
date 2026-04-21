@@ -9,6 +9,10 @@ func execute() -> void:
 	var other_act : Entity = GridManager.get_entity_from_grid(push_at)
 	var move_cmd : Command = CommandMove.new(other_act, push_at, act.properties.face_direction)
 
+	if other_act == null:
+		finish()
+		return
+
 	start()
 
 	ActionQueue.add_wrapped_command(move_cmd)

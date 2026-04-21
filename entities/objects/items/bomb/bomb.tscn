@@ -231,9 +231,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyrm6"]
-size = Vector2(32, 32)
-
 [node name="Bomb" type="Node2D" unique_id=297779133 node_paths=PackedStringArray("animated_sprites")]
 script = ExtResource("1_8lu2u")
 animated_sprites = {
@@ -247,8 +244,3 @@ metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 sprite_frames = SubResource("SpriteFrames_tn6gv")
 animation = &"IGNITION"
 autoplay = "idle"
-
-[node name="ExplotionArea" type="Area2D" parent="." unique_id=1642143296]
-
-[node name="ExplotionShape" type="CollisionShape2D" parent="ExplotionArea" unique_id=2046949029]
-shape = SubResource("RectangleShape2D_gyrm6")

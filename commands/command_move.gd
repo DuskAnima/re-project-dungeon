@@ -17,12 +17,13 @@ func _init(_act: Entity, _from: Vector2i, _dir: Vector2i) -> void:
 func execute() -> void:
 	# Grid new position
 	var to : Vector2i = from + dir
-
-
-
+	
+	if act == null:
+		finish()
+		return
+	
 	start()
-
-
+	
 	# Grid origin
 	var global_from : Vector2 = GridManager._grid_to_world(from)
 	# Grid destiny

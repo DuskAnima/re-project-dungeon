@@ -50,18 +50,20 @@ func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 
 ## Función que retorna el tween de movimiento standard.
 func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
+	if _act == null:
+		return
 	tween = _act.create_tween()
 	tween.tween_property(_act, "position", _to, tween_speed)
 	return tween
 
-func set_area_effect(_area : Rect2i) -> void:
-	print("el tamaño de la explosión fue", _area, "Con el centro en: ", _area.get_center(), "en la posición: ", _area.position)
+func get_surrounding_tiles(_grid_position : Vector2i) -> Array[Vector2i]:
+	return terrain.get_surrounding_cells(_grid_position)
 
 func get_entity_from_grid(grid_position : Vector2i) -> Entity:
 	for tile in grid_occupation:
 		if tile == grid_position:
 			return grid_occupation[grid_position][0]
-	return
+	return null
 
 ## Multiplica la posición de grid (V2i) por el cell_size para calcular posición global.
 func _grid_to_world(grid_pos : Vector2i) -> Vector2:
