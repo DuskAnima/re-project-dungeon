@@ -10,10 +10,13 @@ func execute() -> void:
 	ActionQueue.add_wrapped_command(cmd)
 	var animation : AnimatedSprite2D = act.animations.play_explotion()
 	animation.play("EXPLOTION")
-	var surrounding_tiles : Array[Vector2i] = GridManager.get_surrounding_tiles(act.properties.grid_pos)
+	var surrounding_tiles : Array[Vector2i] = GridManager.get_surrounding_tiles_square(act.properties.grid_pos)
 	for tiles in surrounding_tiles:
 		var actor : Entity = GridManager.get_entity_from_grid(tiles)
-		print(actor)
+		if actor == null or act == actor:
+			print(actor, " se salvó")
+			continue
+		print(actor, " explotó")
 		GameManager.kill_entity(actor)
 	await animation.animation_finished
 	finish()

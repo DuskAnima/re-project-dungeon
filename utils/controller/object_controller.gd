@@ -13,7 +13,6 @@ func _process(_delta: float) -> void:
 func _bomb_controller() -> void:
 	var cmd_ignition : Command = CommandIgnition.new(actor)
 	var cmd_explotion : Command = CommandExplotion.new(actor)
-	print(status)
 	match status:
 		IDLE:
 			status +=1

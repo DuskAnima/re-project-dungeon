@@ -24,7 +24,7 @@ func _game_loop() -> void:
 	var counter : int = 0
 	while game_running:
 		counter += 1
-		current_actor = TurnManager.turn_process()
+		current_actor = TurnManager.set_entity_turn()
 		prints("Game loop started: iteration number ", counter, ".", current_actor, "turn")
 		if current_actor == null:
 			continue

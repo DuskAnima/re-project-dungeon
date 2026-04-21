@@ -31,5 +31,3 @@ func _on_animation_changed() -> void:
 	for animation in animations:
 		if animation != current_animation:
 			act.animated_sprites[animation].visible = false
-			print("Animations: ", animations)
-	print("animación cambió")

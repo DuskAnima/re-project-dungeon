@@ -68,7 +68,7 @@ func turn_iterator() -> void:
 
 ## Da acceso a que la unidad correspondiente pueda tomar su turno al establecer can_act = true. [br]
 ## Retorna la entidad de turno.
-func turn_process() -> Entity:
+func set_entity_turn() -> Entity:
 	current_actor = turn_order[current_index][ACTOR] # Toma al actor de turno
 	current_actor.set_can_act(true) # Establece que puede moverse
 	return current_actor
