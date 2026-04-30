@@ -1,9 +1,10 @@
 extends Node
 
 # --------- GLOBAL REFERENCES --------- 
-## Variable de referencia al nodo Entities, el cual almacena todas las entidades.
+## Variable de referencia al nodo Entities, el cual almacena todas las entidades. Es setteada desde el World node.
 var entities_node : Node 
-
+## Variable de referencua al nodo Auxiliar, el cual sirve para instanciar elementos no-Entity. Es setteada desde el World node.
+var aux_node : Node
 # --------- SETUP --------- 
 ## Boolean que termina el estado del juego
 var game_running : bool = false

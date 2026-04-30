@@ -2,8 +2,8 @@ extends Command
 
 func _init(_act : Entity) -> void:
 	act = _act
-
 func execute() -> void:
+
 	# Casos de uso:
 		# delegar a un personaje in-code
 			# Establecer en ready() para obtener al personaje inicial

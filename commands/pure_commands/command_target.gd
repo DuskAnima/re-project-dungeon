@@ -1,7 +1,7 @@
 extends Command
 class_name CommandTarget
 
-var command : Command 
+var command : Command
 var visual_target : PackedScene = preload("uid://dbcfwbr3s8brp")
 var input : String
 
@@ -18,12 +18,12 @@ func execute() -> void:
 
 	start()
 
-	act.add_child(target)
-	while not Input.is_action_pressed(input):
-		direction_vector = act.properties.grid_pos * act.properties.face_direction
-		target_display = direction_vector * 2
-		target.position = GridManager._world_to_grid(target_display)
-		continue
+	GameManager.aux_node.add_child(target)
+	if Input.is_action_pressed(input):
+		direction_vector = act.properties.grid_pos + act.properties.face_direction
+		target_display = direction_vector 
+		target.position = GridManager._grid_to_world(target_display)
+
 
 	ActionQueue.add_wrapped_command(command)
 

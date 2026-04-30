@@ -74,3 +74,6 @@ animated_sprites = {
 "movement": NodePath("MovementSprites")
 }
 properties = SubResource("Resource_lyijg")
+
+[node name="Auxiliar" type="Node" parent="." unique_id=1048089279]
+unique_name_in_owner = true

@@ -19,10 +19,13 @@ func execute() -> void:
 		var actor : Entity = GridManager.get_entity_from_grid(tiles)
 		if actor == null or act == actor:
 			continue
-		ActionQueue.add_wrapped_command(CommandDead.new(actor)) # Las entidades detectadas mueren (Requiere refactorización)
+		GameManager.kill_entity(actor) # TODO: Documentar por qué matar entidades con la bomba usando 
+		#								directamente kill_entity() NO genera error.
+		#ActionQueue.add_wrapped_command(CommandDead.new(actor)) # Las entidades detectadas mueren (Requiere refactorización)
 
 	await animation.animation_finished
-	
+	#GameManager.kill_entity(act) # TODO: Documentar por qué matar la entidad que exlota usando directamente kill_entity()
+	# SI genera error, pero usando add_wrapped_command(cmd_dead) no genera error.
 	finish()
 
 func _set_time_cost() -> float:
