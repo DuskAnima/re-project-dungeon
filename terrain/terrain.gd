@@ -9,12 +9,16 @@ class_name Terrain
 
 enum { TILE_ID, TILE_ATLAS_COORD, TERRAIN_TILE_DATA }
 
+# ID del tile
 var tile_id : int
+# Coordenada del tile identificado dentro del TileSetAtlasSource
 var tile_atlas_coords : Vector2i
+# TileData del tile identificado dentro de TileSetAtlasSource
 var terrain_tile_data : TileData
 
 func _ready() -> void:
-	GridManager.terrain_setup(self)
+	# On ready, entrega el self del terreno al grid manager para poder operar el process_tile() y otras funciones pertinentes
+	GridManager.terrain_setup(self) 
 
 func process_tile(_grid_position: Vector2i) -> void:
 	_tile_fetcher(_grid_position)

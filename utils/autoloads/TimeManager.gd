@@ -18,10 +18,16 @@ func time_setup(_act: Entity) -> void:
 func consume_time(cost : float) -> void:
 	if GameManager.current_actor == null:
 		return
+	act = GameManager.current_actor
 	var time_left : float = GameManager.current_actor.get_time()
 	GameManager.current_actor.set_time(time_left - cost)
+	prints("Time Manager: cost:", cost, act, "time:", GameManager.current_actor.get_time(), )
 	if GameManager.current_actor.get_time() <= 0:
 		timeout.emit()
+
+func consume_all_time() -> void:
+	prints(act, "consume all")
+	timeout.emit()
 
 func timer_reset(_act : Entity) -> void:
 	if _act == null:

@@ -22,14 +22,16 @@ func entity_setup(_act: Entity) -> void:
 	
 func _game_loop() -> void:
 	game_running = true
-	var counter : int = 0
 	while game_running:
-		counter += 1
 		current_actor = TurnManager.set_entity_turn()
-		prints("Game loop started: iteration number ", counter, ".", current_actor, "turn")
 		if current_actor == null:
 			continue
+		prints(current_actor, "turn")
+		await ActionQueue.queue_empty
 		await TimeManager.timeout
+		if current_actor == null:
+			continue
+		prints(current_actor, "timeout")
 		TimeManager.timer_reset(current_actor)
 		TurnManager.turn_iterator()
 	game_running = false
@@ -50,11 +52,11 @@ func kill_entity(_act: Entity) -> void:
 		return
 	actors.remove_at(index_to_remove)
 	# Ajuste al índice actual de ser necesario
-	if current_actor == _act:
-		current_actor = null
+	TimeManager.consume_all_time()
 	TurnManager.remove_entity_from_pool(_act)
 	GridManager.update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
-	TimeManager.timeout.emit()
+	if current_actor == _act:
+		current_actor = null
 	_act.queue_free()
 
 # --------- CONTROLLER SETTING --------- 

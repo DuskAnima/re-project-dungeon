@@ -6,7 +6,8 @@ func _init(_act : Entity) -> void:
 
 func execute() -> void:
 	start()
-	GameManager.kill_entity(act)
+	# Elimina a la entidad.
+	GameManager.kill_entity(act) 
 	finish()
 
 func _set_time_cost() -> float:

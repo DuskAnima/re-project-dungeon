@@ -1,5 +1,7 @@
 extends Node
 
+var overlay_layer : TileMapLayer
+
 ## Tamaño de las celdas del grid.
 const cell_size : int = 32
 ## Valor constante equivalente a Vector2i.MIN que sirve como convención de eliminación de entidad del grid.
@@ -12,6 +14,12 @@ var terrain : Terrain
 var tween : Tween
 ## Velocidad de desplazamiento entre tiles
 var tween_speed : float = 0.3
+
+func highlight_area(tiles: Array[Vector2i]) -> void:
+	overlay_layer.clear()
+	for tile in tiles:
+		overlay_layer.set_cell(tile, )
+
 
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos

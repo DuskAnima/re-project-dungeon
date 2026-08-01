@@ -5,10 +5,10 @@ func _ready() -> void:
 
 ## Función que toma el Command recién ejecutado
 func command_catcher(_cmd: Command) -> void:
+	prints("Command BUS", _cmd.act, "usó", _cmd)
 	send_time_cost(_cmd.time_cost)
 	if is_instance_of(_cmd, CommandSpawn):
 		_set_object_initiative(_cmd)
-
 
 func send_time_cost(time_cost : float) -> void:
 	TimeManager.consume_time(time_cost)

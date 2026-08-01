@@ -39,20 +39,22 @@ func remove_entity_from_pool(_act: Entity) -> void:
 	var index_to_remove : int = -1
 	for i in range(turn_order.size()): # Busca el índice de la entidad que se busca eliminar
 		if turn_order[i][ACTOR] == _act:
-			index_to_remove = i
+			index_to_remove = i # Asigna el índice a remover
 			break
-	if index_to_remove == -1: # SI la entidad no está en la lista, termina función.
+	if index_to_remove == -1: # SI la entidad no está en la lista (no se asignó un nuevo valor), termina función.
 		return
 	turn_order.remove_at(index_to_remove)
-	# Ajuste al índice actual de ser necesario
+	# AJUSTES DE ÍNDICE:
+	# CASO 1: la entity eliminada estaba ANTES del turno actual.
 	if index_to_remove < current_index:
 		current_index -= 1 # Se retrocede uno al índice
-	elif index_to_remove == current_index:
+	# CASO 2: la entity eliminada era EXACTAMENTE la del turno actual.
+	elif index_to_remove == current_index: 
+		# Si se eliminó el elemento que estaba en el turno, el siguiente elemento ahora ocupa la posición del current index
+		if current_index > 0:
+			current_index = 0
 		if current_actor == _act:
 			current_actor = null
-		current_index -= 1
-		if current_index < 0:
-			current_index = 0
 		
 
 func _sort_descending(a, b) -> bool:
