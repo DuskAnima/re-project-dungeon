@@ -3,15 +3,33 @@ class_name Animations
 
 signal animation_changed
 
+## Entidad enlazada al recurso, cada entidad crea su propio recurso.
 var act : Entity
-var animations : Dictionary
+## Referencia a act.animated_sprites que contiene [String(Nombre de tipo de animación), 
+## AnimatedSprite2D(Nodo con respectivas animaciones)]
+var animations : Dictionary 
+## Nombre de la animación en curso
 var current_animation : String
 
+## El recurso recibe self del actor para conectar la señal y recibir una referencia del dueño de las animaciones.
 func _init(_act) -> void:
 	animation_changed.connect(_on_animation_changed)
 	act = _act
 
-func play_movement() -> AnimatedSprite2D:
+## Función que recibe una constante de dirección para detonar animación de una entity mirando hacia una dirección concreta 
+func face_to_animation(dir: Vector2i) -> void:
+	var sprite : AnimatedSprite2D = _play_movement()
+	var animation_name : String
+	match dir:
+		Vector2i.UP: animation_name = "FACE_UP"
+		Vector2i.DOWN: animation_name = "FACE_DOWN"
+		Vector2i.LEFT: animation_name = "FACE_LEFT"
+		Vector2i.RIGHT: animation_name = "FACE_RIGHT"
+		_: animation_name = "FACE_DOWN"
+	sprite.play(animation_name)
+
+
+func _play_movement() -> AnimatedSprite2D:
 	current_animation = "movement"
 	animation_changed.emit()
 	act.animated_sprites["movement"].visible = true

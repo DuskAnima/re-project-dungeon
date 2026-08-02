@@ -51,8 +51,6 @@ func remove_entity_from_pool(_act: Entity) -> void:
 	# CASO 2: la entity eliminada era EXACTAMENTE la del turno actual.
 	elif index_to_remove == current_index: 
 		# Si se eliminó el elemento que estaba en el turno, el siguiente elemento ahora ocupa la posición del current index
-		if current_index > 0:
-			current_index = 0
 		if current_actor == _act:
 			current_actor = null
 		

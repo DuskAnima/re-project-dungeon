@@ -34,7 +34,7 @@ func execute() -> void:
 		finish()
 		return
 	var cmd_move := CommandMove.new(act, from, dir)
-	var animation : AnimatedSprite2D = act.animations.play_movement()
+	var animation : AnimatedSprite2D = act.animations._play_movement()
 
 	match dir:
 		Vector2i.UP:

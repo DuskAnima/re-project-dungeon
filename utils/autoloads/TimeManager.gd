@@ -25,10 +25,6 @@ func consume_time(cost : float) -> void:
 	if GameManager.current_actor.get_time() <= 0:
 		timeout.emit()
 
-func consume_all_time() -> void:
-	prints(act, "consume all")
-	timeout.emit()
-
 func timer_reset(_act : Entity) -> void:
 	if _act == null:
 		return

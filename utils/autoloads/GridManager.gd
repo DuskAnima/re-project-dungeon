@@ -56,8 +56,18 @@ func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
 	terrain.process_tile(_to) # Detona la lógica del tile habitado
 
+func move_entity(actor: Entity, from: Vector2i, to: Vector2i) -> void:
+	# 1. Calcula posiciones globales
+	var global_from : Vector2 = _grid_to_world(from)
+	var global_to : Vector2 = _grid_to_world(to)
+	# 2. Crea y ejecuta el tween
+	var grid_movement_tween : Tween = _grid_movement(actor, global_from, global_to)
+	await grid_movement_tween.finished
+	# 3. Actualiza el grid lógico
+	update_grid(actor, from, to)
+
 ## Función que retorna el tween de movimiento standard.
-func grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
+func _grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:
 	if _act == null:
 		return
 	tween = _act.create_tween()
@@ -74,6 +84,7 @@ func get_surrounding_tiles_square(_grid_position : Vector2i) -> Array[Vector2i]:
 		area.append(i)
 	return area
 
+## Recibe una posición de grid y retorna la Entity que esté en esa posición.
 func get_entity_from_grid(grid_position : Vector2i) -> Entity:
 	for tile in grid_occupation:
 		if tile == grid_position:

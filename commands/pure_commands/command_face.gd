@@ -10,17 +10,11 @@ func _init(_act : Entity, _dir : Vector2i) -> void:
 func execute() -> void:
 
 	start()
+	
+	# 1. Envía la dirección deseada para animarla
+	act.animations.face_to_animation(dir)
+	# 2. Actualiza la propiedad de dirección actual a la que se está mirandoy
 	act.properties.face_direction = dir
-	var animation : AnimatedSprite2D = act.animations.play_movement()
-	match dir:
-		Vector2i.UP:
-			animation.play("FACE_UP")
-		Vector2i.DOWN:
-			animation.play("FACE_DOWN")
-		Vector2i.LEFT:
-			animation.play("FACE_LEFT")
-		Vector2i.RIGHT:
-			animation.play("FACE_RIGHT")
 
 	finish()
 

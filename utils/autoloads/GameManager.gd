@@ -52,7 +52,6 @@ func kill_entity(_act: Entity) -> void:
 		return
 	actors.remove_at(index_to_remove)
 	# Ajuste al índice actual de ser necesario
-	TimeManager.consume_all_time()
 	TurnManager.remove_entity_from_pool(_act)
 	GridManager.update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
 	if current_actor == _act:
