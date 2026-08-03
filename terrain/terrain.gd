@@ -56,7 +56,7 @@ func fall(_grid_position: Vector2i) -> void:
 	var tile_information : bool = terrain_tile_data.get_custom_data("can_fall")
 	if tile_information:
 		var actor : Entity = GridManager.get_entity_from_grid(_grid_position)
-		ActionQueue.add_wrapped_command(CommandDead.new(actor))
+		ActionQueue.add_command(CommandDead.new(actor))
 
 func break_tile(_grid_position: Vector2i) -> void:
 	var tile_information : bool = terrain_tile_data.get_custom_data("can_break")

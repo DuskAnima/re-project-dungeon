@@ -19,7 +19,7 @@ func execute() -> void:
 		var actor : Entity = GridManager.get_entity_from_grid(tiles)
 		if actor == null or act == actor:
 			continue
-		GameManager.kill_entity(actor) # TODO: Documentar por qué matar entidades con la bomba usando 
+		ActionQueue.add_wrapped_command(CommandDead.new(actor)) # TODO: Documentar por qué matar entidades con la bomba usando 
 		#								directamente kill_entity() NO genera error.
 		#ActionQueue.add_wrapped_command(CommandDead.new(actor)) # Las entidades detectadas mueren (Requiere refactorización)
 

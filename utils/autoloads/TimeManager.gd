@@ -3,7 +3,6 @@ extends Node
 signal timeout
 
 const base_time : float = 2
-var act : Entity
 # Central que itera globalmente el tiempo de cada turno
 	# Captura el tiempo que usa cada Command
 		# Se debe conectar con un bus de datos para poder calcular modificadores en caso de que exitan
@@ -18,10 +17,8 @@ func time_setup(_act: Entity) -> void:
 func consume_time(cost : float) -> void:
 	if GameManager.current_actor == null:
 		return
-	act = GameManager.current_actor
 	var time_left : float = GameManager.current_actor.get_time()
 	GameManager.current_actor.set_time(time_left - cost)
-	prints("Time Manager: cost:", cost, act, "time:", GameManager.current_actor.get_time(), )
 	if GameManager.current_actor.get_time() <= 0:
 		timeout.emit()
 

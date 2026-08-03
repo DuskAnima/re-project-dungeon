@@ -20,18 +20,17 @@ func highlight_area(tiles: Array[Vector2i]) -> void:
 	for tile in tiles:
 		overlay_layer.set_cell(tile, )
 
-
 ## Establece el estado inicial de entidades en el grid: 
 ## _grid_snap(), _act.grid_pos
 func grid_setup(_act: Entity) -> void:
 	if not GameManager.game_running:
 		var pos : Vector2 = _act.position # Obtiene posición global
 		_grid_snap(_act, pos) # Hace snapping a Entity en el grid
-		# Solo cuando update_grid es llamado desde grid setup from y to son llamados de esta forma.
-		update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
+		# Solo cuando _update_grid es llamado desde grid setup from y to son llamados de esta forma.
+		_update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
 	else:
 		# Esta sección es para settear Entities en runtime.
-		update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos) # Establece propiedaes lógicas
+		_update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos) # Establece propiedaes lógicas
 		_act.position = _grid_to_world(_act.properties.grid_pos) # Las actualiza en valores globales
 
 func terrain_setup(_terrain: TileMapLayer) -> void:
@@ -45,7 +44,7 @@ func is_tile_free(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
 ##  target (V2i). Solo debe ser usada por CommandMove y setup_entity()
-func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
+func _update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	if _to == ENTITY_DELETE_FLAG: # SI posee flag de eliminación
 		grid_occupation.erase(_from) # Saca a la entidad del grid
 		return
@@ -56,15 +55,15 @@ func update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
 	terrain.process_tile(_to) # Detona la lógica del tile habitado
 
-func move_entity(actor: Entity, from: Vector2i, to: Vector2i) -> void:
+func move_entity(_act: Entity, from: Vector2i, to: Vector2i) -> void:
 	# 1. Calcula posiciones globales
 	var global_from : Vector2 = _grid_to_world(from)
 	var global_to : Vector2 = _grid_to_world(to)
 	# 2. Crea y ejecuta el tween
-	var grid_movement_tween : Tween = _grid_movement(actor, global_from, global_to)
+	var grid_movement_tween : Tween = _grid_movement(_act, global_from, global_to)
 	await grid_movement_tween.finished
 	# 3. Actualiza el grid lógico
-	update_grid(actor, from, to)
+	_update_grid(_act, from, to)
 
 ## Función que retorna el tween de movimiento standard.
 func _grid_movement(_act: Entity, _from : Vector2, _to : Vector2) -> Tween:

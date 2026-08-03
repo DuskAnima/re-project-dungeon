@@ -161,7 +161,7 @@ animations = [{
 "duration": 2.0,
 "texture": ExtResource("8_gx6sm")
 }],
-"loop": false,
+"loop": 0,
 "name": &"FACE_DOWN",
 "speed": 1.0
 }, {
@@ -169,7 +169,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_yqrof")
 }],
-"loop": false,
+"loop": 0,
 "name": &"FACE_LEFT",
 "speed": 5.0
 }, {
@@ -177,7 +177,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("10_3wlsy")
 }],
-"loop": false,
+"loop": 0,
 "name": &"FACE_RIGHT",
 "speed": 5.0
 }, {
@@ -185,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_b2kln")
 }],
-"loop": false,
+"loop": 0,
 "name": &"FACE_UP",
 "speed": 5.0
 }, {
@@ -214,7 +214,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_24ehl")
 }],
-"loop": false,
+"loop": 0,
 "name": &"MOVE_DOWN",
 "speed": 5.0
 }, {
@@ -243,7 +243,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_13wue")
 }],
-"loop": false,
+"loop": 0,
 "name": &"MOVE_LEFT",
 "speed": 5.0
 }, {
@@ -272,7 +272,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g3pa7")
 }],
-"loop": false,
+"loop": 0,
 "name": &"MOVE_RIGHT",
 "speed": 5.0
 }, {
@@ -301,7 +301,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jjk8f")
 }],
-"loop": false,
+"loop": 0,
 "name": &"MOVE_UP",
 "speed": 5.0
 }]
@@ -312,7 +312,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_gx6sm")
 }],
-"loop": false,
+"loop": 0,
 "name": &"CAST_DOWN",
 "speed": 5.0
 }, {
@@ -320,7 +320,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_yqrof")
 }],
-"loop": false,
+"loop": 0,
 "name": &"CAST_LEFT",
 "speed": 5.0
 }, {
@@ -328,7 +328,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_3wlsy")
 }],
-"loop": false,
+"loop": 0,
 "name": &"CAST_RIGHT",
 "speed": 5.0
 }, {
@@ -336,7 +336,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_b2kln")
 }],
-"loop": false,
+"loop": 0,
 "name": &"CAST_UP",
 "speed": 5.0
 }]

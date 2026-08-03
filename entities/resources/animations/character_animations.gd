@@ -28,6 +28,16 @@ func face_to_animation(dir: Vector2i) -> void:
 		_: animation_name = "FACE_DOWN"
 	sprite.play(animation_name)
 
+func move_to_animation(dir: Vector2i) -> void:
+	var sprite: AnimatedSprite2D = _play_movement()
+	var animation_name : String
+	match dir:
+		Vector2i.UP: animation_name = "MOVE_UP"
+		Vector2i.DOWN: animation_name = "MOVE_DOWN"
+		Vector2i.LEFT: animation_name = "MOVE_LEFT"
+		Vector2i.RIGHT: animation_name = "MOVE_RIGHT"
+		_: animation_name = "MOVE_DOWN"
+	sprite.play(animation_name)
 
 func _play_movement() -> AnimatedSprite2D:
 	current_animation = "movement"

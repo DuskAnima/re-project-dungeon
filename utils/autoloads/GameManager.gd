@@ -5,6 +5,10 @@ extends Node
 var entities_node : Node 
 ## Variable de referencua al nodo Auxiliar, el cual sirve para instanciar elementos no-Entity. Es setteada desde el World node.
 var aux_node : Node
+## Variable de referencia del estado de la state machine del juego.
+var game_status : String
+## estados finitos del juego
+enum {START, SET, TURN, RESOLVING} # DIBUJAR UN ESQUEMA QUE ME AYUDE A RESOLVER ESTA ESTRUCTURA CON MIS DIFERENTES SERVICIOS
 # --------- SETUP --------- 
 ## Boolean que termina el estado del juego
 var game_running : bool = false
@@ -19,8 +23,20 @@ func entity_setup(_act: Entity) -> void:
 	GridManager.grid_setup(_act)
 	TimeManager.time_setup(_act)
 	actors.push_back(_act)
-	
-func _game_loop() -> void:
+
+func game_loop_state_machine() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO
+	pass
+	#match game_status:
+"		IDLE:
+			game_status +=1
+		DETONATION:
+			ActionQueue.add_command(cmd_ignition)
+			status += 1
+		EXPLOSION:
+			ActionQueue.add_command(cmd_explotion)"
+
+
+func _game_loop() -> void:  # Crear una maquina de estados para poder establecer las diferentes fases de resolución y evitar bugs
 	game_running = true
 	while game_running:
 		current_actor = TurnManager.set_entity_turn()
@@ -53,7 +69,7 @@ func kill_entity(_act: Entity) -> void:
 	actors.remove_at(index_to_remove)
 	# Ajuste al índice actual de ser necesario
 	TurnManager.remove_entity_from_pool(_act)
-	GridManager.update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
+	GridManager._update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
 	if current_actor == _act:
 		current_actor = null
 	_act.queue_free()

@@ -30,21 +30,12 @@ func execute() -> void:
 	if not GridManager.is_tile_free(act, from, to):
 		ActionQueue.add_wrapped_command(cmd_face)
 		time_cost = 0
-
 		finish()
 		return
+		
 	var cmd_move := CommandMove.new(act, from, dir)
-	var animation : AnimatedSprite2D = act.animations._play_movement()
-
-	match dir:
-		Vector2i.UP:
-			animation.play("MOVE_UP")
-		Vector2i.DOWN:
-			animation.play("MOVE_DOWN")
-		Vector2i.LEFT:
-			animation.play("MOVE_LEFT")
-		Vector2i.RIGHT:
-			animation.play("MOVE_RIGHT")
+	
+	act.animations.move_to_animation(dir)
 
 	ActionQueue.add_wrapped_command(cmd_move)
 	ActionQueue.add_wrapped_command(cmd_face)
