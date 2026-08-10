@@ -1,17 +1,19 @@
 extends Node
 
+# --------- SIGNALS ---------
+signal turn_ended
+
 # --------- GLOBAL REFERENCES --------- 
+@onready var root : Node = get_tree().current_scene
 ## Variable de referencia al nodo Entities, el cual almacena todas las entidades. Es setteada desde el World node.
 var entities_node : Node 
 ## Variable de referencua al nodo Auxiliar, el cual sirve para instanciar elementos no-Entity. Es setteada desde el World node.
 var aux_node : Node
 ## Variable de referencia del estado de la state machine del juego.
-var game_status : String
+var game_status : int = BOOT
 ## estados finitos del juego
-enum {START, SET, TURN, RESOLVING} # DIBUJAR UN ESQUEMA QUE ME AYUDE A RESOLVER ESTA ESTRUCTURA CON MIS DIFERENTES SERVICIOS
+enum {BOOT, SET, TURN_START, TURN_ACTIVE, TURN_END, GAME_OVER} # DIBUJAR UN ESQUEMA QUE ME AYUDE A RESOLVER ESTA ESTRUCTURA CON MIS DIFERENTES SERVICIOS
 # --------- SETUP --------- 
-## Boolean que termina el estado del juego
-var game_running : bool = false
 ## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
 var actors : Array[Entity]
 ## Variable que revela al actor que está de turno
@@ -24,39 +26,44 @@ func entity_setup(_act: Entity) -> void:
 	TimeManager.time_setup(_act)
 	actors.push_back(_act)
 
-func game_loop_state_machine() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO
-	pass
-	#match game_status:
-"		IDLE:
-			game_status +=1
-		DETONATION:
-			ActionQueue.add_command(cmd_ignition)
-			status += 1
-		EXPLOSION:
-			ActionQueue.add_command(cmd_explotion)"
+func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
+	match game_status:
+		BOOT:
+			_on_ready_setup() # Recibe el llamado de World y hace el primer setup de entidades.
+			game_status = SET
+		SET:
+			current_actor = TurnManager.set_entity_turn()
+			if current_actor == null:
+				game_status = GAME_OVER
+			TimeManager.timer_reset(current_actor)
+			game_status = TURN_START
+		TURN_START:
+			current_actor.set_can_act(true)
+			game_status = TURN_ACTIVE
+		TURN_ACTIVE:
+			game_status += 1
+		TURN_END:
+			game_status += 1
+		GAME_OVER:
+			game_status += 1
 
 
 func _game_loop() -> void:  # Crear una maquina de estados para poder establecer las diferentes fases de resolución y evitar bugs
-	game_running = true
-	while game_running:
 		current_actor = TurnManager.set_entity_turn()
-		if current_actor == null:
-			continue
+
 		prints(current_actor, "turn")
 		await ActionQueue.queue_empty
 		await TimeManager.timeout
-		if current_actor == null:
-			continue
+
 		prints(current_actor, "timeout")
 		TimeManager.timer_reset(current_actor)
 		TurnManager.turn_iterator()
-	game_running = false
+		game_running = false
 
 func _on_ready_setup() -> void:
 	for entity in entities_node.get_children():
 		entity_setup(entity)
 		register_controller(entity)
-	_game_loop()
 
 func kill_entity(_act: Entity) -> void:
 	var index_to_remove : int = -1

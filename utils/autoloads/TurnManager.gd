@@ -70,5 +70,4 @@ func turn_iterator() -> void:
 ## Retorna la entidad de turno.
 func set_entity_turn() -> Entity:
 	current_actor = turn_order[current_index][ACTOR] # Toma al actor de turno
-	current_actor.set_can_act(true) # Establece que puede moverse
 	return current_actor
