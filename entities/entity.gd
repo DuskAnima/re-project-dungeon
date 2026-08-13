@@ -23,6 +23,20 @@ func set_can_act(switch: bool) -> void: properties.can_act = switch
 func get_time() -> float: return properties.time
 func set_time(time: float) -> void: properties.time = time
 	
+## Retorna al actor dueño/creador de este Entity. Ejemplo: una bomba creada por player retornará al actor player
+func get_entity_owner() -> Entity:
+	if properties == null or properties.owner == null:
+		return null
+	return properties.owner.get_ref() as Entity
+
+## Recibe un actor para firmar como dueño/creador a este Entity.[br]
+## La referencia es regitrada como weak reference para asegurar la eliminación del resource y evitar referencias 
+## inválidas si es que la Entity creada es eliminada.
+func set_entity_owner(new_owner: Entity) -> void:
+	if new_owner == null:
+		properties.owner = null
+	else:
+		properties.owner = weakref(new_owner)
 
 func _ready() -> void:
 	z_index = 3

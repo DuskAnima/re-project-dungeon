@@ -28,6 +28,7 @@ TurnManager="*res://utils/autoloads/TurnManager.gd"
 ActionQueue="*res://utils/autoloads/ActionQueue.gd"
 CommandBus="*res://utils/autoloads/CommandBus.gd"
 TimeManager="*res://utils/autoloads/TimeManager.gd"
+TurnSystem="*uid://bo2642w020vil"
 
 [input]
 
