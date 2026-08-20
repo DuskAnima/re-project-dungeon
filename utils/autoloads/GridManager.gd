@@ -20,18 +20,17 @@ func highlight_area(tiles: Array[Vector2i]) -> void:
 	for tile in tiles:
 		overlay_layer.set_cell(tile, )
 
-## Establece el estado inicial de entidades en el grid: 
-## _grid_snap(), _act.grid_pos
+## Establece el estado inicial de entidades en el grid
 func grid_setup(_act: Entity) -> void:
-	if not GameManager.game_running:
+	if not GameManager.BOOT:
 		var pos : Vector2 = _act.position # Obtiene posición global
 		_grid_snap(_act, pos) # Hace snapping a Entity en el grid
 		# Solo cuando _update_grid es llamado desde grid setup from y to son llamados de esta forma.
 		_update_grid(_act, _world_to_grid(_act.position), _world_to_grid(_act.position)) # Registra la posición de grid en las propiedades de Entity
 	else:
 		# Esta sección es para settear Entities en runtime.
-		_update_grid(_act, _act.properties.grid_pos, _act.properties.grid_pos) # Establece propiedaes lógicas
-		_act.position = _grid_to_world(_act.properties.grid_pos) # Las actualiza en valores globales
+		_update_grid(_act, _act.get_grid_position(), _act.get_grid_position()) # Establece propiedaes lógicas
+		_act.position = _grid_to_world(_act.get_grid_position()) # Las actualiza en valores globales
 
 func terrain_setup(_terrain: TileMapLayer) -> void:
 	terrain = _terrain
@@ -50,7 +49,7 @@ func _update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 		return
 	if _from != _to: # Si el origen es diferente del destino
 		grid_occupation.erase(_from) # Elimina el origen
-	_act.properties.grid_pos = _to # A la entidad se le actualiza su posición lógica
+	_act.set_grid_position(_to) # A la entidad se le actualiza su posición lógica
 	grid_occupation.get_or_add(_to, []) # Luego agrega u obtiene la posición. Si la agrega le da por defecto un array vacío
 	grid_occupation[_to].append(_act) # A la posición se le asigna la entidad
 	terrain.process_tile(_to) # Detona la lógica del tile habitado

@@ -11,14 +11,13 @@ func _init(_act : Entity, _pos : Vector2i, _owner: Entity) -> void:
 
 func execute() -> void:
 	start()
-	act.properties.grid_pos = grid_pos
+	act.set_grid_position(grid_pos)
 	GameManager.entities_node.add_child(act)
 	act.set_entity_owner(owner)
 	TurnSystem.register_spawned_actor(act)
-	GameManager.entity_setup(act) # REFACTORIZAR, DE MOMENTO GENERA ERRORES, RECORDAR ELIMINAR CUANDO LOS OTROS MANAGERS ESTEN LISTOS
+	GameManager.entity_setup(act) 
 	GameManager.register_controller(act)
 	finish()
 
 func _set_time_cost() -> float:
 	return 0
-## Es necesario declarar el coste de tiempo con un return de un float.

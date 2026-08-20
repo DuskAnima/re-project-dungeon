@@ -20,9 +20,12 @@ func set_controllable(switch: bool) -> void: properties.is_controllable = switch
 ## Establece la propiedad que permite que una entidad pueda tomar su turno para actuar.
 func set_can_act(switch: bool) -> void: properties.can_act = switch
 
+func get_grid_position() -> Vector2i: return properties.grid_pos
+func set_grid_position(new_pos : Vector2i) -> void: properties.grid_pos = new_pos
+
 func get_time() -> float: return properties.time
 func set_time(time: float) -> void: properties.time = time
-	
+
 ## Retorna al actor dueño/creador de este Entity. Ejemplo: una bomba creada por player retornará al actor player
 func get_entity_owner() -> Entity:
 	if properties == null or properties.owner == null:

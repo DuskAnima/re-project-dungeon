@@ -22,9 +22,8 @@ var current_actor : Entity
 
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
-	TurnManager.turn_setup(_act)
+	TurnSystem.register_actor(_act)
 	GridManager.grid_setup(_act)
-	TimeManager.time_setup(_act)
 	actors.push_back(_act)
 
 func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
@@ -33,10 +32,9 @@ func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
 			_on_ready_setup() # Recibe el llamado de World y hace el primer setup de entidades.
 			game_status = SET
 		SET:
-			current_actor = TurnManager.set_entity_turn() # Asigna al actor que le corresponda el turno
+			current_actor = TurnSystem.get_next_actor() # Asigna al actor que le corresponda el turno
 			if current_actor == null: # Si no hay actores
 				game_status = GAME_OVER # GameOver
-			TimeManager.timer_reset(current_actor) # Resetea el tiempo de acción del actor
 			game_status = TURN_START
 		TURN_START:
 			current_actor.set_can_act(true)
@@ -49,17 +47,9 @@ func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
 			game_status += 1
 
 
-func turn_checks() -> void:
-	
+func _turn_checks() -> void:
+	pass
 
-func _game_loop() -> void:  # Crear una maquina de estados para poder establecer las diferentes fases de resolución y evitar bugs
-	current_actor = TurnManager.set_entity_turn()
-	prints(current_actor, "turn")
-	await ActionQueue.queue_empty
-	await TimeManager.timeout
-	prints(current_actor, "timeout")
-	TimeManager.timer_reset(current_actor)
-	TurnManager.turn_iterator()
 
 func _on_ready_setup() -> void:
 	for entity in entities_node.get_children():
@@ -76,7 +66,6 @@ func kill_entity(_act: Entity) -> void:
 		return
 	actors.remove_at(index_to_remove)
 	# Ajuste al índice actual de ser necesario
-	TurnManager.remove_entity_from_pool(_act)
 	GridManager._update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
 	_act.properties.alive = false
 #	if current_actor == _act:

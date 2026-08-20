@@ -25,7 +25,6 @@ config/icon="res://icon.svg"
 GameManager="*res://utils/autoloads/GameManager.gd"
 GridManager="*res://utils/autoloads/GridManager.gd"
 ActionQueue="*res://utils/autoloads/ActionQueue.gd"
-CommandBus="*res://utils/autoloads/CommandBus.gd"
 TurnSystem="*uid://bo2642w020vil"
 CommandProcessor="*uid://cume160jcslt0"
 

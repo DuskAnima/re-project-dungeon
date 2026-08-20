@@ -1,6 +1,11 @@
 @abstract
 extends RefCounted
 class_name Command
+## Reglas: 
+## - Cada comando debe orquestar a los sistemas en su nivel de abstracción, pero no debe invadir sus detalles internos
+## - Si un sistema puede orquestar internamente una función sin requerir a otros, solo es necesario crear una función 
+## dentro del sistema mismo y no un comando nuevo.
+
 
 signal finished
 

@@ -25,7 +25,6 @@ func _player_action_check() -> bool:
 
 func _npc_action_check() -> bool:
 	if actor == null: return false
-	if ActionQueue.in_process == true: return false
 	if actor == null: return false
 	if actor.properties.can_act == false: return false
 	else: return true

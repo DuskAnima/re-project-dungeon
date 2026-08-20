@@ -1,55 +1,59 @@
 extends Node
 
-signal command_completed(cmd: Command)
+@export var _debug_mode = false
 
-var queue : Array = []
-var in_process : bool = false
-var current : Command = null
-var buffer_command: Command = null  # Buffer para un solo comando de input
+## Al finalizar el Command, envía una referencia de este a CommandProcessor para resolver interacciones.
+signal command_completed(cmd: Command)
+## Señal emitida cuando no quedan Commands ni en cola ni en buffer.
+signal all_commands_finished
+
+var _queue : Array[Command] = []
+var _current : Command = null
+var _buffer_command: Command = null  # Buffer para un solo comando de input
+var _handling_completion : bool = false
 
 ## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por los controles.
 func add_command(cmd : Command) -> void:
-	if in_process:
-		buffer_command = cmd # Buffer: reemplaza el comando pendiente (solo el último)
-		prints("AQ: BUFFER:", cmd.act, buffer_command)
+	if _current != null:
+		_buffer_command = cmd # Buffer: reemplaza el comando pendiente (solo el último)
+		if _debug_mode:
+			prints("AQ: BUFFER:", cmd.act, _buffer_command)
 	else: # Si no hay comando en proceso
-		queue.push_back(cmd) # Agrega un comando al final
-		_execute_next() # Ejecutar siguiente
+		_enqueue(cmd) # Agrega un comando al final
 
-## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por otros comandos.
+## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por otros comandos, no aplica buffer.
 func add_wrapped_command(cmd : Command) -> void:
-	queue.push_back(cmd) # Agrega un comando al final
-	if not in_process : # Si no hay comando en proceso
-		_execute_next() # Ejecutar siguiente
+	_enqueue(cmd)
+
+func _enqueue(cmd : Command) -> void:
+	_queue.push_back(cmd)
+	if _current == null and not _handling_completion:
+		_execute_next()
 
 func _execute_next() -> void:
-	if queue.is_empty(): # Si la lista está vacía
-		in_process = false # Flagear que no hay ningun comando en proceso
-		queue_empty.emit()
-		
-		if buffer_command != null: # Si hay comandos en el buffer se ejecuta
-			var pending = buffer_command
-			buffer_command = null
-			add_command(pending)
-		
-		return # Terminar
-		
-	if current != null:
-		push_error("Existe una recursión en la ejecución del turno, variable 'current' debería ser NULL 
-		antes de ejecutar el siguente Command, pero es ", current)
-
-	in_process = true # Flagear que hay un comando en proceso
-	current = queue.pop_front() # Sacar el comando de la lista y aislarlo para usarlo
-	
-	if not current.finished.is_connected(_on_command_finished): # Conectar señal de finalización
-		current.finished.connect(_on_command_finished)
-		
-	current.execute()
+	if _current != null:
+		if _debug_mode:
+			push_error("Action Queue: se intentó ejecutar otro Command mientras había otro en curso.")
+		return
+	if _queue.is_empty(): # Si la lista está vacía
+		if _buffer_command != null: # Si hay comandos en el buffer se ejecuta
+			var pending = _buffer_command
+			_buffer_command = null
+			_enqueue(pending)
+			return
+		else:
+			all_commands_finished.emit()
+			return # Terminar
+	_current = _queue.pop_front()
+	_current.finished.connect(_on_command_finished, CONNECT_ONE_SHOT)
+	_current.execute()
 
 func _on_command_finished() -> void:
-	CommandBus.command_catcher(current) # Después de que el comando es ejecutado y ya terminó de hacer todos sus calculos
-	# internos, el comando es enviado al comand catcher donde se propaga para que sus valores se ejecuten.
-	if current and current.finished.is_connected(_on_command_finished):
-		current.finished.disconnect(_on_command_finished)
-		current = null
+	if _current == null:
+		return
+	var completed_cmd = _current
+	_current = null
+	_handling_completion = true
+	command_completed.emit(completed_cmd)
+	_handling_completion = false
 	_execute_next()
