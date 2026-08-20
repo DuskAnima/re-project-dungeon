@@ -9,4 +9,4 @@ var owner : WeakRef
 @export var is_controllable : bool = false
 @export var can_act : bool = false
 @export var face_direction : Vector2i = Vector2i.DOWN
-@export var time : float = TimeManager.base_time
+@export var time : float 

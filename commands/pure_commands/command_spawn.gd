@@ -11,7 +11,6 @@ func _init(_act : Entity, _pos : Vector2i, _owner: Entity) -> void:
 
 func execute() -> void:
 	start()
-#	if GridManager.
 	act.properties.grid_pos = grid_pos
 	GameManager.entities_node.add_child(act)
 	act.set_entity_owner(owner)

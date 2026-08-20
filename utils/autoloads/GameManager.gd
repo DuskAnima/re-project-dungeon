@@ -4,6 +4,7 @@ extends Node
 signal turn_ended
 
 # --------- GLOBAL REFERENCES --------- 
+## Referencia al nodo raíz del juego.
 @onready var root : Node = get_tree().current_scene
 ## Variable de referencia al nodo Entities, el cual almacena todas las entidades. Es setteada desde el World node.
 var entities_node : Node 

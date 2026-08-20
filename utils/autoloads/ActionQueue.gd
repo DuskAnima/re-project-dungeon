@@ -1,6 +1,6 @@
 extends Node
 
-signal queue_empty
+signal command_completed(cmd: Command)
 
 var queue : Array = []
 var in_process : bool = false
