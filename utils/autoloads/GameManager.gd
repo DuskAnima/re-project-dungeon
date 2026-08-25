@@ -1,8 +1,5 @@
 extends Node
 
-# --------- SIGNALS ---------
-signal turn_ended
-
 # --------- GLOBAL REFERENCES --------- 
 ## Referencia al nodo raíz del juego.
 @onready var root : Node = get_tree().current_scene
@@ -13,10 +10,8 @@ var aux_node : Node
 ## Variable de referencia del estado de la state machine del juego.
 var game_status : int = BOOT
 ## estados finitos del juego
-enum {BOOT, SET, TURN_START, TURN_ACTIVE, TURN_END, GAME_OVER} # DIBUJAR UN ESQUEMA QUE ME AYUDE A RESOLVER ESTA ESTRUCTURA CON MIS DIFERENTES SERVICIOS
+enum {BOOT, SET, TURN_START, TURN_ACTIVE, TURN_END, GAME_OVER}
 # --------- SETUP --------- 
-## Array que almacena a todos los actores. Las interacciones con los actores deberían ser mediadas desde aquí
-var actors : Array[Entity]
 ## Variable que revela al actor que está de turno
 var current_actor : Entity
 
@@ -24,52 +19,45 @@ func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
 	TurnSystem.register_actor(_act)
 	GridManager.grid_setup(_act)
-	actors.push_back(_act)
 
 func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
-	match game_status:
-		BOOT:
-			_on_ready_setup() # Recibe el llamado de World y hace el primer setup de entidades.
-			game_status = SET
-		SET:
-			current_actor = TurnSystem.get_next_actor() # Asigna al actor que le corresponda el turno
-			if current_actor == null: # Si no hay actores
-				game_status = GAME_OVER # GameOver
-			game_status = TURN_START
-		TURN_START:
-			current_actor.set_can_act(true)
-			game_status = TURN_ACTIVE
-		TURN_ACTIVE:
-			_turn_checks()
-		TURN_END:
-			game_status += 1
-		GAME_OVER:
-			game_status += 1
-
-
-func _turn_checks() -> void:
-	pass
-
-
+	while game_status != GAME_OVER:
+		match game_status:
+			BOOT:
+				_on_ready_setup() # Recibe el llamado de World y hace el primer setup de entidades.
+				game_status = SET
+				print("Boot ready")
+			SET:
+				current_actor = TurnSystem.get_next_actor() # Asigna al actor que le corresponda el turno
+				print("Setting turn: ", current_actor)
+				if current_actor == null: # Si no hay actores
+					game_status = GAME_OVER # GameOver
+				else:
+					game_status = TURN_START
+			TURN_START:
+				current_actor.set_can_act(true)
+				game_status = TURN_ACTIVE
+			TURN_ACTIVE:
+				await TurnSystem.time_depleted
+				print("Timeout from: ", current_actor)
+				current_actor.set_can_act(false)
+				await ActionQueue.all_commands_finished
+				print("All commands finished")
+				game_status = TURN_END
+			TURN_END:
+				TurnSystem.advance_turn()
+				game_status = SET
+			GAME_OVER:
+				game_status += 1
+	
 func _on_ready_setup() -> void:
 	for entity in entities_node.get_children():
 		entity_setup(entity)
 		register_controller(entity)
 
 func kill_entity(_act: Entity) -> void:
-	var index_to_remove : int = -1
-	for i in range(actors.size()): # Busca el índice de la entidad que se busca eliminar
-		if actors[i] == _act:
-			index_to_remove = i
-			break
-	if index_to_remove == -1: # SI la entidad no está en la lista, termina función.
-		return
-	actors.remove_at(index_to_remove)
-	# Ajuste al índice actual de ser necesario
 	GridManager._update_grid(_act, _act.properties.grid_pos, GridManager.ENTITY_DELETE_FLAG)
-	_act.properties.alive = false
-#	if current_actor == _act:
-#		current_actor = null
+	TurnSystem.unregister_actor(_act)
 	_act.queue_free()
 
 # --------- CONTROLLER SETTING --------- 

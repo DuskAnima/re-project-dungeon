@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cglpe83i12wfp"]
+
+[ext_resource type="Script" uid="uid://c8cd7dxt4e6h4" path="res://UI/turn_panel.gd" id="1_moktg"]
+
+[node name="TurnPanel" type="Control" unique_id=507321581]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_moktg")
+
+[node name="Panel" type="Panel" parent="." unique_id=1604247597]
+layout_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=278803178]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

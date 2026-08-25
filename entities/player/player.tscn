@@ -216,7 +216,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_DOWN",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,7 +245,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_LEFT",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -274,7 +274,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_RIGHT",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -303,7 +303,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_UP",
-"speed": 5.0
+"speed": 14.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sglur"]
@@ -352,10 +352,10 @@ stats = SubResource("Resource_a1qjk")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=355228676]
 sprite_frames = SubResource("SpriteFrames_cnswy")
-animation = &"FACE_DOWN"
+animation = &"MOVE_UP"
 autoplay = "FACE_DOWN"
 
 [node name="ActionSprites" type="AnimatedSprite2D" parent="." unique_id=580467011]
 visible = false
 sprite_frames = SubResource("SpriteFrames_sglur")
-animation = &"CAST_DOWN"
+animation = &"CAST_UP"

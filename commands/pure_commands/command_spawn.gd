@@ -2,21 +2,21 @@ extends Command
 class_name CommandSpawn
 
 var grid_pos : Vector2i 
-var owner : Entity
+var spawned : Entity
 
-func _init(_act : Entity, _pos : Vector2i, _owner: Entity) -> void:
+func _init(_act : Entity, _pos : Vector2i, _spawned: Entity) -> void:
 	act = _act
 	grid_pos = _pos
-	owner = _owner
+	spawned = _spawned
 
 func execute() -> void:
 	start()
-	act.set_grid_position(grid_pos)
-	GameManager.entities_node.add_child(act)
-	act.set_entity_owner(owner)
-	TurnSystem.register_spawned_actor(act)
-	GameManager.entity_setup(act) 
-	GameManager.register_controller(act)
+	spawned.set_entity_owner(act)
+	spawned.set_grid_position(grid_pos)
+	GridManager.grid_setup(spawned)
+	GameManager.entities_node.add_child(spawned)
+	GameManager.register_controller(spawned)
+	TurnSystem.register_spawned_actor(spawned)
 	finish()
 
 func _set_time_cost() -> float:

@@ -10,8 +10,7 @@ func execute() -> void:
 	start()
 	
 	ActionQueue.add_wrapped_command(cmd_dead) # Agrega la muerte de la entidad a la cola
-	var animation : AnimatedSprite2D = act.animations.play_explotion() # Llama la animación de explosión
-	animation.play("EXPLOTION") # Reproduce la explosión
+	var animation : Signal = act.animations.explotion_animation(2) # Llama la animación de explosión
 	# Obtiene las posiciones circundantes al origen de la explosión
 	var surrounding_tiles : Array[Vector2i] = GridManager.get_surrounding_tiles_square(act.properties.grid_pos)
 	# Itera por los tiles para poder identificar cuales posee entidades
@@ -23,7 +22,7 @@ func execute() -> void:
 		#								directamente kill_entity() NO genera error.
 		#ActionQueue.add_wrapped_command(CommandDead.new(actor)) # Las entidades detectadas mueren (Requiere refactorización)
 
-	await animation.animation_finished
+	await animation
 	#GameManager.kill_entity(act) # TODO: Documentar por qué matar la entidad que exlota usando directamente kill_entity()
 	# SI genera error, pero usando add_wrapped_command(cmd_dead) no genera error.
 	finish()

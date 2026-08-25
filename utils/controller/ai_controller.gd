@@ -14,6 +14,7 @@ func movement_manager() -> void:
 		return
 
 	var cmd := CommandWalk.new(actor, dir)
+	
 	ActionQueue.add_command(cmd)
 
 

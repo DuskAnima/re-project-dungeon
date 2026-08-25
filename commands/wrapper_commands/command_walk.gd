@@ -19,10 +19,8 @@ func _init(_act : Entity, _dir : Vector2i) -> void:
 	dir = _dir
 	
 func execute() -> void:
-	# Grid origin
-	var from : Vector2i  = act.properties.grid_pos
-	# Grid new position
-	var to : Vector2i = from + dir
+	var from : Vector2i  = act.get_grid_position() # Grid origin
+	var to : Vector2i = from + dir # Grid new position
 	var cmd_face := CommandFace.new(act, dir)
 	
 	start()
@@ -34,10 +32,11 @@ func execute() -> void:
 		return
 		
 	var cmd_move := CommandMove.new(act, from, dir)
-	
-	act.animations.move_to_animation(dir)
 
 	ActionQueue.add_wrapped_command(cmd_move)
+	
+	act.animations.move_to_animation(dir)
+	
 	ActionQueue.add_wrapped_command(cmd_face)
 	
 	finish()

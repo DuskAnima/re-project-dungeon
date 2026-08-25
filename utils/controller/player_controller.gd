@@ -6,7 +6,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		movement_manager(_event)
 		_action()
 
-func movement_manager(_event) -> void:
+func movement_manager(_event: InputEvent) -> void:
 	var dir := _get_direction(_event)
 	if dir == Vector2i.ZERO:
 		return
@@ -14,7 +14,7 @@ func movement_manager(_event) -> void:
 	var cmd := CommandWalk.new(actor, dir)
 	ActionQueue.add_command(cmd)
 
-func _get_direction(movement) -> Vector2i:
+func _get_direction(movement : InputEvent) -> Vector2i:
 	if movement.is_action_pressed("down"): return Vector2i.DOWN
 	elif movement.is_action_pressed("up"): return Vector2i.UP
 	elif movement.is_action_pressed("left"): return Vector2i.LEFT

@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://dkrrpgp4v8ijp"
 [sub_resource type="Resource" id="Resource_uig4m"]
 resource_local_to_scene = true
 script = ExtResource("3_uig4m")
+initiative = nan
 metadata/_custom_type_script = "uid://c3m0uv7c6m2jy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gyrm6"]
@@ -177,7 +178,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f6yhr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"EXPLOTION",
 "speed": 28.0
 }, {
@@ -218,7 +219,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yqwkk")
 }],
-"loop": false,
+"loop": 0,
 "name": &"IGNITION",
 "speed": 33.0
 }, {
@@ -226,7 +227,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rp41h")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle",
 "speed": 5.0
 }]
@@ -242,5 +243,5 @@ metadata/_custom_type_script = "uid://bhkqgvbrflk4t"
 
 [node name="ExplotionSprites" type="AnimatedSprite2D" parent="." unique_id=1518888651]
 sprite_frames = SubResource("SpriteFrames_tn6gv")
-animation = &"IGNITION"
+animation = &"EXPLOTION"
 autoplay = "idle"

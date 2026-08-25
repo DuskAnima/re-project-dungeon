@@ -13,7 +13,7 @@ var terrain : Terrain
 ## Tween que determina el trayecto del movimiento en grid
 var tween : Tween
 ## Velocidad de desplazamiento entre tiles
-var tween_speed : float = 0.3
+var tween_speed : float = 0.45
 
 func highlight_area(tiles: Array[Vector2i]) -> void:
 	overlay_layer.clear()
@@ -22,7 +22,7 @@ func highlight_area(tiles: Array[Vector2i]) -> void:
 
 ## Establece el estado inicial de entidades en el grid
 func grid_setup(_act: Entity) -> void:
-	if not GameManager.BOOT:
+	if GameManager.game_status == GameManager.BOOT: #Ejecución en compile time.
 		var pos : Vector2 = _act.position # Obtiene posición global
 		_grid_snap(_act, pos) # Hace snapping a Entity en el grid
 		# Solo cuando _update_grid es llamado desde grid setup from y to son llamados de esta forma.

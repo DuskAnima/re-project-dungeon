@@ -18,6 +18,7 @@ var controller : Controller
 func set_controllable(switch: bool) -> void: properties.is_controllable = switch
 
 ## Establece la propiedad que permite que una entidad pueda tomar su turno para actuar.
+func get_can_act() -> bool: return properties.can_act
 func set_can_act(switch: bool) -> void: properties.can_act = switch
 
 func get_grid_position() -> Vector2i: return properties.grid_pos

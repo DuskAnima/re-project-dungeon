@@ -5,12 +5,9 @@ func _init(_act : Entity) -> void:
 	act = _act
 
 func execute() -> void:
-	var animation : AnimatedSprite2D = act.animations.play_explotion()
 	start()
-	animation.play("IGNITION")
-	await animation.animation_finished
+	await act.animations.explotion_animation(1)
 	finish()
 
 func _set_time_cost() -> float:
 	return 2
-## Es necesario declarar el coste de tiempo con un return de un float.

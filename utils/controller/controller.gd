@@ -11,7 +11,7 @@ func _ready() -> void:
 	actor = get_parent() # Obtiene al actor que instancia el control.
 	owner = actor # Lo establece como dueño del nodo.
 
-## Iyecta al actor desde GameManager
+## Inyecta al actor desde GameManager
 func set_actor(_act : Entity) -> void:
 	actor = _act
 
@@ -24,7 +24,6 @@ func _player_action_check() -> bool:
 	else: return true
 
 func _npc_action_check() -> bool:
-	if actor == null: return false
 	if actor == null: return false
 	if actor.properties.can_act == false: return false
 	else: return true

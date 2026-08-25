@@ -39,7 +39,6 @@ func _is_tile_occupied(_grid_position : Vector2i) -> bool:
 func _is_tile_solid(_grid_position : Vector2i) -> bool:
 	var tile_data : TileData = get_cell_tile_data(_grid_position)
 	if tile_data == null:
-		push_error("No existe tile en la posición ", _grid_position, "instancia es Null")
 		return true
 	return tile_data.get_custom_data("is_solid")
 

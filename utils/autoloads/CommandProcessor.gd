@@ -10,6 +10,6 @@ func _on_command_completed(cmd: Command) -> void:
 func _apply_time_cost(cmd: Command) -> void:
 	if cmd.act != null and cmd.time_cost > 0.0:
 		TurnSystem.spend_time(cmd.time_cost)
-	
-func _handle_special_cases(cmd: Command) -> void:
+
+func _handle_special_cases(_cmd: Command) -> void:
 	pass

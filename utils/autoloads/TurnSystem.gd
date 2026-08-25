@@ -35,6 +35,7 @@ func register_actor(_act: Entity, initiative: float = NAN) -> void:
 		initiative = _act.stats.initiative * randf_range(0.5, 1.5)
 	turn_order.append([_act, initiative])
 	_sort_turn_order()
+	print("Turn Order", turn_order)
 	
 ## Registra un actor creado por otro actor asignándole una iniciativa justo por debajo de la del owner (origen del spawn).
 ## Esto garantiza que el turno del objeto será justo después del owner.
@@ -60,16 +61,18 @@ func unregister_actor(_act: Entity) -> void:
 		return
 	var was_current_actor : bool = (current_actor == _act)
 	turn_order.remove_at(index) # Elimina al actor de la lista
-	
+
 	if turn_order.is_empty(): # Si la lista queda vacía
 		current_actor = null
 		current_index = 0
 		return
-		
+
 	if was_current_actor: # Si se eliminó al actor actual
+		time_depleted.emit()
+		_timeout_emitted = true
 		current_actor = null
-		current_index = current_index % turn_order.size()
-		
+		current_index += 1
+
 	elif index < current_index: # Si estaba antes del actor actual retrocede 1 
 		current_index -= 1
 	# Si estaba después, no se toca el current index

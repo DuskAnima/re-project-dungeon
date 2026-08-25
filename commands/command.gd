@@ -15,8 +15,6 @@ var act : Entity
 var DIR : Dictionary[Vector2i, String] = { Vector2i.UP : "UP", Vector2i.DOWN : "DOWN", Vector2i.LEFT : "LEFT", Vector2i.RIGHT : "RIGHT"}  
 ## Referencia al valor de tiempo de un Command. Debe ser establecida sobreescrimiendo _set_time_cost() y redefinida en ejecusión
 var time_cost : float = _set_time_cost()
-## Flag de ejecusión. Pasa a true tras start().
-var is_executing : bool = false
 ## Identificador único para depuración.
 var _debug_id: int = randi_range(0, 1000)
 ## Identificador del nombre de un Command para depuración.
@@ -38,13 +36,11 @@ func execute() -> void
 func _set_time_cost() -> float
 ## Es necesario declarar el coste de tiempo con un return de un float.
 
-
 func start() -> void: ## Genera el flag de ejecusión.
-	is_executing = true # Flag de ejecución
+	pass
 
 ## Envía información pertinente a ActionQueue
 func finish() -> void:
-	is_executing = false
 	finished.emit()
 
 func _to_string() -> String:

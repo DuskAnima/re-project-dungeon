@@ -15,9 +15,12 @@ func _bomb_controller() -> void:
 	var cmd_explotion : Command = CommandExplotion.new(actor)
 	match status:
 		IDLE:
-			status +=1
+			status = DETONATION
 		DETONATION:
 			ActionQueue.add_command(cmd_ignition)
-			status += 1
+			print("CONTROLLER SIDE: ", cmd_ignition)
+			status = EXPLOSION
 		EXPLOSION:
 			ActionQueue.add_command(cmd_explotion)
+			print("CONTROLLER SIDE: ", cmd_explotion)
+	
