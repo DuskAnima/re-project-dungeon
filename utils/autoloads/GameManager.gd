@@ -11,6 +11,10 @@ var aux_node : Node
 var game_status : int = BOOT
 ## estados finitos del juego
 enum {BOOT, SET, TURN_START, TURN_ACTIVE, TURN_END, GAME_OVER}
+## Referencia a escena TurnPanel
+const TURN_PANEL_SCENE : PackedScene = preload("uid://cglpe83i12wfp")
+## Referencia a instancia de TurnPanel
+var turn_panel : TurnPanel
 # --------- SETUP --------- 
 ## Variable que revela al actor que está de turno
 var current_actor : Entity
@@ -18,13 +22,16 @@ var current_actor : Entity
 func entity_setup(_act: Entity) -> void:
 	prints("GM - entity setup:", _act)
 	TurnSystem.register_actor(_act)
-	GridManager.grid_setup(_act)
+	GridManager.register_actor(_act)
 
 func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
 	while game_status != GAME_OVER:
 		match game_status:
 			BOOT:
 				_on_ready_setup() # Recibe el llamado de World y hace el primer setup de entidades.
+				turn_panel = TURN_PANEL_SCENE.instantiate()
+				root.get_node("UI").add_child(turn_panel)
+				turn_panel.update_list()
 				game_status = SET
 				print("Boot ready")
 			SET:
@@ -39,10 +46,8 @@ func game_fsm() -> void: #REFACTORIZAR EL GAME LOOP CON ESTO, WORK IN PROGRESS
 				game_status = TURN_ACTIVE
 			TURN_ACTIVE:
 				await TurnSystem.time_depleted
-				print("Timeout from: ", current_actor)
 				current_actor.set_can_act(false)
 				await ActionQueue.all_commands_finished
-				print("All commands finished")
 				game_status = TURN_END
 			TURN_END:
 				TurnSystem.advance_turn()
@@ -60,7 +65,7 @@ func kill_entity(_act: Entity) -> void:
 	TurnSystem.unregister_actor(_act)
 	_act.queue_free()
 
-# --------- CONTROLLER SETTING --------- 
+# --------- CONTROLLER SETTING ---------
 ## Función que agrega una instancia de control a la entidad entregada como argumento. 
 func register_controller(_act : Entity) -> void:
 	var entity_kind : String = _act.properties.entity_kind

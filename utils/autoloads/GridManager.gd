@@ -21,7 +21,7 @@ func highlight_area(tiles: Array[Vector2i]) -> void:
 		overlay_layer.set_cell(tile, )
 
 ## Establece el estado inicial de entidades en el grid
-func grid_setup(_act: Entity) -> void:
+func register_actor(_act: Entity) -> void:
 	if GameManager.game_status == GameManager.BOOT: #Ejecución en compile time.
 		var pos : Vector2 = _act.position # Obtiene posición global
 		_grid_snap(_act, pos) # Hace snapping a Entity en el grid
@@ -42,9 +42,10 @@ func is_tile_free(_act: Entity, _from: Vector2i, _to: Vector2i) -> bool:
 	return true
 
 ## Función que resuelve el movimiento de una entidad. Requiere unidad a mover (Entity) y posición 
-##  target (V2i). Solo debe ser usada por CommandMove y setup_entity()
+##  target (V2i). Solo debe ser usada por setup_entity()
 func _update_grid(_act: Entity, _from : Vector2i, _to: Vector2i) -> void:
 	if _to == ENTITY_DELETE_FLAG: # SI posee flag de eliminación
+		print("kill")
 		grid_occupation.erase(_from) # Saca a la entidad del grid
 		return
 	if _from != _to: # Si el origen es diferente del destino

@@ -53,6 +53,7 @@ func _tile_fetcher(_grid_position: Vector2i) -> void:
 
 func fall(_grid_position: Vector2i) -> void:
 	var tile_information : bool = terrain_tile_data.get_custom_data("can_fall")
+	print("Can Fall ",tile_information)
 	if tile_information:
 		var actor : Entity = GridManager.get_entity_from_grid(_grid_position)
 		ActionQueue.add_command(CommandDead.new(actor))

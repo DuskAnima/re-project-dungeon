@@ -1,6 +1,6 @@
 extends Node
 
-@export var _debug_mode = true
+@export var _debug_mode = false
 
 ## Al finalizar el Command, envía una referencia de este a CommandProcessor para resolver interacciones.
 signal command_completed(cmd: Command)
@@ -19,7 +19,8 @@ func add_command(cmd : Command) -> void:
 		if _debug_mode:
 			prints("AQ: BUFFER:", cmd.act, _buffer_command)
 	else: # Si no hay comando en proceso
-		print(cmd.act ," está encolando: ", cmd)
+		if _debug_mode:
+			print(cmd.act ," está encolando: ", cmd)
 		_enqueue(cmd) # Agrega un comando al final
 
 ## agrega un nuevo comando a la cola. Estos comandos deben ser agregados SOLO por otros comandos, no aplica buffer.
@@ -28,7 +29,8 @@ func add_wrapped_command(cmd : Command) -> void:
 
 func _enqueue(cmd : Command) -> void:
 	_queue.push_back(cmd)
-	print("queue: ", _queue)
+	if _debug_mode:
+		print("queue: ", _queue)
 	if _current == null and not _handling_completion:
 		_execute_next()
 
@@ -48,7 +50,8 @@ func _execute_next() -> void:
 			all_commands_finished.emit()
 			return # Terminar
 	_current = _queue.pop_front()
-	print(_current.act, " está ejecutando: ", _current, ". tiempo restante: ", _current.act.get_time())
+	if _debug_mode:
+		print(_current.act, " está ejecutando: ", _current, ". tiempo restante: ", _current.act.get_time())
 	_current.finished.connect(_on_command_finished, CONNECT_ONE_SHOT)
 	_current.execute()
 

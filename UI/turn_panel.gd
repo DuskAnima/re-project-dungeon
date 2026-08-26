@@ -1,10 +1,10 @@
 extends Control
+class_name TurnPanel
 
-@onready var turn_list : HBoxContainer = $Panel/HBoxContainer
+var turn_list : HBoxContainer
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	turn_list.add_theme_constant_override("separation", 30)
+	turn_list = $Panel/HBoxContainer
 
 func update_list() -> void:
 	for child in turn_list.get_children():
@@ -29,12 +29,10 @@ func update_list() -> void:
 		texture_rect.expand = true
 		texture_rect.size = Vector2(32, 32)
 		texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-		texture_rect.add_theme_constant_override("margin_left", 20)
-		texture_rect.add_theme_constant_override("margin_right", 20)
 
 		turn_list.add_child(texture_rect)
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_list()

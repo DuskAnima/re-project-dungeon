@@ -216,7 +216,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_DOWN",
-"speed": 14.0
+"speed": 15.56
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,7 +245,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_LEFT",
-"speed": 14.0
+"speed": 15.56
 }, {
 "frames": [{
 "duration": 1.0,
@@ -274,7 +274,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_RIGHT",
-"speed": 14.0
+"speed": 15.56
 }, {
 "frames": [{
 "duration": 1.0,
@@ -303,7 +303,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"MOVE_UP",
-"speed": 14.0
+"speed": 15.56
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sglur"]
@@ -352,7 +352,7 @@ stats = SubResource("Resource_a1qjk")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="." unique_id=355228676]
 sprite_frames = SubResource("SpriteFrames_cnswy")
-animation = &"MOVE_UP"
+animation = &"MOVE_DOWN"
 autoplay = "FACE_DOWN"
 
 [node name="ActionSprites" type="AnimatedSprite2D" parent="." unique_id=580467011]

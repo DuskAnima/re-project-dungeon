@@ -13,7 +13,7 @@ func execute() -> void:
 	start()
 	spawned.set_entity_owner(act)
 	spawned.set_grid_position(grid_pos)
-	GridManager.grid_setup(spawned)
+	GridManager.register_actor(spawned)
 	GameManager.entities_node.add_child(spawned)
 	GameManager.register_controller(spawned)
 	TurnSystem.register_spawned_actor(spawned)
